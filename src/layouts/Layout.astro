@@ -10,31 +10,75 @@ const { title } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
+			rel="stylesheet"
+		/>
+		<script is:inline>
+			// ☝️ This script prevent the FART effect.
+			if (localStorage.getItem("theme") === null) {
+				document.documentElement.setAttribute("data-theme", "light");
+			} else
+				document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+			// "theme" LocalStorage value is set by the package to remember user preference.
+			// The value is checked and applyed before rendering anything.
+		</script>
+		<script>
+			import { themeChange } from "theme-change";
+			themeChange();
+		</script>
+		<script type="text/partytown">
+			// import AnimatedCursor from "animated-cursor";
+
+			const acOptions = {
+				// Set clickables to an empty array to make the cursor visible on all divs
+				clickables: ["div", "a", "input", "select", "img", "svg"], // Override default clickables
+				hideNativeCursor: false, // Hide the native cursor (default: false)
+				// Customize cursor styles (optional)
+				color: "#fff", // Cursor color (default: #D3245C)
+				outerAlpha: 0.3, // Outer cursor transparency (default: 0.3)
+				hoverScale: {
+					inner: 0.75, // Scale on hover (inner) (default: 0.75)
+					outer: 1, // Scale on hover (outer) (default: 1.5)
+				},
+				clickScale: {
+					inner: 1.5, // Scale on click (inner) (default: 1.5)
+					outer: 0.5, // Scale on click (outer) (default: 0.13)
+				},
+				trailingSpeed: 0.2, // Outer cursor trailing animation speed (default: 0.2)
+			};
+
+			// Using just default options
+			// const ac = AnimatedCursor(acOptions);
+
+			// ac.init();
+		</script>
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<meta name="description" content="My Site" />
 	</head>
 	<body>
+		<!-- <div id="cursor">
+			<div id="cursor-outer"></div>
+			<div id="cursor-inner"></div>
+		</div> -->
+
 		<slot />
 	</body>
 </html>
+<script type="text/partytown" src="../../node_modules/preline/preline.js"></script>
+<script
+	type="text/partytown"
+	src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+	></script>
+
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
 	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
+		font-family: "Fira Code", sans-serif;
 		background-size: 224px;
 	}
 	code {
@@ -47,5 +91,10 @@ const { title } = Astro.props;
 			Bitstream Vera Sans Mono,
 			Courier New,
 			monospace;
+	}
+	.cursor,
+	.cursor-outer,
+	.cursor-inner {
+		z-index: 9999;
 	}
 </style>

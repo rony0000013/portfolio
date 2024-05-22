@@ -10,8 +10,35 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.7.1",
     "@astrojs/check": "^0.5.10",
-    "typescript": "^5.4.5"
+    "@astrojs/mdx": "^3.0.0",
+    "@astrojs/partytown": "^2.1.0",
+    "@astrojs/sitemap": "^3.1.4",
+    "@astrojs/solid-js": "^4.1.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "@iconify-json/iconamoon": "^1.1.4",
+    "animejs": "^3.2.2",
+    "astro": "^4.8.2",
+    "astro-icon": "^1.1.0",
+    "astro-particles": "^2.10.0",
+    "preline": "^2.1.0",
+    "solid-js": "^1.8.17",
+    "tailwindcss": "^3.4.3",
+    "theme-change": "^2.5.0",
+    "tsparticles": "2.12",
+    "tsparticles-engine": "^2.12.0",
+    "typescript": "^5.4.5",
+    "vanilla-tilt": "^1.8.1"
+  },
+  "devDependencies": {
+    "@iconify-json/la": "^1.1.8",
+    "@iconify-json/line-md": "^1.1.37",
+    "@iconify-json/svg-spinners": "^1.1.2",
+    "@iconify/tailwind": "^1.1.1",
+    "@tailwindcss/typography": "^0.5.13",
+    "@types/node": "^20.12.11",
+    "daisyui": "^4.11.1",
+    "animated-cursor": "^1.2.0",
+    "tailwindcss-animate": "^1.0.7"
   }
 }

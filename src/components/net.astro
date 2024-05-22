@@ -1,0 +1,35 @@
+---
+import Particles from "astro-particles";
+import type { ISourceOptions } from "tsparticles-engine";
+import options from "../assets/particles.json";
+
+// console.log("isBrowser", isMobile);
+// if (isMobile) {
+//     options.particles.number.value = 50;
+// }
+// console.log("particles options", options.particles.number.value);
+// window.options = options;
+
+---
+
+<script>
+    import { type Container, type Engine, tsParticles } from "tsparticles-engine";
+    import { loadFull } from "tsparticles";
+    
+    // the function name is the parameter passed to the init attribute
+    // required
+    // add the function to window is mandatory, it will be searched there
+    window.particlesInit = async function (engine: Engine) {
+        await loadFull(engine);
+    };
+    
+    // the function name is the parameter passed to the loaded attribute
+    // optional
+    // add the function to window is mandatory, it will be searched there
+    window.particlesLoaded = function (container: Container) {
+        console.log("particlesLoaded callback");
+    };
+</script>
+
+<Particles id="tsparticles" options={options} init="particlesInit" />
+

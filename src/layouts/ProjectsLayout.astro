@@ -1,0 +1,60 @@
+---
+import Navbar from "../components/navbar.astro";
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
+			rel="stylesheet"
+		/>
+		<script is:inline>
+			// ☝️ This script prevent the FART effect.
+			if (localStorage.getItem("theme") === null) {
+				document.documentElement.setAttribute("data-theme", "light");
+			} else
+				document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+			// "theme" LocalStorage value is set by the package to remember user preference.
+			// The value is checked and applyed before rendering anything.
+		</script>
+		<script>
+			import { themeChange } from "theme-change";
+			themeChange();
+			// 👆 you could import the CDN directly instead of these two lines
+		</script>
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+	</head>
+	<body>
+		<Navbar />
+		<div class="container p-5 md:p-20">
+			<slot />
+		</div>
+	</body>
+</html>
+<style is:global>
+	html {
+		font-family: "Fira Code", sans-serif;
+		background-size: 224px;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+</style>

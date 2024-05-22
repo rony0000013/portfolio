@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+
+const { title, icons } = Astro.props;
+---
+
+<div class="my-10 flex flex-col justify-items-center">
+    <h1 class="text-primary text-2xl justify-center mx-auto">{title}</h1>
+    <ul class="flex flex-wrap gap-5 justify-center">
+        {
+            Object.entries(icons).map(([name, icon]) => (
+                <li class="group relative inline-block">
+                    <div class="mask mask-squircle bg-white hover:grayscale">
+                        <Image src={icon} alt={name} class="w-14 h-14 p-1  m-1.5" />
+                    </div>
+                    <div class="text-black shadow-1 absolute bottom-full left-1/2 z-20 mb-1 -translate-x-1/2 whitespace-nowrap rounded-[5px] bg-white py-1.5 px-3.5 text-md opacity-0 group-hover:opacity-100">
+                        {/* <span class="absolute -bottom-1 left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 bg-white dark:bg-dark-2" /> */}
+                        {name}
+                    </div>
+                </li>
+            ))
+        }
+    </ul>
+</div>

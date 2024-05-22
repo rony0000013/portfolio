@@ -1,0 +1,20 @@
+---
+import Navbar from "../../components/navbar.astro";
+import Layout from "../../layouts/Layout.astro";
+import Projects from "../../components/projects";
+import Net from "../../components/net.astro";
+import Footer from "../../components/footer";
+
+import { getCollection } from "astro:content";
+const projects = await getCollection("projects");
+// console.log(projects[0]);
+
+---
+
+<Layout title="Home">
+    <Navbar />
+    <Projects projects={projects}  />
+    <Net />
+    <Footer />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</Layout>

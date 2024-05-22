@@ -1,0 +1,81 @@
+---
+import Themes from "./themes";
+---
+
+<!-- export default function Navbar() {
+return ( -->
+<>
+	<!-- Mobile Navbar -->
+	<div class="md:hidden">
+		<div class="fixed bottom-0 z-10 flex flex-row backdrop-blur-lg navbar card">
+			<button
+				type="button"
+				class="text-gray-500 hover:text-gray-600 size-10"
+				data-hs-overlay="#docs-sidebar"
+				aria-controls="docs-sidebar"
+				aria-label="Toggle navigation"
+			>
+				<span class="sr-only">Toggle Navigation</span>
+				<span class="icon-[svg-spinners--blocks-scale] size-8 text-white"></span>
+			</button>
+			<br />
+			<h1 class="text-lg">Rounak Sen</h1>
+		</div>
+		<div
+			id="docs-sidebar"
+			class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64 border-e backdrop-blur-lg border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+		>
+			<nav
+				class="flex flex-col flex-wrap w-full p-6 hs-accordion-group"
+				data-hs-accordion-always-open
+			>
+				<ul class="space-y-1.5">
+					<li>
+						<a
+							href="/"
+							class="btn flex items-center gap-x-3.5 py-2 px-2.5 dark:border-white"
+						>
+							<span
+								class="icon-[line-md--coffee-half-empty-twotone-loop] size-8 text-black dark:text-white"
+							></span>
+							Home
+						</a>
+					</li>
+
+					<li>
+						<a
+							href="/"
+							class="btn flex items-center gap-x-3.5 py-2 px-2.5 dark:border-white"
+						>
+							<span
+								class="icon-[line-md--github-loop] size-8 text-black dark:text-white"
+							></span>
+							Projects
+						</a>
+					</li>
+					<li>
+						<Themes />
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<!-- Desktop Navbar -->
+	<div class="fixed top-0 z-10 hidden text-white md:navbar backdrop-blur-lg ">
+		<a href="/" class="flex-1 px-2 mx-2 text-5xl "> Rounak Sen </a>
+		<div class="">
+			<ul class="menu menu-horizontal">
+				<li>
+					<a href="/projects" class="btn">Projects</a>
+				</li>
+				{
+					/* <li>
+							<a>Navbar Item 2</a>
+						</li> */
+				}
+			</ul>
+			<Themes />
+		</div>
+	</div>
+</>
