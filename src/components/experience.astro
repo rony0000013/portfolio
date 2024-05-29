@@ -1,0 +1,20 @@
+---
+import * as data from "../content/data/data.mdx";
+import ExperienceCard from "../components/experiencecard.astro";
+const { experience } = data.frontmatter;
+---
+
+<div id="experience" class="m-2 md:m-5 md:pl-10">
+    <ul class="steps steps-vertical">
+        <li data-content="⭐" class="step ">
+            <h1 class="text-4xl font-bold text-center text-primary md:text-6xl" data-aos="slide-right">🏢 Experience 💼</h1>
+        </li>
+        {
+            experience.map((exp, i) => (
+                <li key={i} data-content="⚫" class="step step-primary" data-aos="slide-right">
+                    <ExperienceCard {...exp}  />
+                </li>
+            ))
+        }
+    </ul>
+</div>

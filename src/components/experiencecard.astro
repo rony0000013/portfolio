@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+const { role, company, description, image, link, from, to } = Astro.props;
+---
+
+<div
+    class="my-2 mr-2 shadow-xl card md:card-side bg-base-100 card-bordered border-primary backdrop-blur-lg"
+>
+    <figure >
+        <a href={link} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center h-full">
+            <Image src={image} alt={company} inferSize class="rounded-2xl" />
+        </a>
+    </figure>
+    <div class="my-0 divider divider-primary md:divider-horizontal" />
+    <div class="p-3 card-body">
+        <h2 class="justify-center card-title "> <span class="text-primary">{role}</span> at <span class="text-success"> {company}</span></h2>
+        <div class="card-body">
+            <p class="card-description text-secondary">{description}</p>
+        </div>
+        <div class="card-footer">
+            {from} --- {to}
+        </div>
+    </div>
+</div>

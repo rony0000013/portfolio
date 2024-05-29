@@ -1,11 +1,11 @@
 ---
-import title from '../assets/title.png'
+import title from '../assets/title_1.png'
 // console.log()
 ---
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
 
-<div id="particle-slider" class="w-full h-[40vh]">
+<div id="particle-slider" class="w-full h-[40vh] overflow-hidden">
     <div class="slides">
         <div
             id="first-slide"
@@ -14,7 +14,7 @@ import title from '../assets/title.png'
         >
         </div>
     </div>
-    <canvas class="draw"></canvas>
+    <canvas class="draw" aria-label="particle name"></canvas>
 </div>
 
 

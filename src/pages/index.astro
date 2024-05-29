@@ -2,22 +2,28 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/navbar.astro";
 import Hero from "../components/hero.astro";
-import Timeline from "../components/timeline";
-import Footer from "../components/footer";
+import Education from "../components/education.astro";
+import Footer from "../components/footer.astro";
 import Net from "../components/net.astro";
 import TechStack from "../components/techstack.astro";
+import About from "../components/about.astro";
+import Experience from "../components/experience.astro";
+import Spotify from "../components/spotify.astro";
 
 ---
 
 <Layout title="Rounak Sen">
-	<main>
+	<main class="antialiased overflow-hidden">
 		<Navbar />
 		<Hero />
-		<!-- <div class="h-[15vh]" /> -->
+		<About />
+		<Education />
+		<div class="h-[15vh]"></div>
 		<TechStack />
-		<Timeline />
+		<Experience />
+		<Spotify />
 		<Net />
-		<Footer />
+		<Footer bool={true} />
 	</main>
-	
 </Layout>
+

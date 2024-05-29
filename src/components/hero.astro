@@ -4,16 +4,20 @@ import Title from "./title.astro";
 
 <div class="h-screen hero backdrop-blur-none mt-[5vh]">
 	<div class="text-center hero-content text-neutral-content">
-		<div class="max-w-lg">
-			<h1 class="mb-5 text-5xl font-bold">Hi👋🏿 I am,</h1>
-			<!-- <div class="w-full h-[50vh] items-center"> -->
-			<Title  />
-			<!-- </div> -->
-			<p class="mb-5">
-				Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-				exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
-			</p>
-			<button class="btn btn-primary">Get Started</button>
+		<div class="">
+			<h1 class="mb-5 text-5xl font-bold text-white">Hi👋🏿 I am,</h1>
+			<Title />
+			<div class="mt-[10vh] text-4xl animate-bounce flex items-center justify-center">
+				<!-- <span class="icon-[line-md--chevron-triple-down] text-white  transform duration-1000 -rotate-90"/> -->
+					<dotlottie-player
+						autoplay
+						loop
+						playMode="normal"
+						src="/src/assets/down.lottie"
+						class="size-14"
+					>
+					</dotlottie-player>
+			</div>
 		</div>
 	</div>
 </div>

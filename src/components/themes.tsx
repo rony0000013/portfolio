@@ -1,13 +1,24 @@
 export default function Themes() {
 	return (
 		<div class="dropdown ">
-			<div tabindex="0" role="button" class="btn m-1 dark:border-white">
-				<span class="icon-[line-md--star-pulsating-twotone-loop] btn btn-primary size-8 " />
+			<div
+				tabindex="-1"
+				role="button"
+				class="flex justify-center items-center gap-1 align-middle h-[3.5rem] p-2"
+			>
+				{/* <span class="icon-[line-md--star-pulsating-twotone-loop] btn btn-primary size-8 " /> */}
+				<dotlottie-player
+					autoplay
+					loop
+					playMode="normal"
+					src="/src/assets/theme.lottie"
+					class="p-0 m-0 size-10"
+				></dotlottie-player>
 				Theme
-				<span class="icon-[la--angle-down] size-4 text-black" />
+				<span class="icon-[la--chevron-down] size-4 text-white" />
 			</div>
 			<ul
-				tabindex="0"
+				tabindex="-1"
 				class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full"
 			>
 				<li>
@@ -17,7 +28,7 @@ export default function Themes() {
 						class="btn btn-sm btn-block btn-ghost justify-start"
 						aria-label="White"
 						value="light"
-						data-set-theme=""
+						data-set-theme="light"
 						data-act-class="ACTIVECLASS"
 					/>
 				</li>

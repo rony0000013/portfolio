@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import { Img } from "astro-imagetools/components";
+const { key, flip, institution, degree, image, from, to, link, cgpa } = Astro.props;
+---
+
+<li key={key}>
+    <hr class="bg-primary" />
+    <div class={`${flip ? "timeline-end" : "timeline-start"}  md:mx-4 timeline-box card`} data-aos={flip ? "fade-left" : "fade-right"}>
+        <h1 class="md:text-lg text-md text-primary card-title">{institution}</h1>
+        <div class="p-0.5 card-body">
+            <p class="text-sm text-secondary md:text-md">{degree}</p>
+            <p class="text-sm text-info md:text-md">{cgpa}</p>
+        </div>
+        <h1 class="text-sm md:text-md text-netural card-end">{from} - {to}</h1>
+    </div>
+    <div class="timeline-middle">
+        <span class="icon-[svg-spinners--gooey-balls-2] text-white h-5 w-5 md:h-10 md:w-10"></span>
+    </div>
+    <div
+    data-aos="zoom-in"
+        data-tilt
+        class={`${!flip ? "timeline-end" : "timeline-start"} md:mx-4 timeline-box  mask mask-squircle md:mask-hexagon-2  bg-clip-border md:p-2 bg-gradient-to-tr   from-current to-transparent `}
+    >
+        <a href={link} target="_blank" class="text-lg text-primary">
+            <Image
+                src={image}
+                alt={institution}
+                class="w-full h-full mask mask-squircle md:mask-hexagon-2"
+                inferSize
+            />
+        </a>
+    </div>
+    <hr class="bg-primary" />
+</li>

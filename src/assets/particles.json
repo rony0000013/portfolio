@@ -187,7 +187,7 @@
 		"number": {
 			"density": { "enable": true, "width": 1920, "height": 1080 },
 			"limit": { "mode": "delete", "value": 0 },
-			"value": 200
+			"value": 150
 		},
 		"opacity": {
 			"value": { "min": 0.1, "max": 0.5 },

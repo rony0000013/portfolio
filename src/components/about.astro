@@ -1,0 +1,95 @@
+---
+import Image from "astro/components/Image.astro";
+import { Img } from "astro-imagetools/components";
+import github from "../assets/icons/github.svg";
+import linkedin from "../assets/icons/linkedin.svg";
+import twitter from "../assets/icons/twitter.svg";
+import leetcode from "../assets/icons/leetcode.svg";
+import kaggle from "../assets/icons/kaggle.svg";    
+
+import * as data from "../content/data/data.mdx";
+const { name, description, image, resume, links } = data.frontmatter;
+---
+
+<div
+    id="about"
+    class="flex flex-wrap items-center justify-center align-middle md:flex-nowrap backdrop-blur-md"
+>
+    <div class="flex m-10 md:w-16 md:flex-col grow-0">
+        <a href={links.github} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
+            <Image
+                src={github}
+                alt={links.github}
+                onload="this.style.opacity=1"
+                class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
+                
+            />
+        </a>
+        <a href={links.leetcode} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
+            <Image
+                src={leetcode}
+                alt={links.leetcode}
+                onload="this.style.opacity=1"
+                class="w-10 h-10 p-1 m-1.5 easeload bg-black mask mask-squircle "
+            />  
+        </a>
+
+        <a href={links.linkedin} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
+            <Image
+                src={linkedin}
+                alt={links.linkedin}
+                onload="this.style.opacity=1"
+                class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
+            />
+        </a>
+        <a href={links.twitter} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
+            <Image
+                src={twitter}
+                alt={links.twitter}
+                onload="this.style.opacity=1"
+                class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
+            />
+        </a>
+        <a href={links.kaggle} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
+            <Image
+                src={kaggle}
+                alt={links.kaggle}
+                onload="this.style.opacity=1"
+                class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
+            />
+        </a>
+
+    </div>
+    <div
+        class="justify-center w-48 h-48 align-middle md:w-80 md:h-80 mask mask-squircle" data-aos="zoom-in"
+    >
+        <!-- <Image src={image} alt={name} inferSize class="rounded-full" /> -->
+        <Img src={image} alt={name} objectFit="cover" />
+    </div>
+
+    <div class="p-8 md:p-12 lg:px-10 lg:py-24 ">
+        <div class="max-w-xl mx-auto text-center ltr:sm:text-left rtl:sm:text-right">
+            <h2 class="text-2xl font-bold text-white md:text-3xl">
+                {name}
+            </h2>
+
+            <p class="block text-white md:mt-4">
+                {description}
+            </p>
+
+            <div class="mt-4 md:mt-8" data-aos="zoom-in">
+                <a href={resume} class="btn btn-primary"> RESUME 📃</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .easeload {
+        opacity: 0;
+        -webkit-transition: all 2s ease;
+        -moz-transition: all 2s ease;
+        -ms-transition: all 2s ease;
+        -o-transition: all 2s ease;
+    }
+</style>

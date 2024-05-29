@@ -35,12 +35,15 @@ const { title, description } = Astro.props;
 		<meta name="description" content={description} />
 	</head>
 	<body>
+	<div class="md:bg-black md:mt-1 md:h-[13vh]">		
 		<Navbar />
-		<div class="container p-5 md:p-20">
+	</div>
 			<slot />
-		</div>
 	</body>
 </html>
+<script type="module" src="/node_modules/@dotlottie/player-component/dist/dotlottie-player.mjs"></script>
+<script>import "preline/dist/preline.js";</script>
+
 <style is:global>
 	html {
 		font-family: "Fira Code", sans-serif;

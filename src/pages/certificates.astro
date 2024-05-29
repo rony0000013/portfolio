@@ -1,0 +1,60 @@
+---
+import { Img } from "astro-imagetools/components";
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/footer.astro";
+import Navbar from "../components/navbar.astro";
+import * as certs from "../content/data/certificates.mdx";
+import Net from "../components/net.astro";
+
+const { certificates } = certs.frontmatter;
+---
+
+<Layout title="📜Cerificates">
+    <main class="antialiased overflow-hidden">
+        <Navbar />
+        <div class="md:h-[15vh]"></div>
+        <div class="flex items-center justify-center my-16 text-3xl font-bold text-center md:text-5xl text-primary">
+            <dotlottie-player
+                autoplay
+                loop
+                playMode="normal"
+                src="/src/assets/certificate.lottie"
+                class="mr-5 md:mr-10 md:size-16 size-10"
+            >
+            </dotlottie-player>CERTIFICATES</div>
+        <div class="grid grid-cols-2 gap-4 m-3 md:m-10 md:grid-cols-3 lg:grid-cols-4">
+            {
+                certificates.map((cert) => (
+                    <div class="object-cover duration-500 origin-bottom transform card group rounded-xl md:rotate-6 hover:rotate-0 hover:-translate-y-12 hover:scale-150 hover:20 backdrop-blur-lg" >
+                        <div data-aos="zoom-in">
+                            <a href={cert.link} target="_blank" rel="noopener noreferrer"  class="w-full h-46 rounded-bl-3xl rounded-tr-3xl sm:h-56 lg:h-64" >
+                            <Img
+                                src={cert.image}
+                                alt={cert.title}
+                                objectFit="contain"
+                               
+                            />
+                        </a>
+                    </div>
+                        <div class="mt-2 sm:flex sm:items-center sm:justify-center sm:gap-4">
+                            <strong class="text-sm font-medium text-info sm:text-md">
+                                {cert.title}
+                            </strong>
+
+                            <span class="hidden sm:block sm:h-px sm:w-10 sm:bg-primary" />
+
+                            <p class=" text-sm  mt-0.5  sm:mt-0 text-success sm:text-md">
+                                {cert.issuer}
+                            </p>
+                        </div>
+                        <p class="text-sm sm:invisible group-hover:visible text-primary sm:text-center sm:text-md">
+                            {cert.date}
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+    </main>
+    <Net />
+    <Footer />
+</Layout>

@@ -3,7 +3,7 @@ import Navbar from "../../components/navbar.astro";
 import Layout from "../../layouts/Layout.astro";
 import Projects from "../../components/projects";
 import Net from "../../components/net.astro";
-import Footer from "../../components/footer";
+import Footer from "../../components/footer.astro";
 
 import { getCollection } from "astro:content";
 const projects = await getCollection("projects");
@@ -11,10 +11,26 @@ const projects = await getCollection("projects");
 
 ---
 
-<Layout title="Home">
+<Layout title="Projects">
+    <main class="antialiased overflow-hidden">
     <Navbar />
+    <div class="md:h-[15vh]"></div>
+    <div class="flex items-center justify-center my-16 text-3xl font-bold text-center md:text-5xl text-primary"  >
+        <dotlottie-player
+                autoplay
+                loop
+                playMode="normal"
+                src="/src/assets/github.lottie"
+                class="mr-5 md:mr-10 md:size-16 size-10"
+            >
+            </dotlottie-player>
+        PROJECTS</div>
     <Projects projects={projects}  />
     <Net />
+
     <Footer />
+    </main>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
 </Layout>

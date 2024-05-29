@@ -1,19 +1,17 @@
 ---
 title: "Stonks"
-date: "2020-12-01"
-description: "A stock market simulator game"
-image: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+date: "April-2024"
+description: "Stonks is a beginner-friendly 👋 stock information app that revolutionizes the way you access and understand stock data. Built on Streamlit 💻, it leverages serverless Cloudflare Workers ☁️ and Workers AI 🤖 to generate insightful stock summaries from polygon.io API 📊."
+image: "https://res.cloudinary.com/dddwknrcm/image/upload/v1716993138/images_oppu47.jpg"
 tech:
-    - "Python"
-    - "Pygame"
-features: 
-    - "Buy and sell stocks"
-    - "View stock prices"
-    - "View portfolio"
-    - "View transaction history"
+    - "Streamlit"
+    - "Cloudflare Workers"
+    - "Workers AI"
+    - "polygon.io"
 links:
-    github: "https://github.com/rony00000013/stonks"
-    demo: "https://rony00000013.github.io/stonks/"
+    github: "https://github.com/rony0000013/stonks"
+    demo: "https://stonks-stonks.streamlit.app/"
+    githubReadme: "https://raw.githubusercontent.com/rony0000013/stonks/master/README.md"
     
 ---
 
@@ -28,3 +26,48 @@ links:
 - **News and Sentiment Analysis**: Stay up-to-date with recent news related to stocks, accompanied by sentiment analysis for better decision-making.
 - **Customizable Date**: Users can customize the date to obtain stock information tailored to their specific needs.
 - **LLM Model Selection**: Choose from various Large Language Models (LLMs) to generate stock information based on individual preferences.
+
+## Getting Started
+
+### Prerequisites - Python and Poetry, Stonks-worker deployed or running locally
+
+To run the Stonks App locally, follow these steps:
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/rony0000013/stonks.git
+    ```
+
+2. Install the dependencies:
+
+    ```bash
+    poetry install
+    ```
+
+3. Add stonks worker deployed link in `.streamlit/secrets.toml`
+
+    ```bash
+    url = "<your-deployment-link>
+    ```
+4. Run the app
+    ```bash
+    poetry run streamlit run main.py
+    ```
+
+
+## Contributing
+
+Contributions to the Stonks App are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the GitHub repository.
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+> sadasd
+## Tech Stacks
+
+- Streamlit for the easy-to-use web app framework.
+- Cloudflare Workers for serverless computing.
+- Workers AI for providing the language models.
+- polygon.io for the stock market data API.

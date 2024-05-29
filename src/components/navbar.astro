@@ -1,59 +1,114 @@
 ---
 import Themes from "./themes";
+// import { Image } from "astro:assets";
+// import { Img } from "astro-imagetools/components";
 ---
 
-<!-- export default function Navbar() {
-return ( -->
 <>
 	<!-- Mobile Navbar -->
-	<div class="md:hidden">
-		<div class="fixed bottom-0 z-10 flex flex-row backdrop-blur-lg navbar card">
-			<button
-				type="button"
-				class="text-gray-500 hover:text-gray-600 size-10"
-				data-hs-overlay="#docs-sidebar"
-				aria-controls="docs-sidebar"
-				aria-label="Toggle navigation"
-			>
-				<span class="sr-only">Toggle Navigation</span>
-				<span class="icon-[svg-spinners--blocks-scale] size-8 text-white"></span>
-			</button>
-			<br />
-			<h1 class="text-lg">Rounak Sen</h1>
+	<div class="md:hidden text-white">
+		<div class="fixed bottom-0 z-10 justify-center h-[10vh] backdrop-blur-lg navbar card">
+			<ul class="menu menu-horizontal rounded-box">
+				<li>
+					<a href="/" class="p-0">
+						<!-- <canvas id="dotlottie-canvas-home" class="size-10"></canvas> -->
+						<dotlottie-player
+							autoplay
+							loop
+							playMode="normal"
+							src="/src/assets/home.lottie"
+							class="size-10"
+						>
+						</dotlottie-player>
+					</a>
+				</li>
+				<div class="divider divider-horizontal"></div>
+
+				<li
+					data-hs-overlay="#docs-sidebar"
+					aria-controls="docs-sidebar"
+					aria-label="Toggle navigation"
+				>
+					<!-- <span class="sr-only">Toggle Navigation</span> -->
+					<!-- <span class="icon-[svg-spinners--blocks-scale] size-8 text-white"></span> -->
+					<!-- <Image src={menuIcon} alt="home" class="p-0 size-14" /> -->
+					<dotlottie-player
+						class="w-[4rem]"
+						autoplay
+						loop
+						playMode="normal"
+						src="/src/assets/menu.lottie"
+					>
+					</dotlottie-player>
+				</li>
+				<div class="divider divider-horizontal"></div>
+				<li
+					id="scrollToTopButton"
+					class="p-2 text-white rounded-btn"
+					onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+				>
+					<!-- <span class="icon-[line-md--chevron-up] size-8 text-white rotate-90"></span> -->
+					<dotlottie-player
+						autoplay
+						loop
+						playMode="normal"
+						src="/src/assets/up.lottie"
+						class="w-[3rem]"
+					>
+					</dotlottie-player>
+				</li>
+			</ul>
 		</div>
 		<div
 			id="docs-sidebar"
-			class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64 border-e backdrop-blur-lg border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+			class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 translate-x-full transition-all duration-300 transform hidden fixed top-0 end-0 bottom-0 z-[60] w-64 backdrop-blur-lg border rounded-box border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:start-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
 		>
 			<nav
 				class="flex flex-col flex-wrap w-full p-6 hs-accordion-group"
 				data-hs-accordion-always-open
 			>
-				<ul class="space-y-1.5">
-					<li>
-						<a
-							href="/"
-							class="btn flex items-center gap-x-3.5 py-2 px-2.5 dark:border-white"
-						>
-							<span
-								class="icon-[line-md--coffee-half-empty-twotone-loop] size-8 text-black dark:text-white"
-							></span>
+				<ul class="grid grid-flow-row space-y-1.5 gap-3">
+					<li class="flex justify-center text-center rounded-btn border-y-2 border-primary">
+						<a href="/" class="flex items-center ">
+							<dotlottie-player
+								autoplay
+								loop
+								playMode="normal"
+								src="/src/assets/home.lottie"
+								class="size-10"
+							>
+							</dotlottie-player>
 							Home
 						</a>
 					</li>
 
-					<li>
-						<a
-							href="/"
-							class="btn flex items-center gap-x-3.5 py-2 px-2.5 dark:border-white"
-						>
-							<span
-								class="icon-[line-md--github-loop] size-8 text-black dark:text-white"
-							></span>
+					<li class="flex justify-center text-center rounded-btn border-y-2 border-primary">
+						<a href="/projects" class="flex items-center ">
+							<dotlottie-player
+								autoplay
+								loop
+								playMode="normal"
+								src="/src/assets/github.lottie"
+								class="size-10"
+							>
+							</dotlottie-player>
 							Projects
 						</a>
 					</li>
-					<li>
+					<li class="flex justify-center text-center rounded-btn border-y-2 border-primary">
+						<a href="/certificates" class="flex items-center ">
+							<dotlottie-player
+								autoplay
+								loop
+								playMode="normal"
+								src="/src/assets/certificate.lottie"
+								class="size-10"
+							>
+							</dotlottie-player>
+							Certificates
+						</a>
+					</li>
+					<li class="flex justify-center text-center rounded-btn border-y-2 border-primary">
 						<Themes />
 					</li>
 				</ul>
@@ -62,20 +117,50 @@ return ( -->
 	</div>
 
 	<!-- Desktop Navbar -->
-	<div class="fixed top-0 z-10 hidden text-white md:navbar backdrop-blur-lg ">
-		<a href="/" class="flex-1 px-2 mx-2 text-5xl "> Rounak Sen </a>
-		<div class="">
-			<ul class="menu menu-horizontal">
+	<div class="fixed top-0 z-10 hidden text-white md:navbar backdrop-blur-lg">
+		<div class="gap-5 mx-auto">
+			<ul class="gap-5 menu menu-horizontal">
 				<li>
-					<a href="/projects" class="btn">Projects</a>
+					<a href="/" class="border-y-2 border-primary">
+						<dotlottie-player
+							autoplay
+							loop
+							playMode="normal"
+							src="/src/assets/home.lottie"
+							class="p-0 m-0 size-10"
+						>
+						</dotlottie-player> Home</a
+					>
 				</li>
-				{
-					/* <li>
-							<a>Navbar Item 2</a>
-						</li> */
-				}
+				<li>
+					<a href="/projects" class="border-y-2 border-primary">
+						<dotlottie-player
+							autoplay
+							loop
+							playMode="normal"
+							src="/src/assets/github.lottie"
+							class="p-0 m-0 size-10"
+						>
+						</dotlottie-player> Projects</a
+					>
+				</li>
+				<li>
+					<a href="/certificates" class="border-y-2 border-primary">
+						<dotlottie-player
+							autoplay
+							loop
+							playMode="normal"
+							src="/src/assets/certificate.lottie"
+							class="p-0 m-0 size-10"
+						>
+						</dotlottie-player>
+						Certificates</a
+					>
+				</li>
 			</ul>
-			<Themes />
+			<div class="h-[3.5rem] rounded-btn border-y-2 border-primary">
+				<Themes />
+			</div>
 		</div>
 	</div>
 </>

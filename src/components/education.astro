@@ -1,0 +1,21 @@
+---
+import * as data from "../content/data/data.mdx";
+import EducationCard from "./educationcard.astro";
+
+const { education } = data.frontmatter;
+---
+
+<div class="my-10" id="education">
+	<h1 class="my-5 text-4xl font-bold text-center md:text-6xl text-primary" data-aos="fade-up">🎓 Education 📖</h1>
+	<ul class="timeline timeline-vertical ">
+		{
+			education.map((item, index) => (
+				<EducationCard
+					key={index}
+					flip={index % 2 === 0}
+					{...item}
+				/>
+			))
+		}
+	</ul>
+</div>
