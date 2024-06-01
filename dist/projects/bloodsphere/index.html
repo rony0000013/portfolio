@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><script>
+			if (localStorage.getItem("theme") === null)
+				document.documentElement.setAttribute("data-theme", "dark");
+			else document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+		</script><meta name="generator" content="Astro v4.9.1"><title>Blood-Sphere</title><meta name="description" content="Telegram Bot that helps find nearby blood banks with compatible blood types during emergencies. Tech: ReactJS, TailwindCSS, Bootstrap, Python, Telegram Bot API, Zip Code Base API, Google Map API"><link rel="stylesheet" href="/_astro/hoisted.Bxn43R6l.css">
+<link rel="stylesheet" href="/_astro/certificates.DqOrJuup.css">
+<link rel="stylesheet" href="/_astro/_slug_.DqTvkaRX.css"><script type="module" src="/_astro/hoisted.ByhlxJ_C.js"></script>
+<script>!(function(w,p,f,c){if(!window.crossOriginIsolated && !navigator.serviceWorker) return;c=w[p]=Object.assign(w[p]||{},{"lib":"/~partytown/","debug":false});c[f]=(c[f]||[])})(window,'partytown','forward');/* Partytown 0.10.2 - MIT builder.io */
+const t={preserveBehavior:!1},e=e=>{if("string"==typeof e)return[e,t];const[n,r=t]=e;return[n,{...t,...r}]},n=Object.freeze((t=>{const e=new Set;let n=[];do{Object.getOwnPropertyNames(n).forEach((t=>{"function"==typeof n[t]&&e.add(t)}))}while((n=Object.getPrototypeOf(n))!==Object.prototype);return Array.from(e)})());!function(t,r,o,i,a,s,c,d,l,p,u=t,f){function h(){f||(f=1,"/"==(c=(s.lib||"/~partytown/")+(s.debug?"debug/":""))[0]&&(l=r.querySelectorAll('script[type="text/partytown"]'),i!=t?i.dispatchEvent(new CustomEvent("pt1",{detail:t})):(d=setTimeout(v,1e4),r.addEventListener("pt0",w),a?y(1):o.serviceWorker?o.serviceWorker.register(c+(s.swPath||"partytown-sw.js"),{scope:c}).then((function(t){t.active?y():t.installing&&t.installing.addEventListener("statechange",(function(t){"activated"==t.target.state&&y()}))}),console.error):v())))}function y(e){p=r.createElement(e?"script":"iframe"),t._pttab=Date.now(),e||(p.style.display="block",p.style.width="0",p.style.height="0",p.style.border="0",p.style.visibility="hidden",p.setAttribute("aria-hidden",!0)),p.src=c+"partytown-"+(e?"atomics.js?v=0.10.2":"sandbox-sw.html?"+t._pttab),r.querySelector(s.sandboxParent||"body").appendChild(p)}function v(n,o){for(w(),i==t&&(s.forward||[]).map((function(n){const[r]=e(n);delete t[r.split(".")[0]]})),n=0;n<l.length;n++)(o=r.createElement("script")).innerHTML=l[n].innerHTML,o.nonce=s.nonce,r.head.appendChild(o);p&&p.parentNode.removeChild(p)}function w(){clearTimeout(d)}s=t.partytown||{},i==t&&(s.forward||[]).map((function(r){const[o,{preserveBehavior:i}]=e(r);u=t,o.split(".").map((function(e,r,o){var a;u=u[o[r]]=r+1<o.length?u[o[r]]||(a=o[r+1],n.includes(a)?[]:{}):(()=>{let e=null;if(i){const{methodOrProperty:n,thisObject:r}=((t,e)=>{let n=t;for(let t=0;t<e.length-1;t+=1)n=n[e[t]];return{thisObject:n,methodOrProperty:e.length>0?n[e[e.length-1]]:void 0}})(t,o);"function"==typeof n&&(e=(...t)=>n.apply(r,...t))}return function(){let n;return e&&(n=e(arguments)),(t._ptf=t._ptf||[]).push(o,arguments),n}})()}))})),"complete"==r.readyState?h():(t.addEventListener("DOMContentLoaded",h),t.addEventListener("load",h))}(window,document,navigator,top,window.crossOriginIsolated);;((d,s)=>(s=d.currentScript,d.addEventListener('astro:before-swap',()=>s.remove(),{once:true})))(document);</script></head> <body class="!scroll-smooth"> <div class="md:bg-black md:mt-1 md:h-[13vh]"> <div class="md:hidden text-white"><div class="fixed bottom-0 z-10 justify-center h-[10vh] backdrop-blur-lg navbar card"><ul class="menu menu-horizontal rounded-box"><li><a href="/" class="p-0"><!-- <canvas id="dotlottie-canvas-home" class="size-10"></canvas> --><dotlottie-player autoplay loop playMode="normal" src="/src/assets/home.lottie" class="size-10"></dotlottie-player></a></li><div class="divider divider-horizontal"></div><li data-hs-overlay="#docs-sidebar" aria-controls="docs-sidebar" aria-label="Toggle navigation"><!-- <span class="sr-only">Toggle Navigation</span> --><!-- <span class="icon-[svg-spinners--blocks-scale] size-8 text-white"></span> --><!-- <Image src={menuIcon} alt="home" class="p-0 size-14" /> --><dotlottie-player class="w-[4rem]" autoplay loop playMode="normal" src="/src/assets/menu.lottie"></dotlottie-player></li><div class="divider divider-horizontal"></div><li id="scrollToTopButton" class="p-2 text-white rounded-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"><!-- <span class="icon-[line-md--chevron-up] size-8 text-white rotate-90"></span> --><dotlottie-player autoplay loop playMode="normal" src="/src/assets/up.lottie" class="w-[3rem]"></dotlottie-player></li></ul></div><div id="docs-sidebar" class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 translate-x-full transition-all duration-300 transform hidden fixed top-0 end-0 bottom-0 z-[60] w-64 backdrop-blur-lg border rounded-box border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:start-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"><nav class="flex flex-col flex-wrap w-full p-6 hs-accordion-group" data-hs-accordion-always-open><ul class="grid grid-flow-row space-y-1.5 gap-3"><li class="flex justify-center text-center rounded-btn border-y-2 border-primary"><a href="/" class="flex items-center "><dotlottie-player autoplay loop playMode="normal" src="/src/assets/home.lottie" class="size-10"></dotlottie-player>
+Home
+</a></li><li class="flex justify-center text-center rounded-btn border-y-2 border-primary"><a href="/projects" class="flex items-center "><dotlottie-player autoplay loop playMode="normal" src="/src/assets/github.lottie" class="size-10"></dotlottie-player>
+Projects
+</a></li><li class="flex justify-center text-center rounded-btn border-y-2 border-primary"><a href="/certificates" class="flex items-center "><dotlottie-player autoplay loop playMode="normal" src="/src/assets/certificate.lottie" class="size-10"></dotlottie-player>
+Certificates
+</a></li><li class="flex justify-center text-center rounded-btn border-y-2 border-primary"><div class="dropdown "><div tabindex="-1" role="button" class="flex justify-center items-center gap-1 align-middle h-[3.5rem] p-2"><dotlottie-player autoplay loop playmode="normal" src="/src/assets/theme.lottie" class="p-0 m-0 size-10"></dotlottie-player>Theme<span class="icon-[la--chevron-down] size-4 text-white"></span></div><ul tabindex="-1" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full"><li key="0"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="light" value="light" data-set-theme="light" data-act-class="ACTIVECLASS"></li><li key="1"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dark" value="dark" data-set-theme="dark" data-act-class="ACTIVECLASS"></li><li key="2"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cupcake" value="cupcake" data-set-theme="cupcake" data-act-class="ACTIVECLASS"></li><li key="3"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="bumblebee" value="bumblebee" data-set-theme="bumblebee" data-act-class="ACTIVECLASS"></li><li key="4"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="emerald" value="emerald" data-set-theme="emerald" data-act-class="ACTIVECLASS"></li><li key="5"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="corporate" value="corporate" data-set-theme="corporate" data-act-class="ACTIVECLASS"></li><li key="6"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="synthwave" value="synthwave" data-set-theme="synthwave" data-act-class="ACTIVECLASS"></li><li key="7"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="retro" value="retro" data-set-theme="retro" data-act-class="ACTIVECLASS"></li><li key="8"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cyberpunk" value="cyberpunk" data-set-theme="cyberpunk" data-act-class="ACTIVECLASS"></li><li key="9"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="valentine" value="valentine" data-set-theme="valentine" data-act-class="ACTIVECLASS"></li><li key="10"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="halloween" value="halloween" data-set-theme="halloween" data-act-class="ACTIVECLASS"></li><li key="11"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="garden" value="garden" data-set-theme="garden" data-act-class="ACTIVECLASS"></li><li key="12"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="forest" value="forest" data-set-theme="forest" data-act-class="ACTIVECLASS"></li><li key="13"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="aqua" value="aqua" data-set-theme="aqua" data-act-class="ACTIVECLASS"></li><li key="14"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="lofi" value="lofi" data-set-theme="lofi" data-act-class="ACTIVECLASS"></li><li key="15"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="pastel" value="pastel" data-set-theme="pastel" data-act-class="ACTIVECLASS"></li><li key="16"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="fantasy" value="fantasy" data-set-theme="fantasy" data-act-class="ACTIVECLASS"></li><li key="17"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="wireframe" value="wireframe" data-set-theme="wireframe" data-act-class="ACTIVECLASS"></li><li key="18"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="black" value="black" data-set-theme="black" data-act-class="ACTIVECLASS"></li><li key="19"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="luxury" value="luxury" data-set-theme="luxury" data-act-class="ACTIVECLASS"></li><li key="20"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dracula" value="dracula" data-set-theme="dracula" data-act-class="ACTIVECLASS"></li><li key="21"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cmyk" value="cmyk" data-set-theme="cmyk" data-act-class="ACTIVECLASS"></li><li key="22"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="autumn" value="autumn" data-set-theme="autumn" data-act-class="ACTIVECLASS"></li><li key="23"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="business" value="business" data-set-theme="business" data-act-class="ACTIVECLASS"></li><li key="24"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="acid" value="acid" data-set-theme="acid" data-act-class="ACTIVECLASS"></li><li key="25"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="lemonade" value="lemonade" data-set-theme="lemonade" data-act-class="ACTIVECLASS"></li><li key="26"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="night" value="night" data-set-theme="night" data-act-class="ACTIVECLASS"></li><li key="27"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="coffee" value="coffee" data-set-theme="coffee" data-act-class="ACTIVECLASS"></li><li key="28"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="winter" value="winter" data-set-theme="winter" data-act-class="ACTIVECLASS"></li><li key="29"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dim" value="dim" data-set-theme="dim" data-act-class="ACTIVECLASS"></li><li key="30"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="nord" value="nord" data-set-theme="nord" data-act-class="ACTIVECLASS"></li><li key="31"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="sunset" value="sunset" data-set-theme="sunset" data-act-class="ACTIVECLASS"></li></ul></div></li></ul></nav></div></div><div class="fixed top-0 z-10 hidden text-white md:navbar backdrop-blur-lg"><div class="gap-5 mx-auto"><ul class="gap-5 menu menu-horizontal"><li><a href="/" class="border-y-2 border-primary"><dotlottie-player autoplay loop playMode="normal" src="/src/assets/home.lottie" class="p-0 m-0 size-10"></dotlottie-player> Home</a></li><li><a href="/projects" class="border-y-2 border-primary"><dotlottie-player autoplay loop playMode="normal" src="/src/assets/github.lottie" class="p-0 m-0 size-10"></dotlottie-player> Projects</a></li><li><a href="/certificates" class="border-y-2 border-primary"><dotlottie-player autoplay loop playMode="normal" src="/src/assets/certificate.lottie" class="p-0 m-0 size-10"></dotlottie-player>
+Certificates</a></li></ul><div class="h-[3.5rem] rounded-btn border-y-2 border-primary"><div class="dropdown "><div tabindex="-1" role="button" class="flex justify-center items-center gap-1 align-middle h-[3.5rem] p-2"><dotlottie-player autoplay loop playmode="normal" src="/src/assets/theme.lottie" class="p-0 m-0 size-10"></dotlottie-player>Theme<span class="icon-[la--chevron-down] size-4 text-white"></span></div><ul tabindex="-1" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full"><li key="0"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="light" value="light" data-set-theme="light" data-act-class="ACTIVECLASS"></li><li key="1"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dark" value="dark" data-set-theme="dark" data-act-class="ACTIVECLASS"></li><li key="2"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cupcake" value="cupcake" data-set-theme="cupcake" data-act-class="ACTIVECLASS"></li><li key="3"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="bumblebee" value="bumblebee" data-set-theme="bumblebee" data-act-class="ACTIVECLASS"></li><li key="4"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="emerald" value="emerald" data-set-theme="emerald" data-act-class="ACTIVECLASS"></li><li key="5"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="corporate" value="corporate" data-set-theme="corporate" data-act-class="ACTIVECLASS"></li><li key="6"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="synthwave" value="synthwave" data-set-theme="synthwave" data-act-class="ACTIVECLASS"></li><li key="7"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="retro" value="retro" data-set-theme="retro" data-act-class="ACTIVECLASS"></li><li key="8"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cyberpunk" value="cyberpunk" data-set-theme="cyberpunk" data-act-class="ACTIVECLASS"></li><li key="9"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="valentine" value="valentine" data-set-theme="valentine" data-act-class="ACTIVECLASS"></li><li key="10"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="halloween" value="halloween" data-set-theme="halloween" data-act-class="ACTIVECLASS"></li><li key="11"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="garden" value="garden" data-set-theme="garden" data-act-class="ACTIVECLASS"></li><li key="12"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="forest" value="forest" data-set-theme="forest" data-act-class="ACTIVECLASS"></li><li key="13"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="aqua" value="aqua" data-set-theme="aqua" data-act-class="ACTIVECLASS"></li><li key="14"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="lofi" value="lofi" data-set-theme="lofi" data-act-class="ACTIVECLASS"></li><li key="15"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="pastel" value="pastel" data-set-theme="pastel" data-act-class="ACTIVECLASS"></li><li key="16"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="fantasy" value="fantasy" data-set-theme="fantasy" data-act-class="ACTIVECLASS"></li><li key="17"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="wireframe" value="wireframe" data-set-theme="wireframe" data-act-class="ACTIVECLASS"></li><li key="18"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="black" value="black" data-set-theme="black" data-act-class="ACTIVECLASS"></li><li key="19"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="luxury" value="luxury" data-set-theme="luxury" data-act-class="ACTIVECLASS"></li><li key="20"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dracula" value="dracula" data-set-theme="dracula" data-act-class="ACTIVECLASS"></li><li key="21"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cmyk" value="cmyk" data-set-theme="cmyk" data-act-class="ACTIVECLASS"></li><li key="22"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="autumn" value="autumn" data-set-theme="autumn" data-act-class="ACTIVECLASS"></li><li key="23"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="business" value="business" data-set-theme="business" data-act-class="ACTIVECLASS"></li><li key="24"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="acid" value="acid" data-set-theme="acid" data-act-class="ACTIVECLASS"></li><li key="25"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="lemonade" value="lemonade" data-set-theme="lemonade" data-act-class="ACTIVECLASS"></li><li key="26"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="night" value="night" data-set-theme="night" data-act-class="ACTIVECLASS"></li><li key="27"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="coffee" value="coffee" data-set-theme="coffee" data-act-class="ACTIVECLASS"></li><li key="28"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="winter" value="winter" data-set-theme="winter" data-act-class="ACTIVECLASS"></li><li key="29"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dim" value="dim" data-set-theme="dim" data-act-class="ACTIVECLASS"></li><li key="30"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="nord" value="nord" data-set-theme="nord" data-act-class="ACTIVECLASS"></li><li key="31"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="sunset" value="sunset" data-set-theme="sunset" data-act-class="ACTIVECLASS"></li></ul></div></div></div></div> </div>  <div class="m-5 md:m-10 card"> <div class="hero py-10 rounded-box bg-black text-white mb-12 shadow-2xl"> <div class="hero-content flex-col lg:flex-row"> <img src="https://res.cloudinary.com/dddwknrcm/image/upload/v1716992511/BLOODSPHERE-01_qpelye.jpg" alt="Blood-Sphere" class="justify-start max-w-sm w-full rounded-lg shadow-2xl" width="1719" height="807" loading="lazy" decoding="async"> <div> <h1 class="text-xl md:text-5xl font-bold md:ml-5">Blood-Sphere</h1> <div class="py-4 md:ml-5"> Telegram Bot that helps find nearby blood banks with compatible blood types during emergencies. Tech: ReactJS, TailwindCSS, Bootstrap, Python, Telegram Bot API, Zip Code Base API, Google Map API <br> <span class="text-sm text-info">Date: September-2023</span> <div class="flex flex-wrap gap-2 pt-2"> <span class="badge badge-success">ReactJS</span><span class="badge badge-success">TailwindCSS</span><span class="badge badge-success">Bootstrap</span><span class="badge badge-success">Python</span><span class="badge badge-success">Telegram Bot API</span><span class="badge badge-success">Zip Code Base API</span><span class="badge badge-success">Google Map API</span> </div> </div> <ul class="flex menu menu-horizontal gap-5"> <li class="bg-base-200 rounded-box "> <a aria-label="demo link" href="https://blood-sphere.vercel.app/" target="_blank">
+Demo Link
+<dotlottie-player autoplay loop playMode="normal" src="/src/assets/arrow.lottie" class="size-8 rounded-full -rotate-45 bg-white "></dotlottie-player> </a> </li> <li class="bg-base-200 rounded-box"> <a aria-label="github" href="https://github.com/Soumyajit2825/Blood-Sphere" target="_blank">
+Github Link
+<dotlottie-player autoplay loop playMode="normal" src="/src/assets/githubBlack.lottie" class="size-8 rounded-box bg-white"></dotlottie-player> </a> </li> </ul> </div> </div> </div> <div class="prose dark:prose-invert
+                        prose-h1:font-bold prose-h1:text-primary
+                        prose-h2:text-secondary prose-h3:text-secondary prose-h4:text-secondary prose-h5:text-secondary prose-h6:text-secondary
+                        prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
+                        prose-headings:underline md:mx-auto"> <article><h1>InterHacktive-Blood-Sphere</h1>
+<p><a id="top"></a></p>
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="">
+    <img src="https://github.com/Koustavjr/Blood-Sphere/blob/master/Frontend/src/Images/INTERHACKTIVE.jpg" height=250px width=250px>
+    <img src="https://github.com/Koustavjr/Blood-Sphere/blob/master/Frontend/src/Images/BLOODSPHERE-01.jpeg" alt="Logo" width="270" height="270">
+  </a>
+   
+</div>
+<a href="https://youtu.be/GIesmWSPkQM?si=URWYIPF2jeZdHIcz"> Watch Demo</a>
+<hr />
+<!-- TABLE OF CONTENTS -->
+<details>
+  <Summary> Table of Contents  </Summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+         <ul>
+        <li><a href="#inspiration">Inspiration</a></li>
+      </ul>
+      <ul>
+        <li><a href="#use-case">Use Case</a></li>
+      </ul>
+       <ul>
+        <li><a href="#what-problem-does-the-project-solve">What Problem does the Project Solve?</a></li>
+      </ul>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+      </ul>
+      <ul>
+        <li><a href="#challenges-we-faced">Challenges We Faced</a></li>
+      </ul>
+      <ul>
+        <li><a href="#future-goals">Future Goals</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#how-to-use">How To Use</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+  </ol>
+</details>
+  <!-- ABOUT THE PROJECT -->
+  
+<h1>🩸🩸About The Project 🩸🩸</h1>
+<p><img src="https://github.com/Koustavjr/Blood-Sphere/blob/master/Frontend/src/Images/photo_2023-08-28_17-44-40.jpg" alt="UI/UX"></p>
+<h3>💭Inspiration</h3>
+<p>• Unawareness of compatible blood availability nearby during emergency: People in need of blood during accidents/ emergency situations tend to rush to blood banks that are far away, potentially risking their life, assuming that there are no blood banks nearby. <br></p>
+<p>• Not knowing where to donate blood: Other than occasional blood donation campaigns, people are often unaware about the fact that the local hospitals run of certain blood types wherein potential blood donors can help them out.
+&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<h3>🎯Use Case</h3>
+<p>Blood Donation and Searching during contingency
+Imagine being in a critical situation where someone in need requires an urgent blood transfusion. Instead of panicking and rushing to distant blood banks, people can open our blood donation and searching website and try our ‘BloodSphere Bot’. With just a few clicks, you can easily find nearby blood banks/ hospitals with the compatible blood type. Our platform with its user-friendly interface, ensures you&#39;re always aware of compatible blood availability during emergencies, saving precious time and potentially saving lives.</p>
+<h3>💡What problem does the project solve?</h3>
+<p>•  Time constraints: In critical situations, people may waste valuable time searching for blood sources, which can delay life-saving treatment. <br>
+•  Effective communication: Traditional ways to find blood donors can be time-consuming and involve long phone calls and large networks, which can slow down the process of getting the blood type you need. <br>
+•  Different distribution of blood types: Lack of a centralized system can lead to mismatched blood types which can be dangerous or even fatal. <br>
+•  Geographic constraints: Patients may not know where the closest blood bank is located, which can lead to wasted travel to remote areas. <br>
+•  Low donor turnout: A lack of visibility and convenient access to donation centres can contribute to low donor turnout and insufficient blood supply.</p>
+<h3>🙌Overview</h3>
+<p>•	On the landing page, see the buttons ‘Search for Blood’ and ‘Donate Blood’ respectively.</p>
+<p>•	Clicking on the button will take you to our Bot – ‘BloodSphere Bot’</p>
+<p>•	Start interacting with the bot through commands such as ‘/start’, ‘/get’ and ‘/donate’.</p>
+<p>•	Enter your respective PIN code to get location and details of all the nearby blood banks and hospitals.</p>
+<h3>💀Challenges we Faced</h3>
+<p>•	Getting a free API to implement the bot was a heavy task.</p>
+<p>•	Getting PIN code for all the nearby blood banks and hospitals in our database was a difficult task for us.</p>
+<p>•	 We couldn’t find any extensive live database that could be implemented in our database.</p>
+<p>•	The bot was to be implemented using WhatsApp API from Twilio but META makes it mandatory to have a Facebook page and takes about 3 weeks for verification, which was not feasible for us.</p>
+<h3>🔮Future Goals:</h3>
+<p>• For this project, as we couldn&#39;t get an extensive dataset, Our Future plan is to take some aid from the government to get access to some live data covering the availability of the various blood types across the country.</p>
+<p>• Optimisation and minor bug fixes.</p>
+<p align="right"><a href="#read<img width="191" alt="an_logo_light_temp" src="https://user-images.githubusercontent.com/63441472/190889937-afb28215-5bb5-4115-83d2-f7afb73ef8f8.png">
+</p>
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<h3>💻Built With</h3>
+<ul>
+<li><p><img src = "https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" style="margin-top: 40px" height=30px width=30px > <em>React</em>- For developing the Front-end UI <br> </p>
+</li>
+<li><p><img src = "https://github.com/Koustavjr/Blood-Sphere/blob/master/Frontend/src/Images/tailwind-removebg-preview.png" height=40px width=40px><em>Tailwind Css and Daisy UI</em>- For designing the UI  <br></p>
+</li>
+<li><p><img src = "https://juststickers.in/wp-content/uploads/2019/01/webpack-logo.png" height=40px width=40px> <em>WebPack</em> - Used to bundle the JavaScript packages  <br></p>
+</li>
+<li><p><img src = "https://th.bing.com/th/id/OIP.wF-2BeX_-oRQVMGVyQxfowHaEc?pid=ImgDet&rs=1](https://brandlogos.net/wp-content/uploads/2021/09/bootstrap-logo.png" height=40px width=40px ><em>Bootstrap</em>- Used for Designing the front-end <br></p>
+</li>
+<li><p><img src = "https://cdn.freebiesupply.com/logos/large/2x/auth0-logo-png-transparent.png" height=40px width=40px><em>Auth0</em>- Used For making the sign in/Login handler  <br></p>
+</li>
+<li><p><img src = "https://th.bing.com/th/id/R.4227717661d4e253127c591194bf6fe9?rik=JNbva6iP8QTsXw&riu=http%3a%2f%2fclipart-library.com%2fimages_k%2fpython-logo-transparent%2fpython-logo-transparent-5.jpg&ehk=fd687R1W1S%2fYQ9PAACxGKzTy%2bLNdngxem8mtMtcFzBg%3d&risl=&pid=ImgRaw&r=0" height=40px width=40px> <em>Python</em> - Used for developing the backend and connecting the telegramBotApi for handling the messages  <br></p>
+</li>
+<li><p><img src="https://scrapingant.com/blog/img/blog/beautifulsoup-logo.png" height=50px width=50px> <em>BeautifulSoup4</em>- used for scraping data from <a href="https://www.eraktkosh.in/BLDAHIMS/bloodbank/transactions/bbpublicindex.html">Website</a>  </p>
+</li>
+<li><p><img src="https://th.bing.com/th/id/OIP.710tCvb0eHNtcf8DbFOTdwHaHa?pid=ImgDet&rs=1" height=40px width=40px>API used - <br>
+      1. Google Map API  <br>
+      2. Zip Code Base API <br>
+      3. Telegram Bot API <br></p>
+</li>
+<li><p><em>Email JS</em> - Use for sending email to user client side technology </p>
+</li>
+<li><p><img src="https://th.bing.com/th/id/OIP.P5VJJoua7vc00-2-LBGi8QHaHa?pid=ImgDet&rs=1" height=40px width=40px> Deployment is done in FLy.io</p>
+</li>
+</ul>
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<h2>Tracks Used</h2>
+<ol>
+<li>Best Project Workflow</li>
+<li>Best Implementation Of UI/UX<!-- GETTING STARTED --></li>
+</ol>
+<h2>Getting Started</h2>
+<p>For setting up your project locally, follow these simple steps.</p>
+<h3>Prerequisites</h3>
+<p>You must have followings installed  in your system , If you dont we got you covered  </p>
+<ol>
+<li><a href="https://phoenixnap.com/kb/install-node-js-npm-on-windows">Install NPM</a></li>
+<li><a href="https://pip.pypa.io/en/stable/cli/pip_install/">Install Pip</a></li>
+<li><a href="https://www.python.org/downloads/">Python Download</a></li>
+</ol>
+<h2>Installation</h2>
+<ol>
+<li>clone repo</li>
+</ol>
+<pre><code> git clone : https://github.com/Soumyajit2825/Blood-Sphere.git
+</code></pre>
+<p>  <strong><em>Front-end Installation</em></strong></p>
+<ol>
+<li>Navigate to frontend folder</li>
+</ol>
+<pre><code>cd Frontend
+</code></pre>
+<ol start="2">
+<li>Install necessary Libraries</li>
+</ol>
+<pre><code>npm i
+</code></pre>
+<ol start="3">
+<li>To run fronted on local server</li>
+</ol>
+<pre><code>npm start
+</code></pre>
+<p><strong><em>Backend Installation</em></strong>
+If you do not want to deploy the bot, bot is already deployed: <a href="https://t.me/blood_sphere_bot">https://t.me/blood_sphere_bot</a></p>
+<ol>
+<li>Navigate to Backend Folder</li>
+</ol>
+<pre><code>$ cd Backend
+</code></pre>
+<ol start="2">
+<li>Install required libraries</li>
+</ol>
+<pre><code>$ pip instsall -r requirements.txt
+</code></pre>
+<ol start="3">
+<li>Add your zipcodebase API key and telegram bot API key</li>
+<li>To run script</li>
+</ol>
+<pre><code>$ python app.py
+</code></pre>
+<p><a href="https://t.me/blood_sphere_bot">Telegram Bot</a> or paste this user name in telegram Search: @blood_sphere_bot</p>
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES 
+## Usage
+<div align="center">
+<img src="https://media2.giphy.com/media/UYpelo7WbjZQg0dDQY/200.gif" width="500" height="200" />
+</div>
+<p align="right">(<a href="#top">back to top</a>)</p> -->
+
+
+
+<!-- How to  Use -->
+<h2>How To Use</h2>
+<p>&nbsp; </p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Open BloodSpehere Website</li>
+<li><input checked="" disabled="" type="checkbox"> Login With Your Credentials</li>
+<li><input checked="" disabled="" type="checkbox"> Click on Search/Donate</li>
+<li><input checked="" disabled="" type="checkbox"> Interact with the bot to meet your purpose<h3>Commands To Interact</h3>
+</li>
+<li><input checked="" disabled="" type="checkbox"> /start - to start interacting with the bot</li>
+<li><input checked="" disabled="" type="checkbox"> /get - to search blood groups</li>
+<li><input checked="" disabled="" type="checkbox"> /donate - to find nearby blood donation camps</li>
+<li><input disabled="" type="checkbox"> Live data fetch and update(Future plan)</li>
+</ul>
+<h3>WorkFLow</h3>
+<p><img src="https://github.com/Koustavjr/Blood-Sphere/blob/master/Frontend/src/Images/workflow.jpg" alt=""></p>
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
+<h2>Contributing</h2>
+<p>If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag &quot;improvement&quot;.
+Don&#39;t forget to ⭐ this project!! </p>
+<ol>
+<li>Fork the Project</li>
+<li>Create your Feature Branch (<code>git checkout -b feature/Feature1</code>)</li>
+<li>Commit your Changes (<code>git commit -m &#39;Add Feature 1&#39;</code>)</li>
+<li>Push to the Branch (<code>git push origin feature/Feature1</code>)</li>
+<li>Open a Pull Request</li>
+</ol>
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+<h2>Contributors</h2>
+<br>
+<div>
+<h1 align="center">
+ <b>Made with ❤️ by team Semicolon
+<h1>
+<a href="https://github.com/Soumyajit2825/Blood-Sphere/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Soumyajit2825/Blood-Sphere" />
+</a>
+</div>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+</article> </div> </div>  <script type="module" src="/node_modules/@dotlottie/player-component/dist/dotlottie-player.mjs"></script> <script type="text/partytown" src="../../node_modules/preline/preline.js"></script> </body></html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><script>
+			if (localStorage.getItem("theme") === null)
+				document.documentElement.setAttribute("data-theme", "dark");
+			else document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+		</script><meta name="generator" content="Astro v4.9.1"><title>WasteX</title><meta name="description" content="Waste Management (Computer Vision, APIs, Streamlit): Utilizes Computer Vision to detect and map waste locations for better waste management. Tech: ReactJS, TailwindCSS, FastAPI, MongoDB, HuggingFace API, Streamlit, Cohere API"><link rel="stylesheet" href="/_astro/hoisted.Bxn43R6l.css">
+<link rel="stylesheet" href="/_astro/certificates.DqOrJuup.css">
+<link rel="stylesheet" href="/_astro/_slug_.DqTvkaRX.css"><script type="module" src="/_astro/hoisted.ByhlxJ_C.js"></script>
+<script>!(function(w,p,f,c){if(!window.crossOriginIsolated && !navigator.serviceWorker) return;c=w[p]=Object.assign(w[p]||{},{"lib":"/~partytown/","debug":false});c[f]=(c[f]||[])})(window,'partytown','forward');/* Partytown 0.10.2 - MIT builder.io */
+const t={preserveBehavior:!1},e=e=>{if("string"==typeof e)return[e,t];const[n,r=t]=e;return[n,{...t,...r}]},n=Object.freeze((t=>{const e=new Set;let n=[];do{Object.getOwnPropertyNames(n).forEach((t=>{"function"==typeof n[t]&&e.add(t)}))}while((n=Object.getPrototypeOf(n))!==Object.prototype);return Array.from(e)})());!function(t,r,o,i,a,s,c,d,l,p,u=t,f){function h(){f||(f=1,"/"==(c=(s.lib||"/~partytown/")+(s.debug?"debug/":""))[0]&&(l=r.querySelectorAll('script[type="text/partytown"]'),i!=t?i.dispatchEvent(new CustomEvent("pt1",{detail:t})):(d=setTimeout(v,1e4),r.addEventListener("pt0",w),a?y(1):o.serviceWorker?o.serviceWorker.register(c+(s.swPath||"partytown-sw.js"),{scope:c}).then((function(t){t.active?y():t.installing&&t.installing.addEventListener("statechange",(function(t){"activated"==t.target.state&&y()}))}),console.error):v())))}function y(e){p=r.createElement(e?"script":"iframe"),t._pttab=Date.now(),e||(p.style.display="block",p.style.width="0",p.style.height="0",p.style.border="0",p.style.visibility="hidden",p.setAttribute("aria-hidden",!0)),p.src=c+"partytown-"+(e?"atomics.js?v=0.10.2":"sandbox-sw.html?"+t._pttab),r.querySelector(s.sandboxParent||"body").appendChild(p)}function v(n,o){for(w(),i==t&&(s.forward||[]).map((function(n){const[r]=e(n);delete t[r.split(".")[0]]})),n=0;n<l.length;n++)(o=r.createElement("script")).innerHTML=l[n].innerHTML,o.nonce=s.nonce,r.head.appendChild(o);p&&p.parentNode.removeChild(p)}function w(){clearTimeout(d)}s=t.partytown||{},i==t&&(s.forward||[]).map((function(r){const[o,{preserveBehavior:i}]=e(r);u=t,o.split(".").map((function(e,r,o){var a;u=u[o[r]]=r+1<o.length?u[o[r]]||(a=o[r+1],n.includes(a)?[]:{}):(()=>{let e=null;if(i){const{methodOrProperty:n,thisObject:r}=((t,e)=>{let n=t;for(let t=0;t<e.length-1;t+=1)n=n[e[t]];return{thisObject:n,methodOrProperty:e.length>0?n[e[e.length-1]]:void 0}})(t,o);"function"==typeof n&&(e=(...t)=>n.apply(r,...t))}return function(){let n;return e&&(n=e(arguments)),(t._ptf=t._ptf||[]).push(o,arguments),n}})()}))})),"complete"==r.readyState?h():(t.addEventListener("DOMContentLoaded",h),t.addEventListener("load",h))}(window,document,navigator,top,window.crossOriginIsolated);;((d,s)=>(s=d.currentScript,d.addEventListener('astro:before-swap',()=>s.remove(),{once:true})))(document);</script></head> <body class="!scroll-smooth"> <div class="md:bg-black md:mt-1 md:h-[13vh]"> <div class="md:hidden text-white"><div class="fixed bottom-0 z-10 justify-center h-[10vh] backdrop-blur-lg navbar card"><ul class="menu menu-horizontal rounded-box"><li><a href="/" class="p-0"><!-- <canvas id="dotlottie-canvas-home" class="size-10"></canvas> --><dotlottie-player autoplay loop playMode="normal" src="/src/assets/home.lottie" class="size-10"></dotlottie-player></a></li><div class="divider divider-horizontal"></div><li data-hs-overlay="#docs-sidebar" aria-controls="docs-sidebar" aria-label="Toggle navigation"><!-- <span class="sr-only">Toggle Navigation</span> --><!-- <span class="icon-[svg-spinners--blocks-scale] size-8 text-white"></span> --><!-- <Image src={menuIcon} alt="home" class="p-0 size-14" /> --><dotlottie-player class="w-[4rem]" autoplay loop playMode="normal" src="/src/assets/menu.lottie"></dotlottie-player></li><div class="divider divider-horizontal"></div><li id="scrollToTopButton" class="p-2 text-white rounded-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"><!-- <span class="icon-[line-md--chevron-up] size-8 text-white rotate-90"></span> --><dotlottie-player autoplay loop playMode="normal" src="/src/assets/up.lottie" class="w-[3rem]"></dotlottie-player></li></ul></div><div id="docs-sidebar" class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 translate-x-full transition-all duration-300 transform hidden fixed top-0 end-0 bottom-0 z-[60] w-64 backdrop-blur-lg border rounded-box border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:start-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"><nav class="flex flex-col flex-wrap w-full p-6 hs-accordion-group" data-hs-accordion-always-open><ul class="grid grid-flow-row space-y-1.5 gap-3"><li class="flex justify-center text-center rounded-btn border-y-2 border-primary"><a href="/" class="flex items-center "><dotlottie-player autoplay loop playMode="normal" src="/src/assets/home.lottie" class="size-10"></dotlottie-player>
+Home
+</a></li><li class="flex justify-center text-center rounded-btn border-y-2 border-primary"><a href="/projects" class="flex items-center "><dotlottie-player autoplay loop playMode="normal" src="/src/assets/github.lottie" class="size-10"></dotlottie-player>
+Projects
+</a></li><li class="flex justify-center text-center rounded-btn border-y-2 border-primary"><a href="/certificates" class="flex items-center "><dotlottie-player autoplay loop playMode="normal" src="/src/assets/certificate.lottie" class="size-10"></dotlottie-player>
+Certificates
+</a></li><li class="flex justify-center text-center rounded-btn border-y-2 border-primary"><div class="dropdown "><div tabindex="-1" role="button" class="flex justify-center items-center gap-1 align-middle h-[3.5rem] p-2"><dotlottie-player autoplay loop playmode="normal" src="/src/assets/theme.lottie" class="p-0 m-0 size-10"></dotlottie-player>Theme<span class="icon-[la--chevron-down] size-4 text-white"></span></div><ul tabindex="-1" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full"><li key="0"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="light" value="light" data-set-theme="light" data-act-class="ACTIVECLASS"></li><li key="1"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dark" value="dark" data-set-theme="dark" data-act-class="ACTIVECLASS"></li><li key="2"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cupcake" value="cupcake" data-set-theme="cupcake" data-act-class="ACTIVECLASS"></li><li key="3"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="bumblebee" value="bumblebee" data-set-theme="bumblebee" data-act-class="ACTIVECLASS"></li><li key="4"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="emerald" value="emerald" data-set-theme="emerald" data-act-class="ACTIVECLASS"></li><li key="5"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="corporate" value="corporate" data-set-theme="corporate" data-act-class="ACTIVECLASS"></li><li key="6"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="synthwave" value="synthwave" data-set-theme="synthwave" data-act-class="ACTIVECLASS"></li><li key="7"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="retro" value="retro" data-set-theme="retro" data-act-class="ACTIVECLASS"></li><li key="8"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cyberpunk" value="cyberpunk" data-set-theme="cyberpunk" data-act-class="ACTIVECLASS"></li><li key="9"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="valentine" value="valentine" data-set-theme="valentine" data-act-class="ACTIVECLASS"></li><li key="10"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="halloween" value="halloween" data-set-theme="halloween" data-act-class="ACTIVECLASS"></li><li key="11"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="garden" value="garden" data-set-theme="garden" data-act-class="ACTIVECLASS"></li><li key="12"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="forest" value="forest" data-set-theme="forest" data-act-class="ACTIVECLASS"></li><li key="13"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="aqua" value="aqua" data-set-theme="aqua" data-act-class="ACTIVECLASS"></li><li key="14"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="lofi" value="lofi" data-set-theme="lofi" data-act-class="ACTIVECLASS"></li><li key="15"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="pastel" value="pastel" data-set-theme="pastel" data-act-class="ACTIVECLASS"></li><li key="16"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="fantasy" value="fantasy" data-set-theme="fantasy" data-act-class="ACTIVECLASS"></li><li key="17"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="wireframe" value="wireframe" data-set-theme="wireframe" data-act-class="ACTIVECLASS"></li><li key="18"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="black" value="black" data-set-theme="black" data-act-class="ACTIVECLASS"></li><li key="19"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="luxury" value="luxury" data-set-theme="luxury" data-act-class="ACTIVECLASS"></li><li key="20"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dracula" value="dracula" data-set-theme="dracula" data-act-class="ACTIVECLASS"></li><li key="21"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cmyk" value="cmyk" data-set-theme="cmyk" data-act-class="ACTIVECLASS"></li><li key="22"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="autumn" value="autumn" data-set-theme="autumn" data-act-class="ACTIVECLASS"></li><li key="23"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="business" value="business" data-set-theme="business" data-act-class="ACTIVECLASS"></li><li key="24"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="acid" value="acid" data-set-theme="acid" data-act-class="ACTIVECLASS"></li><li key="25"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="lemonade" value="lemonade" data-set-theme="lemonade" data-act-class="ACTIVECLASS"></li><li key="26"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="night" value="night" data-set-theme="night" data-act-class="ACTIVECLASS"></li><li key="27"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="coffee" value="coffee" data-set-theme="coffee" data-act-class="ACTIVECLASS"></li><li key="28"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="winter" value="winter" data-set-theme="winter" data-act-class="ACTIVECLASS"></li><li key="29"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dim" value="dim" data-set-theme="dim" data-act-class="ACTIVECLASS"></li><li key="30"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="nord" value="nord" data-set-theme="nord" data-act-class="ACTIVECLASS"></li><li key="31"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="sunset" value="sunset" data-set-theme="sunset" data-act-class="ACTIVECLASS"></li></ul></div></li></ul></nav></div></div><div class="fixed top-0 z-10 hidden text-white md:navbar backdrop-blur-lg"><div class="gap-5 mx-auto"><ul class="gap-5 menu menu-horizontal"><li><a href="/" class="border-y-2 border-primary"><dotlottie-player autoplay loop playMode="normal" src="/src/assets/home.lottie" class="p-0 m-0 size-10"></dotlottie-player> Home</a></li><li><a href="/projects" class="border-y-2 border-primary"><dotlottie-player autoplay loop playMode="normal" src="/src/assets/github.lottie" class="p-0 m-0 size-10"></dotlottie-player> Projects</a></li><li><a href="/certificates" class="border-y-2 border-primary"><dotlottie-player autoplay loop playMode="normal" src="/src/assets/certificate.lottie" class="p-0 m-0 size-10"></dotlottie-player>
+Certificates</a></li></ul><div class="h-[3.5rem] rounded-btn border-y-2 border-primary"><div class="dropdown "><div tabindex="-1" role="button" class="flex justify-center items-center gap-1 align-middle h-[3.5rem] p-2"><dotlottie-player autoplay loop playmode="normal" src="/src/assets/theme.lottie" class="p-0 m-0 size-10"></dotlottie-player>Theme<span class="icon-[la--chevron-down] size-4 text-white"></span></div><ul tabindex="-1" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full"><li key="0"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="light" value="light" data-set-theme="light" data-act-class="ACTIVECLASS"></li><li key="1"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dark" value="dark" data-set-theme="dark" data-act-class="ACTIVECLASS"></li><li key="2"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cupcake" value="cupcake" data-set-theme="cupcake" data-act-class="ACTIVECLASS"></li><li key="3"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="bumblebee" value="bumblebee" data-set-theme="bumblebee" data-act-class="ACTIVECLASS"></li><li key="4"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="emerald" value="emerald" data-set-theme="emerald" data-act-class="ACTIVECLASS"></li><li key="5"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="corporate" value="corporate" data-set-theme="corporate" data-act-class="ACTIVECLASS"></li><li key="6"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="synthwave" value="synthwave" data-set-theme="synthwave" data-act-class="ACTIVECLASS"></li><li key="7"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="retro" value="retro" data-set-theme="retro" data-act-class="ACTIVECLASS"></li><li key="8"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cyberpunk" value="cyberpunk" data-set-theme="cyberpunk" data-act-class="ACTIVECLASS"></li><li key="9"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="valentine" value="valentine" data-set-theme="valentine" data-act-class="ACTIVECLASS"></li><li key="10"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="halloween" value="halloween" data-set-theme="halloween" data-act-class="ACTIVECLASS"></li><li key="11"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="garden" value="garden" data-set-theme="garden" data-act-class="ACTIVECLASS"></li><li key="12"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="forest" value="forest" data-set-theme="forest" data-act-class="ACTIVECLASS"></li><li key="13"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="aqua" value="aqua" data-set-theme="aqua" data-act-class="ACTIVECLASS"></li><li key="14"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="lofi" value="lofi" data-set-theme="lofi" data-act-class="ACTIVECLASS"></li><li key="15"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="pastel" value="pastel" data-set-theme="pastel" data-act-class="ACTIVECLASS"></li><li key="16"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="fantasy" value="fantasy" data-set-theme="fantasy" data-act-class="ACTIVECLASS"></li><li key="17"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="wireframe" value="wireframe" data-set-theme="wireframe" data-act-class="ACTIVECLASS"></li><li key="18"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="black" value="black" data-set-theme="black" data-act-class="ACTIVECLASS"></li><li key="19"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="luxury" value="luxury" data-set-theme="luxury" data-act-class="ACTIVECLASS"></li><li key="20"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dracula" value="dracula" data-set-theme="dracula" data-act-class="ACTIVECLASS"></li><li key="21"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="cmyk" value="cmyk" data-set-theme="cmyk" data-act-class="ACTIVECLASS"></li><li key="22"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="autumn" value="autumn" data-set-theme="autumn" data-act-class="ACTIVECLASS"></li><li key="23"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="business" value="business" data-set-theme="business" data-act-class="ACTIVECLASS"></li><li key="24"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="acid" value="acid" data-set-theme="acid" data-act-class="ACTIVECLASS"></li><li key="25"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="lemonade" value="lemonade" data-set-theme="lemonade" data-act-class="ACTIVECLASS"></li><li key="26"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="night" value="night" data-set-theme="night" data-act-class="ACTIVECLASS"></li><li key="27"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="coffee" value="coffee" data-set-theme="coffee" data-act-class="ACTIVECLASS"></li><li key="28"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="winter" value="winter" data-set-theme="winter" data-act-class="ACTIVECLASS"></li><li key="29"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="dim" value="dim" data-set-theme="dim" data-act-class="ACTIVECLASS"></li><li key="30"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="nord" value="nord" data-set-theme="nord" data-act-class="ACTIVECLASS"></li><li key="31"><input type="radio" name="theme-dropdown" class="btn btn-sm btn-block btn-ghost justify-start" aria-label="sunset" value="sunset" data-set-theme="sunset" data-act-class="ACTIVECLASS"></li></ul></div></div></div></div> </div>  <div class="m-5 md:m-10 card"> <div class="hero py-10 rounded-box bg-black text-white mb-12 shadow-2xl"> <div class="hero-content flex-col lg:flex-row"> <img src="https://res.cloudinary.com/dddwknrcm/image/upload/v1716992720/W_a_s_t_e-X-ba4cc6c6_gdtags.jpg" alt="WasteX" class="justify-start max-w-sm w-full rounded-lg shadow-2xl" width="1014" height="662" loading="lazy" decoding="async"> <div> <h1 class="text-xl md:text-5xl font-bold md:ml-5">WasteX</h1> <div class="py-4 md:ml-5"> Waste Management (Computer Vision, APIs, Streamlit): Utilizes Computer Vision to detect and map waste locations for better waste management. Tech: ReactJS, TailwindCSS, FastAPI, MongoDB, HuggingFace API, Streamlit, Cohere API <br> <span class="text-sm text-info">Date: August-2023</span> <div class="flex flex-wrap gap-2 pt-2"> <span class="badge badge-success">ReactJS</span><span class="badge badge-success">TailwindCSS</span><span class="badge badge-success">FastAPI</span><span class="badge badge-success">MongoDB</span><span class="badge badge-success">HuggingFace API</span><span class="badge badge-success">Streamlit</span><span class="badge badge-success">Cohere API</span> </div> </div> <ul class="flex menu menu-horizontal gap-5"> <li class="bg-base-200 rounded-box "> <a aria-label="demo link" href="https://waste-x.vercel.app/" target="_blank">
+Demo Link
+<dotlottie-player autoplay loop playMode="normal" src="/src/assets/arrow.lottie" class="size-8 rounded-full -rotate-45 bg-white "></dotlottie-player> </a> </li> <li class="bg-base-200 rounded-box"> <a aria-label="github" href="https://github.com/rony00000013/WasteX" target="_blank">
+Github Link
+<dotlottie-player autoplay loop playMode="normal" src="/src/assets/githubBlack.lottie" class="size-8 rounded-box bg-white"></dotlottie-player> </a> </li> </ul> </div> </div> </div> <div class="prose dark:prose-invert
+                        prose-h1:font-bold prose-h1:text-primary
+                        prose-h2:text-secondary prose-h3:text-secondary prose-h4:text-secondary prose-h5:text-secondary prose-h6:text-secondary
+                        prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
+                        prose-headings:underline md:mx-auto"> <article><!DOCTYPE html>
+<html
+  lang="en"
+  
+<p>  data-color-mode=&quot;auto&quot; data-light-theme=&quot;light&quot; data-dark-theme=&quot;dark&quot;
+  data-a11y-animated-images=&quot;system&quot; data-a11y-link-underlines=&quot;true&quot;</p>
+<blockquote>
+</blockquote>
+  <head>
+    <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://github.githubassets.com">
+  <link rel="dns-prefetch" href="https://avatars.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://github-cloud.s3.amazonaws.com">
+  <link rel="dns-prefetch" href="https://user-images.githubusercontent.com/">
+  <link rel="preconnect" href="https://github.githubassets.com" crossorigin>
+  <link rel="preconnect" href="https://avatars.githubusercontent.com">
+
+  
+
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/light-f552bab6ce72.css" /><link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/dark-4589f64a2275.css" /><link data-color-theme="dark_dimmed" crossorigin="anonymous" media="all" rel="stylesheet" data-href="https://github.githubassets.com/assets/dark_dimmed-a7246d2d6733.css" /><link data-color-theme="dark_high_contrast" crossorigin="anonymous" media="all" rel="stylesheet" data-href="https://github.githubassets.com/assets/dark_high_contrast-f2ef05cef2f1.css" /><link data-color-theme="dark_colorblind" crossorigin="anonymous" media="all" rel="stylesheet" data-href="https://github.githubassets.com/assets/dark_colorblind-daa1fe317131.css" /><link data-color-theme="light_colorblind" crossorigin="anonymous" media="all" rel="stylesheet" data-href="https://github.githubassets.com/assets/light_colorblind-1ab6fcc64845.css" /><link data-color-theme="light_high_contrast" crossorigin="anonymous" media="all" rel="stylesheet" data-href="https://github.githubassets.com/assets/light_high_contrast-46de871e876c.css" /><link data-color-theme="light_tritanopia" crossorigin="anonymous" media="all" rel="stylesheet" data-href="https://github.githubassets.com/assets/light_tritanopia-c9754fef2a31.css" /><link data-color-theme="dark_tritanopia" crossorigin="anonymous" media="all" rel="stylesheet" data-href="https://github.githubassets.com/assets/dark_tritanopia-dba748981a29.css" />
+    <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-primitives-4cbeaa0795ef.css" />
+    <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-fa3434a1ba0a.css" />
+    <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/global-545513c45073.css" />
+    <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/github-f1af66156f94.css" />
+  
+
+  
+
+
+  <script type="application/json" id="client-env">{"locale":"en","featureFlags":["code_vulnerability_scanning","copilot_chat_static_thread_suggestions","copilot_conversational_ux_history_refs","copilot_followup_to_agent","copilot_smell_icebreaker_ux","copilot_implicit_context","copilot_stop_response","copilot_updated_function_buttons","failbot_handle_non_errors","geojson_azure_maps","image_metric_tracking","marketing_forms_api_integration_contact_request","marketing_pages_search_explore_provider","turbo_experiment_risky","sample_network_conn_type","no_character_key_shortcuts_in_inputs","react_start_transition_for_navigations","custom_inp","remove_child_patch","kb_source_repos"]}</script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/wp-runtime-e6b3826e3283.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_dompurify_dist_purify_js-810e4b1b9abd.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_oddbird_popover-polyfill_dist_popover_js-4ac41d0a76fd.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_smoothscroll-polyfill_dist_smoothscroll_js-node_modules_stacktrace-parse-a448e4-f17a27f30529.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/environment-2168885ea2b8.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_behaviors_dist_esm_focus-zone_js-c7679f99a1f3.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_selector-observer_dist_index_esm_js-9f960d9b217c.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_relative-time-element_dist_index_js-c76945c5961a.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_auto-complete-element_dist_index_js-node_modules_github_catalyst_-392fe4-1327b94f3269.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_text-expander-element_dist_index_js-b2135edb5ced.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_filter-input-element_dist_index_js-node_modules_github_remote-inp-b7d8f4-6e6f83bcc978.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_mini-throttle_dist_index_js-node_modules_delegated-events_dist_in-b63d41-209f14258c8d.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_file-attachment-element_dist_index_js-node_modules_primer_view-co-c238a4-c6bbd5d2c027.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/app_assets_modules_github_onfocus_ts-ui_packages_trusted-types-policies_policy_ts-ui_packages-6fe316-ae5060590d17.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/github-elements-d00866eeec16.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/element-registry-a9d225a6d5cd.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_braintree_browser-detection_dist_browser-detection_js-node_modules_githu-fd5530-4007dac5c26f.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_lit-html_lit-html_js-cc7cb714ead5.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_morphdom_dist_morphdom-esm_js-node_modules_github_memoize_dist_esm_index_js-8d7117d67c36.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_turbo_dist_turbo_es2017-esm_js-1cea0f5eff45.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_remote-form_dist_index_js-node_modules_delegated-events_dist_inde-893f9f-880ac2bbb719.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_scroll-anchoring_dist_scroll-anchoring_esm_js-node_modules_github_hotkey-1a1d91-1bb71f3f93c2.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_color-convert_index_js-cdd1e82b3795.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_behaviors_dist_esm_dimensions_js-node_modules_github_jtml_lib_index_js-b1947a1d4855.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_session-resume_dist_index_js-node_modules_primer_behaviors_dist_e-da6ec6-77ce2f267f4e.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_quote-selection_dist_index_js-node_modules_github_textarea-autosi-9e0349-704599a61056.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/app_assets_modules_github_updatable-content_ts-4d91e80fb877.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/app_assets_modules_github_behaviors_task-list_ts-app_assets_modules_github_onfocus_ts-app_ass-421cec-d3af2356fb47.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/app_assets_modules_github_sticky-scroll-into-view_ts-3dc342dedcb0.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/app_assets_modules_github_behaviors_ajax-error_ts-app_assets_modules_github_behaviors_include-467754-2363a1c8ed46.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/app_assets_modules_github_behaviors_commenting_edit_ts-app_assets_modules_github_behaviors_ht-83c235-5276a3faf037.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/behaviors-dea72fb5100b.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_delegated-events_dist_index_js-node_modules_github_catalyst_lib_index_js-06ff531-2ea61fcc9a71.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/notifications-global-0409f6303340.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_virtualized-list_es_index_js-node_modules_github_template-parts_lib_index_js-878844713bc9.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_filter-input-element_dist_index_js-node_modules_github_mini-throt-1f9a80-7411de83ebdb.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/app_assets_modules_github_ref-selector_ts-fa04da463305.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/app_assets_modules_github_onfocus_ts-app_assets_modules_github_settings_runner-groups_ts-app_-9377c8-dd8de152f7f2.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/app_assets_modules_github_behaviors_details_ts-app_assets_modules_github_scanning_ts-63c0a3b4b487.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/settings-9366cfbcdf92.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_github_remote-form_dist_index_js-node_modules_delegated-events_dist_inde-94fd67-8743f7dc256e.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/sessions-458fee042571.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/signup-f459274dac79.js"></script>
+  <title>Sign in to GitHub · GitHub</title>
+
+
+
+  <meta name="route-pattern" content="/login(.:format)" data-turbo-transient>
+  <meta name="route-controller" content="sessions" data-turbo-transient>
+  <meta name="route-action" content="new" data-turbo-transient>
+
+    
+  <meta name="current-catalog-service-hash" content="701273d4944fb23919c770da2da3f33b6da9ed8e668f7249090e3e9f429343b5">
+
+
+  <meta name="request-id" content="3026:3D0759:E10FE8:FEB180:665B93B0" data-pjax-transient="true"/><meta name="html-safe-nonce" content="e983480ea036858492d8d1e40b785f6ed91c6b3992f4ffea3dc7dc9791ab3935" data-pjax-transient="true"/><meta name="visitor-payload" content="eyJyZWZlcnJlciI6IiIsInJlcXVlc3RfaWQiOiIzMDI2OjNEMDc1OTpFMTBGRTg6RkVCMTgwOjY2NUI5M0IwIiwidmlzaXRvcl9pZCI6Ijg4MDk4OTMwMzczMTUxNjcxNTIiLCJyZWdpb25fZWRnZSI6ImNlbnRyYWxpbmRpYSIsInJlZ2lvbl9yZW5kZXIiOiJjZW50cmFsaW5kaWEifQ==" data-pjax-transient="true"/><meta name="visitor-hmac" content="b44263eb38c0fedcfe9f15a000a630857a3174171f04c4aabe329737c61c44e4" data-pjax-transient="true"/>
+
+
+
+
+  <meta name="github-keyboard-shortcuts" content="copilot" data-turbo-transient="true" />
+  
+
+  <meta name="selected-link" value="/login" data-turbo-transient>
+  <link rel="assets" href="https://github.githubassets.com/">
+
+<pre><code>&lt;meta name=&quot;google-site-verification&quot; content=&quot;Apib7-x98H0j5cPqHWwSMm6dNU4GmODRoqxLiDzdx9I&quot;&gt;
+</code></pre>
+<meta name="octolytics-url" content="https://collector.github.com/github/collect" />
+
+  <meta name="analytics-location-query-strip" content="true" data-turbo-transient="true" />
+
+  
+
+
+
+
+<pre><code>&lt;meta name=&quot;user-login&quot; content=&quot;&quot;&gt;
+
+
+
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+
+
+
+  &lt;meta name=&quot;description&quot; content=&quot;GitHub is where people build software. More than 100 million people use GitHub to discover, fork, and contribute to over 420 million projects.&quot;&gt;
+
+  &lt;link rel=&quot;search&quot; type=&quot;application/opensearchdescription+xml&quot; href=&quot;/opensearch.xml&quot; title=&quot;GitHub&quot;&gt;
+
+&lt;link rel=&quot;fluid-icon&quot; href=&quot;https://github.com/fluidicon.png&quot; title=&quot;GitHub&quot;&gt;
+&lt;meta property=&quot;fb:app_id&quot; content=&quot;1401488693436528&quot;&gt;
+
+
+  &lt;meta property=&quot;og:url&quot; content=&quot;https://github.com&quot;&gt;
+</code></pre>
+  <meta property="og:site_name" content="GitHub">
+  <meta property="og:title" content="Build software better, together">
+  <meta property="og:description" content="GitHub is where people build software. More than 100 million people use GitHub to discover, fork, and contribute to over 420 million projects.">
+  <meta property="og:image" content="https://github.githubassets.com/assets/github-logo-55c5b9a1fe52.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:image" content="https://github.githubassets.com/assets/github-mark-57519b92ca4e.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="620">
+  <meta property="og:image" content="https://github.githubassets.com/assets/github-octocat-13c86b8b336d.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="620">
+
+  <meta property="twitter:site" content="github">
+  <meta property="twitter:site:id" content="13334762">
+  <meta property="twitter:creator" content="github">
+  <meta property="twitter:creator:id" content="13334762">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="GitHub">
+  <meta property="twitter:description" content="GitHub is where people build software. More than 100 million people use GitHub to discover, fork, and contribute to over 420 million projects.">
+  <meta property="twitter:image:src" content="https://github.githubassets.com/assets/github-logo-55c5b9a1fe52.png">
+  <meta property="twitter:image:width" content="1200">
+  <meta property="twitter:image:height" content="1200">
+
+
+
+
+<pre><code>  &lt;meta name=&quot;hostname&quot; content=&quot;github.com&quot;&gt;
+
+
+
+    &lt;meta name=&quot;expected-hostname&quot; content=&quot;github.com&quot;&gt;
+</code></pre>
+  <meta http-equiv="x-pjax-version" content="f884a49a2e7d8390598366a744facbab910f452e943a0be64a81502bf17334a4" data-turbo-track="reload">
+  <meta http-equiv="x-pjax-csp-version" content="38c639a245e1dd04786881fae1060fbd72d3ed419b2f0d38d6082dc9d67876c3" data-turbo-track="reload">
+  <meta http-equiv="x-pjax-css-version" content="f37eaf27fe12b105c6661d303537787959eeb4bf52c6937d9165fd6b569faf30" data-turbo-track="reload">
+  <meta http-equiv="x-pjax-js-version" content="6fb6788bb0a26e70542917256586776a9507f7ac1bdf9ee113bf54dff9a14ec9" data-turbo-track="reload">
+
+  <meta name="turbo-cache-control" content="no-preview" data-turbo-transient="">
+
+<pre><code>  &lt;link crossorigin=&quot;anonymous&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; href=&quot;https://github.githubassets.com/assets/github-f1af66156f94.css&quot; /&gt;
+
+
+
+  &lt;link rel=&quot;canonical&quot; href=&quot;https://github.com/login&quot; data-turbo-transient&gt;
+
+
+&lt;meta name=&quot;turbo-body-classes&quot; content=&quot;logged-out env-production page-responsive session-authentication&quot;&gt;
+</code></pre>
+  <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+
+  <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+
+  <link rel="mask-icon" href="https://github.githubassets.com/assets/pinned-octocat-093da3e6fa40.svg" color="#000000">
+  <link rel="alternate icon" class="js-site-favicon" type="image/png" href="https://github.githubassets.com/favicons/favicon.png">
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+
+<meta name="theme-color" content="#1e2327">
+<meta name="color-scheme" content="light dark" />
+
+
+  <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials">
+
+  </head>
+
+  <body class="logged-out env-production page-responsive session-authentication" style="word-wrap: break-word;">
+    <div data-turbo-body class="logged-out env-production page-responsive session-authentication" style="word-wrap: break-word;">
+      
+
+
+<pre><code>&lt;div class=&quot;position-relative js-header-wrapper &quot;&gt;
+  &lt;a href=&quot;#start-of-content&quot; data-skip-target-assigned=&quot;false&quot; class=&quot;px-2 py-4 color-bg-accent-emphasis color-fg-on-emphasis show-on-focus js-skip-to-content&quot;&gt;Skip to content&lt;/a&gt;
+
+  &lt;span data-view-component=&quot;true&quot; class=&quot;progress-pjax-loader Progress position-fixed width-full&quot;&gt;
+&lt;span style=&quot;width: 0%;&quot; data-view-component=&quot;true&quot; class=&quot;Progress-item progress-pjax-loader-bar left-0 top-0 color-bg-accent-emphasis&quot;&gt;&lt;/span&gt;
+</code></pre>
+</span>      
+      
+<pre><code>  &lt;script crossorigin=&quot;anonymous&quot; defer=&quot;defer&quot; type=&quot;application/javascript&quot; src=&quot;https://github.githubassets.com/assets/react-lib-dc88c1a68b28.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_octicons-react_dist_index_esm_js-node_modules_primer_react_lib-es-541a38-c63b7a3484dd.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_react_lib-esm_Box_Box_js-8f8c5e2a2cbf.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_react_lib-esm_FeatureFlags_FeatureFlags_js-node_modules_github_ca-9009bd-47065f21e9ac.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_react_lib-esm_Button_Button_js-97ed51d4f278.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_react_lib-esm_TooltipV2_Tooltip_js-334106258bdb.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_react_node_modules_primer_octicons-react_dist_index_esm_mjs-dc98a76c65d6.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_react_lib-esm_ActionList_index_js-9e50e37cd494.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/vendors-node_modules_primer_react_lib-esm_Button_IconButton_js-node_modules_primer_react_lib--1cd808-6070bc6b2c67.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/ui_packages_react-core_create-browser-history_ts-ui_packages_safe-storage_safe-storage_ts-ui_-682c2c-44ed51a2083d.js"></script>
+<script crossorigin="anonymous" defer="defer" type="application/javascript" src="https://github.githubassets.com/assets/keyboard-shortcuts-dialog-5cf59981c8b2.js"></script>
+
+<p>&lt;react-partial
+  partial-name=&quot;keyboard-shortcuts-dialog&quot;
+  data-ssr=&quot;false&quot;</p>
+<blockquote>
+</blockquote>
+  <script type="application/json" data-target="react-partial.embeddedData">{"props":{"docsUrl":"https://docs.github.com/get-started/accessibility/keyboard-shortcuts"}}</script>
+  <div data-target="react-partial.reactRoot"></div>
+</react-partial>
+
+
+
+
+      
+
+<pre><code>    &lt;div class=&quot;header header-logged-out width-full pt-5 pb-4&quot; role=&quot;banner&quot;&gt;
+</code></pre>
+  <div class="container clearfix width-full text-center">
+    <a class="header-logo" href="https://github.com/"  aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+      <svg height="48" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="48" data-view-component="true" class="octicon octicon-mark-github">
+    <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+</svg>
+    </a>
+  </div>
+</div>
+
+
+<pre><code>  &lt;div hidden=&quot;hidden&quot; data-view-component=&quot;true&quot; class=&quot;js-stale-session-flash stale-session-flash flash flash-warn flash-full mb-3&quot;&gt;
+
+    &lt;svg aria-hidden=&quot;true&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; data-view-component=&quot;true&quot; class=&quot;octicon octicon-alert&quot;&gt;
+&lt;path d=&quot;M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z&quot;&gt;&lt;/path&gt;
+</code></pre>
+</svg>
+        <span class="js-stale-session-flash-signed-in" hidden>You signed in with another tab or window. <a class="Link--inTextBlock" href="">Reload</a> to refresh your session.</span>
+        <span class="js-stale-session-flash-signed-out" hidden>You signed out in another tab or window. <a class="Link--inTextBlock" href="">Reload</a> to refresh your session.</span>
+        <span class="js-stale-session-flash-switched" hidden>You switched accounts on another tab or window. <a class="Link--inTextBlock" href="">Reload</a> to refresh your session.</span>
+
+<pre><code>&lt;button id=&quot;icon-button-09183d30-a31b-4275-83f0-eeceed37ada0&quot; aria-labelledby=&quot;tooltip-2f4e287d-c711-4283-895a-e6d5905631a5&quot; type=&quot;button&quot; data-view-component=&quot;true&quot; class=&quot;Button Button--iconOnly Button--invisible Button--medium flash-close js-flash-close&quot;&gt;  &lt;svg aria-hidden=&quot;true&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; data-view-component=&quot;true&quot; class=&quot;octicon octicon-x Button-visual&quot;&gt;
+&lt;path d=&quot;M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z&quot;&gt;&lt;/path&gt;
+</code></pre>
+</svg>
+</button><tool-tip id="tooltip-2f4e287d-c711-4283-895a-e6d5905631a5" for="icon-button-09183d30-a31b-4275-83f0-eeceed37ada0" popover="manual" data-direction="s" data-type="label" data-view-component="true" class="sr-only position-absolute">Dismiss alert</tool-tip>
+
+
+  
+</div>
+    </div>
+
+  <div id="start-of-content" class="show-on-focus"></div>
+
+
+
+
+
+
+
+
+
+    
+<pre><code>&lt;include-fragment class=&quot;js-notification-shelf-include-fragment&quot; data-base-src=&quot;https://github.com/notifications/beta/shelf&quot;&gt;&lt;/include-fragment&gt;
+</code></pre>
+  <div
+    class="application-main "
+    data-commit-hovercards-enabled
+    data-discussion-hovercards-enabled
+    data-issue-and-pr-hovercards-enabled
+  >
+      <main>
+        
+
+<div class="auth-form px-3" id="login"  data-hpc>
+
+<pre><code>&lt;div class=&quot;auth-form-header p-0&quot;&gt;
+  &lt;h1&gt;Sign in to GitHub&lt;/h1&gt;
+&lt;/div&gt;
+
+
+&lt;div id=&quot;js-flash-container&quot; class=&quot;flash-container&quot; data-turbo-replace&gt;
+</code></pre>
+  <template class="js-flash-template">
+    
+<div class="flash flash-full   {{ className }}">
+  <div >
+    <button autofocus class="flash-close js-flash-close" type="button" aria-label="Dismiss this message">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x">
+    <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+</svg>
+    </button>
+    <div aria-atomic="true" role="alert" class="js-flash-alert">
+      
+<pre><code>  &lt;div&gt;{{ message }}&lt;/div&gt;
+
+&lt;/div&gt;
+</code></pre>
+  </div>
+</div>
+  </template>
+</div>
+
+
+<pre><code>&lt;div class=&quot;flash js-transform-notice&quot; hidden&gt;
+  &lt;button class=&quot;flash-close js-flash-close&quot; type=&quot;button&quot; aria-label=&quot;Dismiss this message&quot;&gt;
+    &lt;svg aria-label=&quot;Dismiss&quot; role=&quot;img&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; data-view-component=&quot;true&quot; class=&quot;octicon octicon-x&quot;&gt;
+&lt;path d=&quot;M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z&quot;&gt;&lt;/path&gt;
+</code></pre>
+</svg>
+      </button>
+    </div>
+
+<pre><code>&lt;div class=&quot;auth-form-body mt-3&quot;&gt;
+
+  &lt;!-- &#39;&quot;` --&gt;&lt;!-- &lt;/textarea&gt;&lt;/xmp&gt; --&gt;&lt;/option&gt;&lt;/form&gt;&lt;form data-turbo=&quot;false&quot; action=&quot;/session&quot; accept-charset=&quot;UTF-8&quot; method=&quot;post&quot;&gt;&lt;input type=&quot;hidden&quot; data-csrf=&quot;true&quot; name=&quot;authenticity_token&quot; value=&quot;Rm3IMSLtXg3QvApIxhqh1Y0SkoZvZzLWbaBY6v8Hhv76J2KUPmQwFLH+bnyxn6koAO3eGsDwnpCZLHM1m/1y+g==&quot; /&gt;    &lt;label for=&quot;login_field&quot;&gt;
+  Username or email address
+&lt;/label&gt;
+&lt;input type=&quot;text&quot; name=&quot;login&quot; id=&quot;login_field&quot; class=&quot;form-control input-block js-login-field&quot; autocapitalize=&quot;off&quot; autocorrect=&quot;off&quot; autocomplete=&quot;username&quot; autofocus=&quot;autofocus&quot; required=&quot;required&quot; /&gt;
+</code></pre>
+  <div class="position-relative">
+    <label for="password">
+      Password
+    </label>
+    <input type="password" name="password" id="password" class="form-control form-control input-block js-password-field" autocomplete="current-password" required="required" />
+    <a class="label-link position-absolute top-0 right-0" id="forgot-password" href="/password_reset">Forgot password?</a>
+    
+<input type="hidden" name="webauthn-conditional" value="undefined">
+<input type="hidden" class="js-support" name="javascript-support" value="unknown">
+<input type="hidden" class="js-webauthn-support" name="webauthn-support" value="unknown">
+<input type="hidden" class="js-webauthn-iuvpaa-support" name="webauthn-iuvpaa-support" value="unknown">
+<input type="hidden" name="return_to" id="return_to" value="https://github.com/rony0000013/WasteX/edit/master/README.md" autocomplete="off" class="form-control" />
+<input type="hidden" name="allow_signup" id="allow_signup" autocomplete="off" class="form-control" />
+<input type="hidden" name="client_id" id="client_id" autocomplete="off" class="form-control" />
+<input type="hidden" name="integration" id="integration" autocomplete="off" class="form-control" />
+<input class="form-control" type="text" name="required_field_3f69" hidden="hidden" />
+<input class="form-control" type="hidden" name="timestamp" value="1717277617032" />
+<input class="form-control" type="hidden" name="timestamp_secret" value="6bcacaad994b1c6d491af94fb07113d9b49f649f8bf02924f5e291a54fb742d1" />
+
+
+<pre><code>&lt;input type=&quot;submit&quot; name=&quot;commit&quot; value=&quot;Sign in&quot; class=&quot;btn btn-primary btn-block js-sign-in-button&quot; data-disable-with=&quot;Signing in…&quot; data-signin-label=&quot;Sign in&quot; data-sso-label=&quot;Sign in with your identity provider&quot; development=&quot;false&quot; disable-emu-sso=&quot;false&quot; /&gt;
+</code></pre>
+  </div>
+</form>  <webauthn-status class="js-webauthn-login-emu-control">
+      <include-fragment  data-target="webauthn-status.fragment" data-src="/u2f/login_fragment?is_emu_login=false&amp;return_to=https%3A%2F%2Fgithub.com%2Frony0000013%2FWasteX%2Fedit%2Fmaster%2FREADME.md"></include-fragment>
+  </webauthn-status>
+
+<pre><code>&lt;/div&gt;
+
+
+    &lt;h2 class=&quot;sr-only&quot;&gt;Password login alternatives&lt;/h2&gt;
+    &lt;div class=&quot;login-callout mt-3&quot;&gt;
+        &lt;webauthn-subtle class=&quot;js-webauthn-subtle&quot; hidden&gt;
+&lt;p class=&quot;mb-0 mt-0 js-webauthn-subtle-emu-control&quot;&gt;
+  &lt;button data-action=&quot;click:webauthn-subtle#prompt&quot; type=&quot;button&quot; data-view-component=&quot;true&quot; class=&quot;Button--link Button--medium Button&quot;&gt;  &lt;span class=&quot;Button-content&quot;&gt;
+&lt;span class=&quot;Button-label&quot;&gt;Sign in with a passkey&lt;/span&gt;
+</code></pre>
+  </span>
+</button>
+    </p>
+  </webauthn-subtle>
+
+<pre><code>      &lt;p class=&quot;mt-1 mb-0 p-0&quot;&gt;
+        New to GitHub?
+          &lt;a data-ga-click=&quot;Sign in, switch to sign up&quot; data-hydro-click=&quot;{&amp;quot;event_type&amp;quot;:&amp;quot;authentication.click&amp;quot;,&amp;quot;payload&amp;quot;:{&amp;quot;location_in_page&amp;quot;:&amp;quot;sign in switch to sign up&amp;quot;,&amp;quot;repository_id&amp;quot;:null,&amp;quot;auth_type&amp;quot;:&amp;quot;SIGN_UP&amp;quot;,&amp;quot;originating_url&amp;quot;:&amp;quot;https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Frony0000013%2FWasteX%2Fedit%2Fmaster%2FREADME.md&amp;quot;,&amp;quot;user_id&amp;quot;:null}}&quot; data-hydro-click-hmac=&quot;1cda8eb0b3a650ca693825b322116c1f17b9b99439b16d8ee2b27c30efc49b89&quot; href=&quot;/signup?return_to=https%3A%2F%2Fgithub.com%2Frony0000013%2FWasteX%2Fedit%2Fmaster%2FREADME.md&amp;amp;source=login&quot;&gt;Create an account&lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+</code></pre>
+</div>
+
+<pre><code>  &lt;/main&gt;
+</code></pre>
+  </div>
+
+<pre><code>      &lt;div class=&quot;footer container-lg p-responsive py-6 mt-6 f6&quot; role=&quot;contentinfo&quot;&gt;
+&lt;ul class=&quot;list-style-none d-flex flex-justify-center&quot;&gt;
+    &lt;li class=&quot;mx-2&quot;&gt;
+      &lt;a data-analytics-event=&quot;{&amp;quot;category&amp;quot;:&amp;quot;Footer&amp;quot;,&amp;quot;action&amp;quot;:&amp;quot;go to Terms&amp;quot;,&amp;quot;label&amp;quot;:&amp;quot;text:terms&amp;quot;}&quot; href=&quot;https://docs.github.com/site-policy/github-terms/github-terms-of-service&quot; data-view-component=&quot;true&quot; class=&quot;Link--secondary Link&quot;&gt;Terms&lt;/a&gt;
+    &lt;/li&gt;
+
+    &lt;li class=&quot;mx-2&quot;&gt;
+      &lt;a data-analytics-event=&quot;{&amp;quot;category&amp;quot;:&amp;quot;Footer&amp;quot;,&amp;quot;action&amp;quot;:&amp;quot;go to privacy&amp;quot;,&amp;quot;label&amp;quot;:&amp;quot;text:privacy&amp;quot;}&quot; href=&quot;https://docs.github.com/site-policy/privacy-policies/github-privacy-statement&quot; data-view-component=&quot;true&quot; class=&quot;Link--secondary Link&quot;&gt;Privacy&lt;/a&gt;
+    &lt;/li&gt;
+
+    &lt;li class=&quot;mx-2&quot;&gt;
+      &lt;a data-analytics-event=&quot;{&amp;quot;category&amp;quot;:&amp;quot;Footer&amp;quot;,&amp;quot;action&amp;quot;:&amp;quot;go to docs&amp;quot;,&amp;quot;label&amp;quot;:&amp;quot;text:docs&amp;quot;}&quot; href=&quot;https://docs.github.com&quot; data-view-component=&quot;true&quot; class=&quot;Link--secondary Link&quot;&gt;Docs&lt;/a&gt;
+    &lt;/li&gt;
+
+    &lt;li class=&quot;mx-2&quot;&gt;
+        &lt;a data-analytics-event=&quot;{&amp;quot;category&amp;quot;:&amp;quot;Footer&amp;quot;,&amp;quot;action&amp;quot;:&amp;quot;go to contact&amp;quot;,&amp;quot;label&amp;quot;:&amp;quot;text:contact&amp;quot;}&quot; href=&quot;https://support.github.com&quot; data-view-component=&quot;true&quot; class=&quot;Link--secondary Link&quot;&gt;Contact GitHub Support&lt;/a&gt;
+    &lt;/li&gt;
+
+      &lt;li class=&quot;mr-3&quot; &gt;
+</code></pre>
+  <cookie-consent-link>
+    <button type="button" class="Link--secondary underline-on-hover border-0 p-0 color-bg-transparent" data-action="click:cookie-consent-link#showConsentManagement">
+      Manage cookies
+    </button>
+  </cookie-consent-link>
+</li>
+
+<li class="mr-3">
+  <cookie-consent-link>
+    <button type="button" class="Link--secondary underline-on-hover border-0 p-0 color-bg-transparent" data-action="click:cookie-consent-link#showConsentManagement">
+      Do not share my personal information
+    </button>
+  </cookie-consent-link>
+</li>
+
+<pre><code>&lt;/ul&gt;
+</code></pre>
+  </div>
+
+
+<pre><code>&lt;ghcc-consent id=&quot;ghcc&quot; class=&quot;position-fixed bottom-0 left-0&quot; style=&quot;z-index: 999999&quot; data-initial-cookie-consent-allowed=&quot;&quot; data-cookie-consent-required=&quot;false&quot;&gt;&lt;/ghcc-consent&gt;
+</code></pre>
+  <div id="ajax-error-message" class="ajax-error-message flash flash-error" hidden>
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path>
+</svg>
+    <button type="button" class="flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x">
+    <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+</svg>
+    </button>
+    You can’t perform that action at this time.
+  </div>
+
+<pre><code>&lt;template id=&quot;site-details-dialog&quot;&gt;
+</code></pre>
+  <details class="details-reset details-overlay details-overlay-dark lh-default color-fg-default hx_rsm" open>
+    <summary role="button" aria-label="Close dialog"></summary>
+    <details-dialog class="Box Box--overlay d-flex flex-column anim-fade-in fast hx_rsm-dialog hx_rsm-modal">
+      <button class="Box-btn-octicon m-0 btn-octicon position-absolute right-0 top-0" type="button" aria-label="Close dialog" data-close-dialog>
+        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x">
+    <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+</svg>
+      </button>
+      <div class="octocat-spinner my-6 js-details-dialog-spinner"></div>
+    </details-dialog>
+  </details>
+</template>
+
+<pre><code>&lt;div class=&quot;Popover js-hovercard-content position-absolute&quot; style=&quot;display: none; outline: none;&quot; tabindex=&quot;0&quot;&gt;
+</code></pre>
+  <div class="Popover-message Popover-message--bottom-left Popover-message--large Box color-shadow-large" style="width:360px;">
+  </div>
+</div>
+
+<pre><code>&lt;template id=&quot;snippet-clipboard-copy-button&quot;&gt;
+</code></pre>
+  <div class="zeroclipboard-container position-absolute right-0 top-0">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn js-clipboard-copy m-2 p-0 tooltipped-no-delay" data-copy-feedback="Copied!" data-tooltip-direction="w">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon m-2">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none m-2">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div>
+</template>
+<template id="snippet-clipboard-copy-button-unpositioned">
+  <div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div>
+</template>
+
+
+
+
+<pre><code>&lt;/div&gt;
+
+&lt;div id=&quot;js-global-screen-reader-notice&quot; class=&quot;sr-only&quot; aria-live=&quot;polite&quot; aria-atomic=&quot;true&quot; &gt;&lt;/div&gt;
+&lt;div id=&quot;js-global-screen-reader-notice-assertive&quot; class=&quot;sr-only&quot; aria-live=&quot;assertive&quot; aria-atomic=&quot;true&quot;&gt;&lt;/div&gt;
+</code></pre>
+  </body>
+</html>
+
+</article> </div> </div>  <script type="module" src="/node_modules/@dotlottie/player-component/dist/dotlottie-player.mjs"></script> <script type="text/partytown" src="../../node_modules/preline/preline.js"></script> </body></html>
