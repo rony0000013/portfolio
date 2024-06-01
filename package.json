@@ -19,7 +19,6 @@
     "@dotlottie/player-component": "^2.7.12",
     "@playform/compress": "^0.0.10",
     "@preline/overlay": "^2.3.0",
-    "animejs": "^3.2.2",
     "aos": "3.0.0-beta.6",
     "astro": "^4.9.1",
     "astro-icon": "^1.1.0",

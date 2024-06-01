@@ -1,3 +1,38 @@
+const themes = [
+	"light",
+	"dark",
+	"cupcake",
+	"bumblebee",
+	"emerald",
+	"corporate",
+	"synthwave",
+	"retro",
+	"cyberpunk",
+	"valentine",
+	"halloween",
+	"garden",
+	"forest",
+	"aqua",
+	"lofi",
+	"pastel",
+	"fantasy",
+	"wireframe",
+	"black",
+	"luxury",
+	"dracula",
+	"cmyk",
+	"autumn",
+	"business",
+	"acid",
+	"lemonade",
+	"night",
+	"coffee",
+	"winter",
+	"dim",
+	"nord",
+	"sunset",
+];
+
 export default function Themes() {
 	return (
 		<div class="dropdown ">
@@ -21,83 +56,19 @@ export default function Themes() {
 				tabindex="-1"
 				class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full"
 			>
-				<li>
+				{themes.map((theme, i) => (
+				<li key={i}>
 					<input
 						type="radio"
 						name="theme-dropdown"
 						class="btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="White"
-						value="light"
-						data-set-theme="light"
+						aria-label={theme}
+						value={theme}
+						data-set-theme={theme}
 						data-act-class="ACTIVECLASS"
 					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Dark"
-						value="dark"
-						data-set-theme="dark"
-						data-act-class="ACTIVECLASS"
-					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Retro"
-						value="retro"
-						data-set-theme="retro"
-						data-act-class="ACTIVECLASS"
-					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Cyberpunk"
-						value="cyberpunk"
-						data-set-theme="cyberpunk"
-						data-act-class="ACTIVECLASS"
-					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Valentine"
-						value="valentine"
-						data-set-theme="valentine"
-						data-act-class="ACTIVECLASS"
-					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Aqua"
-						value="aqua"
-						data-set-theme="aqua"
-						data-act-class="ACTIVECLASS"
-					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Cupcake"
-						value="cupcake"
-						data-set-theme="cupcake"
-						data-act-class="ACTIVECLASS"
-					/>
-				</li>
+				</li>))}
+				
 			</ul>
 		</div>
 	);

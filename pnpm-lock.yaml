@@ -35,9 +35,6 @@ importers:
       '@preline/overlay':
         specifier: ^2.3.0
         version: 2.3.0
-      animejs:
-        specifier: ^3.2.2
-        version: 3.2.2
       aos:
         specifier: 3.0.0-beta.6
         version: 3.0.0-beta.6
@@ -1247,9 +1244,6 @@ packages:
 
   animated-cursor@1.2.0:
     resolution: {integrity: sha512-On3mvp89UkTJVv/ASZ34pRiYs8sQJdPX/ttIoRzMvx+oMid2X+imGfkStZJEwTA3irZkC+rUQRtYTL1RMFBu+A==}
-
-  animejs@3.2.2:
-    resolution: {integrity: sha512-Ao95qWLpDPXXM+WrmwcKbl6uNlC5tjnowlaRYtuVDHHoygjtIPfDUoK9NthrlZsQSKjZXlmji2TrBUAVbiH0LQ==}
 
   ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -5029,8 +5023,6 @@ snapshots:
   acorn@8.11.3: {}
 
   animated-cursor@1.2.0: {}
-
-  animejs@3.2.2: {}
 
   ansi-align@3.0.1:
     dependencies:

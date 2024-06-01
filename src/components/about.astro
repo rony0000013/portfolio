@@ -6,6 +6,7 @@ import linkedin from "../assets/icons/linkedin.svg";
 import twitter from "../assets/icons/twitter.svg";
 import leetcode from "../assets/icons/leetcode.svg";
 import kaggle from "../assets/icons/kaggle.svg";    
+import rs from "../assets/rs.png";
 
 import * as data from "../content/data/data.mdx";
 const { name, description, image, resume, links } = data.frontmatter;
@@ -69,6 +70,7 @@ const { name, description, image, resume, links } = data.frontmatter;
 
     <div class="p-8 md:p-12 lg:px-10 lg:py-24 ">
         <div class="max-w-xl mx-auto text-center ltr:sm:text-left rtl:sm:text-right">
+            <Image src={rs} alt="Rounak Sen" inferSize class="size-10 md:size-14 justify-center mx-auto" />
             <h2 class="text-2xl font-bold text-white md:text-3xl">
                 {name}
             </h2>

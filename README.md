@@ -1,54 +1,63 @@
-# Astro Starter Kit: Basics
+# My Portfolio
 
-```sh
-npm create astro@latest -- --template basics
+This portfolio is built using Astro, a front-end framework for building fast, optimized websites and applications. It leverages a variety of dependencies to create a dynamic and interactive user experience.
+
+## Dependencies 🧱
+
+Here are the main dependencies used in this project:
+
+- `astro`: The main Astro framework.
+- `tailwindcss`: A utility-first CSS framework.
+- `solid-js`: A declarative JavaScript library for building user interfaces.
+- `tsparticles`: A lightweight library for creating particles.
+- `aos`: Animate on scroll library.
+- `marked`: A markdown parser and compiler.
+- `typescript`: A typed superset of JavaScript.
+- `vanilla-tilt`: A smooth 3D tilt JavaScript library.
+- `@astrojs/*`: A collection of Astro plugins and utilities.
+
+## DevDependencies 🧱
+
+Here are the main devDependencies used in this project:
+
+- `@iconify-json/*`: A collection of Iconify JSON icons.
+- `@tailwindcss/typography`: A plugin that provides a set of typography utilities for Tailwind CSS.
+- `animated-cursor`: A library for creating animated cursors.
+- `daisyui`: A plugin for Tailwind CSS that adds new utilities and components.
+- `tailwindcss-animate`: A plugin that adds animate.css classes as utilities in Tailwind CSS.
+
+## Getting Started ▶️
+
+To get started with this project, clone the repository and install the dependencies:
+
+```bash
+git clone <repository-url>
+cd portfolio
+pnpm i
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+To start the development server:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+pnpm run dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+This will start the server on `http://localhost:4321`.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Building for Production ⚒️
 
-Any static assets, like images, can be placed in the `public/` directory.
+To create a production build:
 
-## 🧞 Commands
+```bash
+pnpm run build
+```
 
-All commands are run from the root of the project, from a terminal:
+This will create a `dist` directory with the production-ready website.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Contributing 🤝
 
-## 👀 Want to learn more?
+Contributions are welcome. Please open an issue or submit a pull request.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## License 🔑
+
+This project is open source and available under the [GLWTS License](LICENSE).
