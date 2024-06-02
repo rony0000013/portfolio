@@ -5,6 +5,8 @@ import Projects from "../../components/projects";
 import Net from "../../components/net.astro";
 import Footer from "../../components/footer.astro";
 
+import github from "../../assets/github.lottie";
+
 import { getCollection } from "astro:content";
 const projects = await getCollection("projects");
 // console.log(projects[0]);
@@ -20,7 +22,7 @@ const projects = await getCollection("projects");
                 autoplay
                 loop
                 playMode="normal"
-                src="/src/assets/github.lottie"
+                src={github}
                 class="mr-5 md:mr-10 md:size-16 size-10"
             >
             </dotlottie-player>

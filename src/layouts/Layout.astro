@@ -43,9 +43,10 @@ const { title } = Astro.props;
 		<slot />
 	</body>
 </html>
-<script type="module" src="/node_modules/@dotlottie/player-component/dist/dotlottie-player.mjs"
-></script>
-<script type="text/partytown" src="../../node_modules/preline/preline.js"></script>
+<!-- <script type="module" src="https://unpkg.com/@dotlottie/player-component/dist/dotlottie-player.mjs" ></script> -->
+<script>import "@dotlottie/player-component/dist/dotlottie-player.mjs";</script>
+<script>import "preline/dist/preline.js";</script>
+
 
 <style is:global>
 	html {

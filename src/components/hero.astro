@@ -1,5 +1,6 @@
 ---
 import Title from "./title.astro";
+import down from "../assets/down.lottie";
 ---
 
 <div class="h-screen hero backdrop-blur-none mt-[5vh]">
@@ -13,7 +14,7 @@ import Title from "./title.astro";
 						autoplay
 						loop
 						playMode="normal"
-						src="/src/assets/down.lottie"
+						src={down}
 						class="size-14"
 					>
 					</dotlottie-player>

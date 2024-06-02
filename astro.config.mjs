@@ -11,6 +11,9 @@ import playformCompress from "@playform/compress";
 // https://astro.build/config
 export default defineConfig({
   markdown: {},
+  vite: {
+    assetsInclude: ['**/*.lottie']
+  },
   integrations: [solidJs(), tailwind(), icon({
     iconDir: "src/assets/icons"
   }), astroImageTools, mdx(), sitemap(),  partytown(), playformCompress()]

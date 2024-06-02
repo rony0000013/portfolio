@@ -1,7 +1,16 @@
 ---
 import Themes from "./themes";
+import home from "../assets/home.lottie";
+import menu from "../assets/menu.lottie";
+import up from "../assets/up.lottie";
+import github from "../assets/github.lottie";
+import certificate from "../assets/certificate.lottie";
+import theme from "../assets/theme.lottie";
+
 // import { Image } from "astro:assets";
 // import { Img } from "astro-imagetools/components";
+
+
 ---
 
 <>
@@ -16,7 +25,7 @@ import Themes from "./themes";
 							autoplay
 							loop
 							playMode="normal"
-							src="/src/assets/home.lottie"
+							src={home}
 							class="size-10"
 						>
 						</dotlottie-player>
@@ -37,7 +46,7 @@ import Themes from "./themes";
 						autoplay
 						loop
 						playMode="normal"
-						src="/src/assets/menu.lottie"
+						src={menu}
 					>
 					</dotlottie-player>
 				</li>
@@ -52,7 +61,7 @@ import Themes from "./themes";
 						autoplay
 						loop
 						playMode="normal"
-						src="/src/assets/up.lottie"
+						src={up}
 						class="w-[3rem]"
 					>
 					</dotlottie-player>
@@ -74,7 +83,7 @@ import Themes from "./themes";
 								autoplay
 								loop
 								playMode="normal"
-								src="/src/assets/home.lottie"
+								src={home}
 								class="size-10"
 							>
 							</dotlottie-player>
@@ -88,7 +97,7 @@ import Themes from "./themes";
 								autoplay
 								loop
 								playMode="normal"
-								src="/src/assets/github.lottie"
+								src={github}
 								class="size-10"
 							>
 							</dotlottie-player>
@@ -101,7 +110,7 @@ import Themes from "./themes";
 								autoplay
 								loop
 								playMode="normal"
-								src="/src/assets/certificate.lottie"
+								src={certificate}
 								class="size-10"
 							>
 							</dotlottie-player>
@@ -109,7 +118,7 @@ import Themes from "./themes";
 						</a>
 					</li>
 					<li class="flex justify-center text-center rounded-btn border-y-2 border-primary">
-						<Themes />
+						<Themes image={theme} />
 					</li>
 				</ul>
 			</nav>
@@ -126,7 +135,7 @@ import Themes from "./themes";
 							autoplay
 							loop
 							playMode="normal"
-							src="/src/assets/home.lottie"
+							src={home}
 							class="p-0 m-0 size-10"
 						>
 						</dotlottie-player> Home</a
@@ -138,7 +147,7 @@ import Themes from "./themes";
 							autoplay
 							loop
 							playMode="normal"
-							src="/src/assets/github.lottie"
+							src={github}
 							class="p-0 m-0 size-10"
 						>
 						</dotlottie-player> Projects</a
@@ -150,7 +159,7 @@ import Themes from "./themes";
 							autoplay
 							loop
 							playMode="normal"
-							src="/src/assets/certificate.lottie"
+							src={certificate}
 							class="p-0 m-0 size-10"
 						>
 						</dotlottie-player>
@@ -159,7 +168,7 @@ import Themes from "./themes";
 				</li>
 			</ul>
 			<div class="h-[3.5rem] rounded-btn border-y-2 border-primary">
-				<Themes />
+				<Themes image={theme} />
 			</div>
 		</div>
 	</div>

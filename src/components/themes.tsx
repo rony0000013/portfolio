@@ -33,7 +33,7 @@ const themes = [
 	"sunset",
 ];
 
-export default function Themes() {
+export default function Themes({ image }) {
 	return (
 		<div class="dropdown ">
 			<div
@@ -46,7 +46,7 @@ export default function Themes() {
 					autoplay
 					loop
 					playMode="normal"
-					src="/src/assets/theme.lottie"
+					src={image}
 					class="p-0 m-0 size-10"
 				></dotlottie-player>
 				Theme

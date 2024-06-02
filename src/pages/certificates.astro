@@ -6,6 +6,8 @@ import Navbar from "../components/navbar.astro";
 import * as certs from "../content/data/certificates.mdx";
 import Net from "../components/net.astro";
 
+import certificateLottie from "../assets/certificate.lottie";
+
 const { certificates } = certs.frontmatter;
 ---
 
@@ -18,7 +20,7 @@ const { certificates } = certs.frontmatter;
                 autoplay
                 loop
                 playMode="normal"
-                src="/src/assets/certificate.lottie"
+                src={certificateLottie}
                 class="mr-5 md:mr-10 md:size-16 size-10"
             >
             </dotlottie-player>CERTIFICATES</div>
