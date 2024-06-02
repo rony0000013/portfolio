@@ -1,0 +1,64 @@
+---
+const themes = {
+	light: "☀️ Light",
+	dark: "🌙 Dark",
+	cupcake: "🧁 Cupcake",
+	bumblebee: "🐝 Bumblebee",
+	emerald: "✳️ Emerald",
+	corporate: "🏢 Corporate",
+	synthwave: "🌆 Synthwave",
+	retro: "🕰️ Retro",
+	cyberpunk: "🌆 Cyberpunk",
+	valentine: "💗 Valentine",
+	halloween: "🎃 Halloween",
+	garden: "🌷 Garden",
+	forest: "🌲 Forest",
+	aqua: "🐟 Aqua",
+	lofi: "📼 Lofi",
+	pastel: "🌸 Pastel",
+	fantasy: "🔮 Fantasy",
+	wireframe: "📝 Wireframe",
+	black: "🖤 Black",
+	luxury: "💎 Luxury",
+	dracula: "🧛 Dracula",
+	cmyk: "🎨 Cmyk",
+	autumn: "🍂 Autumn",
+	business: "🏦 Business",
+	acid: "💊 Acid",
+	lemonade: "🍋 Lemonade",
+	night: "🌃 Night",
+	coffee: "☕ Coffee",
+	winter: "⛄ Winter",
+	dim: "🕶️ Dim",
+	nord: "❄️ Nord",
+	sunset: "🌇 Sunset",
+};
+
+const { image } = Astro.props;
+---
+<div class="flex align-middle text-center">
+<!-- <dotlottie-player autoplay loop playMode="normal" src={image} class="p-0 m-0 size-10"
+></dotlottie-player> -->
+<select class="select  bg-transparent text-primary  border-none text-lg" data-choose-theme>
+	<option selected disabled class="bg-black">
+		{/* <span class="icon-[line-md--star-pulsating-twotone-loop] btn btn-primary size-8 " /> */}
+		✨ Themes
+		<!-- <span class="icon-[la--chevron-down] size-4 text-white"></span>	 -->
+	</option>
+
+	{
+		Object.entries(themes).map(([theme, name]) => (
+			<option value={theme} class="bg-black">
+				<div
+					// data-set-theme={theme}
+					// data-act-class="ACTIVECLASS"
+					
+					aria-label={name}
+				>
+					{name}
+				</div>
+			</option>
+		))
+	}
+</select>
+</div>
