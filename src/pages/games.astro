@@ -1,0 +1,505 @@
+---
+import Pretext from "../components/Pretext.astro";
+import { frontmatter } from "../content/data/games.mdx";
+import Layout from "../layouts/Layout.astro";
+import { getCloudinaryPublicId } from "../utils/cloudinary";
+
+interface Game {
+	title: string;
+	tier: string;
+	rating: number;
+	genre: string;
+	description: string;
+	image: string;
+	playtime?: string;
+	processedImage?: string;
+}
+
+const games = frontmatter.games as Game[];
+const tiers = ["S", "A", "B", "C"];
+
+const isCloudinary = (url: string) =>
+	url.includes("cloudinary.com") || !url.startsWith("http");
+---
+
+<Layout title="Games Vault">
+	<main class="min-h-screen pt-32 pb-20 px-4 sm:px-8 max-w-7xl mx-auto">
+		<Pretext text="GAMES VAULT" size={24} />
+
+		<div class="space-y-24">
+			{tiers.map((tier) => (
+					<section class="tier-section" data-tier={tier}>
+						<div class="flex items-end gap-4 mb-8 border-b border-base-content/10 pb-4">
+							<span
+								class={`font-orbitron text-6xl font-black italic tracking-tighter tier-letter tier-${tier.toLowerCase()}`}
+							>
+								{tier}
+							</span>
+							<div class="flex flex-col">
+								<span class="font-space-mono text-[10px] opacity-40 tracking-widest uppercase">
+									Archive_Status
+								</span>
+								<span class="font-orbitron text-xs tracking-[0.3em] uppercase opacity-80">
+									{tier === "S"
+										? "ELITE_SELECTION"
+										: tier === "A"
+											? "HIGH_PRIORITY"
+											: tier === "B"
+												? "STANDARD_LOG"
+												: "MINOR_ENTRIES"}
+								</span>
+							</div>
+						</div>
+
+						<div class="grid grid-cols-2 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
+							{games
+								.filter((g: Game) => g.tier === tier)
+								.map((game: Game) => (
+									<button
+										type="button"
+										class="game-card group relative aspect-square rounded-xl overflow-hidden border border-white/10 bg-black/40 transition-all duration-500 hover:border-primary/60 hover:shadow-[0_0_30px_rgba(var(--color-primary-rgb),0.3)] focus:outline-none"
+										data-game={JSON.stringify({
+											...game,
+											processedImage: isCloudinary(
+												game.image,
+											)
+												? `https://res.cloudinary.com/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_800/${getCloudinaryPublicId(game.image)}`
+												: game.image,
+										})}
+									>
+										{/* Encrypted Image */}
+										{isCloudinary(game.image) ? (
+											<div class="w-full h-full encrypted-image">
+												<img
+													src={`https://res.cloudinary.com/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_800/${getCloudinaryPublicId(game.image)}`}
+													alt={game.title}
+													class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+													loading="lazy"
+												/>
+											</div>
+										) : (
+											<img
+												src={game.image}
+												alt={game.title}
+												class="w-full h-full object-cover transition-all duration-700 encrypted-image group-hover:scale-110"
+												loading="lazy"
+											/>
+										)}
+
+										{/* Tier Badge Accent */}
+										<div
+											class={`absolute top-0 right-0 p-1.5 opacity-40 group-hover:opacity-100 transition-opacity`}
+										>
+											<span
+												class={`font-orbitron font-black italic text-lg tier-${tier.toLowerCase()}`}
+											>
+												{tier}
+											</span>
+										</div>
+
+										{/* Overlay HUD */}
+										<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+										<div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+											<div class="p-2 bg-black/90 backdrop-blur-xl rounded-lg border border-primary/30 shadow-2xl">
+												<div class="font-space-mono text-[9px] text-primary whitespace-nowrap uppercase tracking-widest leading-none flex items-center gap-2">
+													<span class="size-1 rounded-full bg-primary animate-pulse" />
+													View_Details
+												</div>
+											</div>
+										</div>
+
+										{/* Scanlines */}
+										<div class="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-size-[100%_4px,3px_100%]" />
+									</button>
+								))}
+						</div>
+					</section>
+				))}
+		</div>
+	</main>
+
+	<!-- Premium HUD Modal -->
+	<div
+		id="game-modal"
+		class="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-10 opacity-0 pointer-events-none transition-all duration-500"
+	>
+		<div
+			class="absolute inset-0 bg-black/40 backdrop-blur-xl modal-backdrop"
+		></div>
+
+		<div
+			class="relative w-[90vw] md:max-w-[35vw] h-[70vh] md:h-[600px] bg-stone-950/40 rounded-[2.5rem] border border-white/10 shadow-[0_0_100px_rgba(0,0,0,0.8)] overflow-hidden md:overflow-visible transition-all duration-700 modal-content group/modal perspective-1000"
+		>
+			<!-- Image Wrapper (Restricts Size) -->
+			<div class="absolute inset-0 overflow-hidden rounded-[2.5rem] z-0">
+				<img
+					id="modal-image"
+					src=""
+					alt=""
+					class="w-full h-full object-cover saturate-100 brightness-[0.85] contrast-[1.1] transition-transform duration-1000 scale-100 md:scale-[1.5] group-hover/modal:scale-100"
+				>
+			</div>
+
+			<!-- Close Button - Desktop Hidden -->
+			<button
+				type="button"
+				id="close-modal"
+				class="absolute -top-12 left-1/2 -translate-x-1/2 md:hidden z-50 size-10 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 flex flex-col items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all active:scale-95 group/close"
+			>
+				<span
+					class="font-space-mono text-[8px] font-bold text-white/50 group-hover/close:text-white"
+					>ESC</span
+				>
+				<div
+					class="w-3 h-0.5 bg-white/20 mt-1 rounded-full group-hover/close:bg-white/50"
+				></div>
+			</button>
+
+			<div class="relative h-full flex flex-col z-10 select-none">
+				<!-- Rating Badge - Primary focal point -->
+				<div
+					class="bg-linear-to-br from-amber-300 via-amber-500 to-amber-600 size-14 flex flex-col items-center justify-center rounded-xl shadow-[0_15px_40px_rgba(245,158,11,0.2)] transform-3d transition-transform duration-600 group-hover/modal:translate-z-40 group-hover/modal:rotate-6 self-start m-6 md:absolute md:-top-10 md:-left-10 z-20"
+				>
+					<span
+						class="game-rating-val text-amber-950 font-orbitron font-black italic text-2xl leading-none"
+					></span>
+				</div>
+				<div
+					class="md:hidden mt-auto p-6 pt-20 bg-linear-to-t from-stone-950 via-stone-950/80 to-transparent"
+				>
+					<h2
+						class="game-title-val font-orbitron text-2xl font-black uppercase tracking-tight text-white mb-2"
+					></h2>
+					<p
+						class="game-description-val font-space-mono text-xs leading-relaxed text-white/70 line-clamp-4"
+					></p>
+				</div>
+
+				<!-- DESKTOP VIEW: Circular Gauge & Blade Title -->
+				<div
+					class="hidden md:flex md:absolute md:right-full md:mr-8 md:top-4 group-hover/modal:translate-z-50 transition-all duration-700 md:group-hover/modal:-translate-x-12 flex-col items-end gap-6"
+				>
+					<!-- Rating Gauge (Circular) -->
+					<div
+						class="relative size-32 flex items-center justify-center translate-y-8"
+					>
+						<svg class="absolute inset-0 size-full -rotate-90">
+							<title>Game Rating Gauge</title>
+							<circle
+								cx="64"
+								cy="64"
+								r="60"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								class="text-white/5"
+							></circle>
+							<circle
+								cx="64"
+								cy="64"
+								r="60"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="4"
+								stroke-dasharray="376"
+								stroke-dashoffset="40"
+								class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] transition-all duration-1000 group-hover/modal:[stroke-dashoffset:0]"
+							></circle>
+						</svg>
+						<div class="relative flex flex-col items-center">
+							<span
+								class="game-rating-val font-orbitron font-black text-4xl text-white leading-none"
+							></span>
+						</div>
+					</div>
+
+					<!-- Blade Title Panel -->
+					<div
+						class="relative bg-stone-900/60 backdrop-blur-2xl p-6 py-4 w-72 md:w-80 shadow-2xl"
+						style="clip-path: polygon(10% 0%, 100% 0, 100% 100%, 0% 100%, 0% 40%);"
+					>
+						<div
+							class="absolute top-0 right-0 size-8 border-t-2 border-r-2 border-white/20"
+						></div>
+						<h2
+							class="game-title-val font-orbitron text-2xl font-black uppercase tracking-tighter text-white mb-1"
+						></h2>
+						<span
+							class="game-genre-val font-space-mono text-[9px] text-white/40 uppercase tracking-[0.5em] font-bold block ml-4"
+						></span>
+					</div>
+				</div>
+
+				<!-- DESKTOP VIEW: Minimalist Shard Description -->
+				<div
+					class="hidden md:block md:absolute md:left-full md:ml-8 md:bottom-12 md:w-80 md:opacity-0 md:group-hover/modal:opacity-100 md:group-hover/modal:translate-x-12 transition-all duration-1000 group-hover/modal:translate-z-30"
+				>
+					<div
+						class="relative bg-stone-900/40 backdrop-blur-3xl p-8 border-l border-white/10"
+						style="clip-path: polygon(0 0, 100% 0, 100% 60%, 80% 100%, 0 100%);"
+					>
+						<div
+							class="absolute bottom-4 left-4 size-1 rounded-full bg-white/20"
+						></div>
+						<p
+							class="game-description-val font-space-mono text-[12px] leading-relaxed text-white/70 italic"
+						></p>
+					</div>
+
+					<!-- Decorative Logic Line -->
+					<div
+						class="h-px w-full bg-linear-to-r from-white/10 to-transparent mt-4 ml-4"
+					></div>
+				</div>
+			</div>
+
+			<!-- Subtle Grain Overlay -->
+			<div
+				class="absolute inset-0 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"
+			></div>
+		</div>
+	</div>
+</Layout>
+
+<svg class="hidden">
+	<title>Pixelation Patterns</title>
+	<filter id="pixelate" x="0" y="0">
+		<feFlood x="4" y="4" height="2" width="2"></feFlood>
+		<feComposite width="8" height="8"></feComposite>
+		<feTile result="a"></feTile>
+		<feComposite in="SourceGraphic" in2="a" operator="in"></feComposite>
+		<feMorphology operator="dilate" radius="4"></feMorphology>
+	</filter>
+</svg>
+
+<script>
+const initGames = () => {
+	let activeSourceImg: HTMLImageElement | null = null;
+
+	const modal = document.getElementById("game-modal");
+	const modalContent = modal?.querySelector(".modal-content") as HTMLElement;
+	const backdrop = modal?.querySelector(".modal-backdrop");
+	const closeBtn = document.getElementById("close-modal");
+
+	const openModal = async (game: Game, card: HTMLElement) => {
+		if (!modal || !modalContent) return;
+
+		activeSourceImg = card.querySelector("img");
+		const targetImg = document.getElementById(
+			"modal-image",
+		) as HTMLImageElement;
+		const ratingCircle = document.querySelector(
+			"#game-modal circle:last-of-type",
+		) as HTMLElement;
+
+		// OLD state: grid image has the label
+		if (activeSourceImg)
+			activeSourceImg.style.viewTransitionName = "game-image-morph";
+
+		const updateModal = () => {
+			// NEW state: Label moves to modal image
+			if (activeSourceImg) activeSourceImg.style.viewTransitionName = "";
+			if (targetImg) targetImg.style.viewTransitionName = "game-image-morph";
+
+			// Inject data into ALL matching elements (Mobile & Desktop)
+			document.querySelectorAll(".game-title-val").forEach((el) => {
+				el.textContent = game.title;
+			});
+			document.querySelectorAll(".game-tier-val").forEach((el) => {
+				el.textContent = game.tier;
+			});
+			document.querySelectorAll(".game-rating-val").forEach((el) => {
+				el.textContent = String(game.rating);
+			});
+			document.querySelectorAll(".game-genre-val").forEach((el) => {
+				el.textContent = game.genre;
+			});
+			document.querySelectorAll(".game-description-val").forEach((el) => {
+				el.textContent = game.description;
+			});
+
+			if (targetImg) targetImg.setAttribute("src", game.processedImage);
+
+			const tierColor =
+				game.tier === "S"
+					? "var(--color-primary)"
+					: game.tier === "A"
+						? "#10b981"
+						: game.tier === "B"
+							? "#3b82f6"
+							: "#94a3b8";
+
+			// Update Tier-specific elements
+			const tierBadge = document.getElementById("modal-tier");
+			if (tierBadge) tierBadge.style.color = tierColor;
+
+			if (ratingCircle) {
+				ratingCircle.style.color = tierColor;
+				ratingCircle.style.filter = `drop-shadow(0 0 10px ${tierColor})`;
+			}
+
+			// Dynamic HUD Glow
+			modalContent.style.boxShadow = `0 0 80px -20px ${tierColor}`;
+			modalContent.style.borderColor = `${tierColor}33`;
+			modalContent.style.setProperty("--tier-color", tierColor);
+
+			modal.classList.remove("opacity-0", "pointer-events-none");
+			modalContent.classList.remove("scale-95");
+			document.body.style.overflow = "hidden";
+		};
+
+		if (document.startViewTransition) {
+			const transition = document.startViewTransition(updateModal);
+			await transition.finished;
+			// Clean up both to be safe
+			if (targetImg) targetImg.style.viewTransitionName = "";
+			if (activeSourceImg) activeSourceImg.style.viewTransitionName = "";
+		} else {
+			updateModal();
+		}
+	};
+
+	const closeModal = async () => {
+		if (!modal || !modalContent) return;
+
+		const targetImg = document.getElementById(
+			"modal-image",
+		) as HTMLImageElement;
+
+		// OLD state (Closing): Modal image has the label
+		if (targetImg) targetImg.style.viewTransitionName = "game-image-morph";
+
+		const updateModal = () => {
+			// NEW state (Closed): Move label BACK to grid image
+			if (targetImg) targetImg.style.viewTransitionName = "";
+			if (activeSourceImg)
+				activeSourceImg.style.viewTransitionName = "game-image-morph";
+
+			modal.classList.add("opacity-0", "pointer-events-none");
+			modalContent.classList.add("scale-95");
+			document.body.style.overflow = "";
+		};
+
+		if (document.startViewTransition) {
+			const transition = document.startViewTransition(updateModal);
+			await transition.finished;
+			// Final cleanup
+			if (activeSourceImg) activeSourceImg.style.viewTransitionName = "";
+			activeSourceImg = null;
+		} else {
+			updateModal();
+		}
+	};
+
+	document.querySelectorAll(".game-card").forEach((btn) => {
+		const card = btn as HTMLElement;
+		card.addEventListener("click", () => {
+			const game = JSON.parse(card.getAttribute("data-game") || "{}");
+			openModal(game, card);
+		});
+	});
+
+	closeBtn?.addEventListener("click", closeModal);
+	backdrop?.addEventListener("click", closeModal);
+
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") closeModal();
+	});
+};
+
+document.addEventListener("astro:page-load", initGames);
+</script>
+
+<style is:global>
+.tier-letter {
+	text-shadow: 0 0 30px currentColor;
+	filter: brightness(1.2);
+}
+.tier-s {
+	color: var(--color-primary);
+}
+.tier-a {
+	color: #10b981;
+}
+.tier-b {
+	color: #3b82f6;
+}
+.tier-c {
+	color: #94a3b8;
+}
+
+.encrypted-image {
+	filter: url(#pixelate) contrast(120%) brightness(0.8);
+	transform: scale(1.05);
+}
+
+.game-card:hover .encrypted-image {
+	transform: scale(1.1);
+}
+
+@keyframes scanline {
+	0% {
+		transform: translateY(0);
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(100vh);
+		opacity: 0;
+	}
+}
+
+.animate-scanline {
+	animation: scanline 4s linear infinite;
+}
+
+/* Atmospheric Layer 3D Utilities */
+.perspective-1000 {
+	perspective: 1000px;
+}
+.transform-3d {
+	transform-style: preserve-3d;
+}
+.translate-z-10 {
+	transform: translateZ(10px);
+}
+.translate-z-20 {
+	transform: translateZ(20px);
+}
+.translate-z-40 {
+	transform: translateZ(40px);
+}
+
+/* Custom Scrollbar for Modal Text */
+.custom-scrollbar::-webkit-scrollbar {
+	width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.05);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background: var(--color-primary);
+}
+
+/* Cinematic View Transition Smoothing */
+::view-transition-group(game-image-morph) {
+	animation-duration: 600ms;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(game-image-morph),
+::view-transition-new(game-image-morph) {
+	animation: none;
+	mix-blend-mode: normal;
+	height: 100%;
+	overflow: clip;
+	object-fit: cover;
+}
+
+/* HUD Accents Glow */
+.modal-content {
+	transition: box-shadow 0.5s ease;
+}
+</style>

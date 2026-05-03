@@ -1,115 +1,172 @@
 ---
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 import github from "../assets/icons/github.svg";
+import kaggle from "../assets/icons/kaggle.svg";
+import leetcode from "../assets/icons/leetcode.svg";
 import linkedin from "../assets/icons/linkedin.svg";
 import twitter from "../assets/icons/twitter.svg";
-import leetcode from "../assets/icons/leetcode.svg";
-import kaggle from "../assets/icons/kaggle.svg";
 import plane from "../assets/plane.lottie";
+import rs from "../assets/rs.png";
 
 import * as data from "../content/data/data.mdx";
+
 const { links } = data.frontmatter;
-const { bool } = Astro.props;
-let navs = {};
-if (bool) {
-	navs = {
-		"/": "Home",
-		"#about": "About",
-		"#education": "Education",
-		"#experience": "Experience",
-		"#skills": "Skills",
-		"#spotify": "Spotify",
-		"/projects": "Projects",
-		"/certificates": "Certificates",
-	};
-} else {
-	navs = {
-		"/": "Home",
-		"/#about": "About",
-		"/#education": "Education",
-		"/#experience": "Experience",
-		"/#skills": "Skills",
-		"/#spotify": "Spotify",
-		"/projects": "Projects",
-		"/certificates": "Certificates",
-	};
-}
+
+const getAssetSrc = (asset: string | { src: string }) =>
+	typeof asset === "string" ? asset : asset.src;
+
+const githubSrc = getAssetSrc(github);
+const linkedinSrc = getAssetSrc(linkedin);
+const twitterSrc = getAssetSrc(twitter);
+const leetcodeSrc = getAssetSrc(leetcode);
+const kaggleSrc = getAssetSrc(kaggle);
+const planeSrc = getAssetSrc(plane);
 ---
 
 <footer
-	class="p-10 pb-20 border-t-8 border-base-300 footer footer-center md:pb-10 backdrop-blur-lg text-base-content card"
+	class="relative w-full py-20 md:py-8 px-6 md:px-12 border-t border-white/5 backdrop-blur-md bg-stone-900/40 overflow-hidden"
 >
-	<ul class="flex flex-col gap-0 md:flex-row menu menu-horizontal md:menu-vertical">
-		<li><span class="text-2xl text-white">Pages</span></li>
-		<div class="divider divider-horizontal"></div>
-		{
-			Object.entries(navs).map(([link, name]) => (
-				<>
-					<li>
-						<a href={link} class="text-info step step-neutral">
-							{name}
-						</a>
-					</li>
-					<div class="mx-0 divider divider-horizontal" />
-				</>
-			))
-		}
-	</ul>
-	<div class="flex">
-	<a href="mailto:rony000013@proton.me" class="my-0 btn btn-primary btn-outline"> Contact Me  </a>
-	<dotlottie-player
-		autoplay
-		loop
-		playMode="normal"
-		src={plane}
-		class="h-36"
-	>
-	</dotlottie-player>
-</div>
-	<nav class="flex">
-		<a href={links.github} target="_blank" rel="noopener noreferrer">
-			<Image
-				src={github}
-				alt={links.github}
-				onload="this.style.opacity=1"
-				class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
-			/>
-		</a>
-		<a href={links.linkedin} target="_blank" rel="noopener noreferrer">
-			<Image
-				src={linkedin}
-				alt={links.linkedin}
-				onload="this.style.opacity=1"
-				class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
-			/>
-		</a>
-		<a href={links.twitter} target="_blank" rel="noopener noreferrer">
-			<Image
-				src={twitter}
-				alt={links.twitter}
-				onload="this.style.opacity=1"
-				class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
-			/>
-		</a>
-		<a href={links.leetcode} target="_blank" rel="noopener noreferrer">
-			<Image
-				src={leetcode}
-				alt={links.leetcode}
-				onload="this.style.opacity=1"
-				class="w-10 h-10 p-1 m-1.5 easeload bg-black mask mask-squircle"
-			/>
-		</a>
-		<a href={links.kaggle} target="_blank" rel="noopener noreferrer">
-			<Image
-				src={kaggle}
-				alt={links.kaggle}
-				onload="this.style.opacity=1"
-				class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
-			/>
-		</a>
-	</nav>
-	<aside title="footer" class="text-white">
-		<p>Made with ❤️ by Rounak Sen using Astro, TailwindCSS, SolidJS ✨</p>
-	</aside>
-</footer>
+	<!-- Structural HUD Detail -->
+	<div
+		class="absolute top-0 left-0 w-[20vw] h-px bg-linear-to-r from-primary to-transparent"
+	></div>
+	<div
+		class="absolute top-0 right-0 w-[20vw] h-px bg-linear-to-l from-primary to-transparent"
+	></div>
 
+	<div
+		class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12"
+	>
+		<!-- Column 1: Identity Source -->
+		<div class="flex flex-col items-center md:items-start gap-4 flex-1">
+			<div class="relative group">
+				<Image
+					src={rs}
+					alt="Signature"
+					class="w-16 h-16 md:w-20 md:h-20 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+				/>
+				<div
+					class="absolute -inset-2 border border-primary/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"
+				></div>
+			</div>
+
+			<div class="flex items-center gap-3">
+				<div class="relative">
+					<div class="size-2 bg-primary rounded-full animate-pulse"></div>
+					<div
+						class="absolute inset-0 size-2 bg-primary rounded-full animate-ping opacity-40"
+					></div>
+				</div>
+				<span
+					class="font-orbitron text-[10px] tracking-[0.3em] text-white/50 uppercase"
+				>
+					Status: <span class="text-primary font-bold">Online</span>
+				</span>
+			</div>
+		</div>
+
+		<!-- Column 2: Communication Uplink -->
+		<div class="flex flex-col items-center gap-6 flex-1 order-3 md:order-2">
+			<div class="relative w-full max-w-[200px] flex flex-col items-center">
+				<div
+					class="absolute -top-10 left-1/2 -translate-x-1/2 pointer-events-none"
+				>
+					<dotlottie-player
+						autoplay
+						loop
+						src={planeSrc}
+						class="w-48 h-48 opacity-60"
+					></dotlottie-player>
+				</div>
+
+				<div class="relative mt-20 group/btn">
+					<a
+						href="mailto:rony000013@proton.me"
+						class="relative flex items-center justify-center px-12 py-4 bg-primary/10 border border-primary/30 hover:border-primary border-dashed rounded-none transition-all duration-300 overflow-hidden"
+						style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);"
+					>
+						<span
+							class="relative z-10 font-orbitron text-xs font-bold tracking-[0.3em] text-primary group-hover/btn:text-white"
+						>
+							CONTACT
+						</span>
+						<div
+							class="absolute inset-0 bg-primary translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300"
+						></div>
+					</a>
+					<div
+						class="absolute -top-2 -left-2 size-4 border-t border-l border-white/20"
+					></div>
+					<div
+						class="absolute -bottom-2 -right-2 size-4 border-b border-r border-white/20"
+					></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Column 3: Social Network -->
+		<div
+			class="flex flex-col items-center md:items-end gap-6 flex-1 order-2 md:order-3"
+		>
+			<span
+				class="font-orbitron text-[10px] tracking-[0.3em] text-white/30 uppercase mr-2"
+				>Socials</span
+			>
+			<nav class="flex flex-wrap justify-center md:justify-end gap-3">
+				{[
+						{ src: githubSrc, link: links.github, name: "GitHub" },
+						{
+							src: linkedinSrc,
+							link: links.linkedin,
+							name: "LinkedIn",
+						},
+						{
+							src: twitterSrc,
+							link: links.twitter,
+							name: "Twitter",
+						},
+						{
+							src: leetcodeSrc,
+							link: links.leetcode,
+							name: "LeetCode",
+							invert: false,
+						},
+						{ src: kaggleSrc, link: links.kaggle, name: "Kaggle" },
+					].map((social) => (
+						<a
+							href={social.link}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="group/shard relative"
+						>
+							<div class="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-primary/50 hover:bg-primary/10 transition-all duration-500 group-hover/shard:scale-125 group-hover/shard:rotate-12 group-hover/shard:shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.3)]">
+								<img
+									src={social.src}
+									alt={social.name}
+									class={`w-5 h-5 opacity-60 group-hover/shard:opacity-100 group-hover/shard:-rotate-12 transition-all duration-500 ${social.name !== "LeetCode" && social.name !== "Kaggle" ? "invert" : ""}`}
+								/>
+							</div>
+						</a>
+					))}
+			</nav>
+		</div>
+	</div>
+
+	<!-- Credit Ticker -->
+	<div class="mt-16 pt-8 border-t border-white/5 text-center">
+		<aside
+			title="footer"
+			class="font-space-mono text-[10px] uppercase tracking-widest text-white/40 flex flex-col md:flex-row items-center justify-center gap-4"
+		>
+			<p>
+				Designed & Engineered by
+				<span class="text-white/80 font-bold">Rounak Sen ❤️</span>
+			</p>
+			<span class="hidden md:block w-1.5 h-1.5 rounded-full bg-white/10"></span>
+			<p>
+				Powered by
+				<span class="text-primary/70">Astro / Tailwind / SolidJS</span>
+			</p>
+		</aside>
+	</div>
+</footer>

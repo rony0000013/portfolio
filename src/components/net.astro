@@ -1,35 +1,201 @@
 ---
-import Particles from "astro-particles";
-import type { ISourceOptions } from "tsparticles-engine";
-import options from "../assets/particles.json";
-
-// console.log("isBrowser", isMobile);
-// if (isMobile) {
-//     options.particles.number.value = 50;
-// }
-// console.log("particles options", options.particles.number.value);
-// window.options = options;
-
 ---
 
+<canvas
+	id="starfield-canvas"
+	class="fixed inset-0 w-full h-full -z-10 bg-black"
+	transition:persist
+></canvas>
+
 <script>
-    import { type Container, type Engine, tsParticles } from "tsparticles-engine";
-    import { loadFull } from "tsparticles";
-    
-    // the function name is the parameter passed to the init attribute
-    // required
-    // add the function to window is mandatory, it will be searched there
-    window.particlesInit = async function (engine: Engine) {
-        await loadFull(engine);
-    };
-    
-    // the function name is the parameter passed to the loaded attribute
-    // optional
-    // add the function to window is mandatory, it will be searched there
-    window.particlesLoaded = function (container: Container) {
-        console.log("particlesLoaded callback");
-    };
+interface Star {
+	x: number;
+	y: number;
+	vx: number;
+	vy: number;
+	size: number;
+	opacity: number;
+	hue: number;
+	isRainbow: boolean;
+}
+
+class Starfield {
+	canvas!: HTMLCanvasElement;
+	ctx!: CanvasRenderingContext2D;
+	stars!: Star[];
+	numStars!: number;
+	mouseX!: number;
+	mouseY!: number;
+	baseSpeed!: number;
+	targetSpeedMultiplier!: number;
+	currentSpeedMultiplier!: number;
+	time!: number;
+	centerX!: number;
+	centerY!: number;
+
+	constructor() {
+		this.canvas = document.getElementById(
+			"starfield-canvas",
+		) as HTMLCanvasElement;
+		const context = this.canvas.getContext("2d");
+		if (!context) return;
+		this.ctx = context;
+		this.stars = [];
+		this.numStars = 400;
+		this.mouseX = -1000;
+		this.mouseY = -1000;
+		this.baseSpeed = 1.0;
+		this.targetSpeedMultiplier = 1.0;
+		this.currentSpeedMultiplier = 1.0;
+		this.time = 0;
+
+		this.init();
+	}
+
+	init() {
+		this.resize();
+		window.addEventListener("resize", () => this.resize());
+		window.addEventListener("mousemove", (e) => {
+			this.mouseX = e.clientX;
+			this.mouseY = e.clientY;
+
+			// Calculate distance from center to control speed
+			const dx = this.mouseX - this.centerX;
+			const dy = this.mouseY - this.centerY;
+			const distFromCenter = Math.sqrt(dx * dx + dy * dy);
+			const maxDist = Math.sqrt(
+				this.centerX * this.centerX + this.centerY * this.centerY,
+			);
+
+			// At center dist=0 -> multiplier=3.0 (Fast)
+			// At edge dist=max -> multiplier=0.3 (Slow)
+			this.targetSpeedMultiplier = 0.3 + (1 - distFromCenter / maxDist) * 3.0;
+		});
+
+		// Create initial stars
+		for (let i = 0; i < this.numStars; i++) {
+			this.stars.push(this.createStar(true));
+		}
+
+		this.animate();
+	}
+
+	resize() {
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
+		this.centerX = this.canvas.width / 2;
+		this.centerY = this.canvas.height / 2;
+	}
+
+	createStar(randomPos = false): Star {
+		const side = Math.floor(Math.random() * 4);
+		let x: number;
+		let y: number;
+
+		if (randomPos) {
+			x = Math.random() * this.canvas.width;
+			y = Math.random() * this.canvas.height;
+		} else {
+			if (side === 0) {
+				x = Math.random() * this.canvas.width;
+				y = -50;
+			} else if (side === 1) {
+				x = Math.random() * this.canvas.width;
+				y = this.canvas.height + 50;
+			} else if (side === 2) {
+				x = -50;
+				y = Math.random() * this.canvas.height;
+			} else {
+				x = this.canvas.width + 50;
+				y = Math.random() * this.canvas.height;
+			}
+		}
+
+		const speed = (Math.random() * 2 + 0.5) * this.baseSpeed;
+		const angle = Math.atan2(this.centerY - y, this.centerX - x);
+
+		return {
+			x,
+			y,
+			vx: Math.cos(angle) * speed,
+			vy: Math.sin(angle) * speed,
+			size: Math.random() * 2 + 0.5,
+			opacity: Math.random() * 0.5 + 0.5,
+			hue: Math.random() * 360,
+			isRainbow: false,
+		};
+	}
+
+	animate() {
+		this.time++;
+		// Smoothly interpolate speed multiplier
+		this.currentSpeedMultiplier +=
+			(this.targetSpeedMultiplier - this.currentSpeedMultiplier) * 0.05;
+
+		this.ctx.fillStyle = "black";
+		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+		this.stars.forEach((star, index) => {
+			// Apply the mouse-driven speed multiplier
+			star.x += star.vx * this.currentSpeedMultiplier;
+			star.y += star.vy * this.currentSpeedMultiplier;
+
+			const dx = this.centerX - star.x;
+			const dy = this.centerY - star.y;
+			const distToCenter = Math.sqrt(dx * dx + dy * dy);
+
+			// Acceleration as they approach the center
+			star.vx *= 1.002;
+			star.vy *= 1.002;
+
+			// Rainbow Hover Effect
+			const mDx = this.mouseX - star.x;
+			const mDy = this.mouseY - star.y;
+			const distToMouse = Math.sqrt(mDx * mDx + mDy * mDy);
+
+			if (distToMouse < 100) {
+				star.isRainbow = true;
+				star.hue = (star.hue + 2) % 360;
+			} else {
+				star.isRainbow = false;
+			}
+
+			const opacity = Math.min(star.opacity, distToCenter / 200);
+
+			if (star.isRainbow) {
+				this.ctx.fillStyle = `hsla(${star.hue}, 100%, 75%, ${opacity})`;
+				this.ctx.shadowBlur = 15;
+				this.ctx.shadowColor = `hsl(${star.hue}, 100%, 75%)`;
+			} else {
+				this.ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+				this.ctx.shadowBlur = 0;
+			}
+
+			this.ctx.beginPath();
+			this.ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+			this.ctx.fill();
+			this.ctx.shadowBlur = 0;
+
+			// Respawn at edges if too close to center
+			if (distToCenter < 10) {
+				this.stars[index] = this.createStar();
+			}
+		});
+
+		requestAnimationFrame(() => this.animate());
+	}
+}
+
+const startStarfield = () => {
+	const canvas = document.getElementById(
+		"starfield-canvas",
+	) as HTMLCanvasElement;
+	if (canvas && !canvas.dataset.initialized) {
+		new Starfield();
+		canvas.dataset.initialized = "true";
+	}
+};
+
+document.addEventListener("DOMContentLoaded", startStarfield);
+document.addEventListener("astro:after-swap", startStarfield);
 </script>
-
-<Particles id="tsparticles" options={options} init="particlesInit" />
-

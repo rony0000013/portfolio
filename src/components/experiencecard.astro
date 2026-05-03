@@ -1,24 +1,100 @@
 ---
-import { Image } from "astro:assets";
-const { role, company, description, image, link, from, to } = Astro.props;
+import { CldImage } from "astro-cloudinary";
+
+import { getCloudinaryPublicId } from "../utils/cloudinary";
+
+const { role, company, description, image, link, from, to, index } =
+	Astro.props;
 ---
 
 <div
-    class="my-2 mr-2 shadow-xl card md:card-side bg-base-100 card-bordered border-primary backdrop-blur-lg"
+	class:list={[
+		"experience-card-root group relative flex flex-col items-center text-center w-full max-w-sm mx-auto transition-all duration-700",
+		Astro.props.isActive && "experience-active",
+	]}
 >
-    <figure >
-        <a href={link} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center h-full">
-            <Image src={image} alt={company} inferSize class="rounded-2xl" />
-        </a>
-    </figure>
-    <div class="my-0 divider divider-primary md:divider-horizontal" />
-    <div class="p-3 card-body">
-        <h2 class="justify-center card-title "> <span class="text-primary">{role}</span> at <span class="text-success"> {company}</span></h2>
-        <div class="card-body">
-            <p class="card-description text-secondary">{description}</p>
-        </div>
-        <div class="card-footer">
-            {from} --- {to}
-        </div>
-    </div>
+	<!-- Radial Dark Matter (The Invisible Container) -->
+	<div
+		class="absolute inset-0 pointer-events-none rounded-full bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.3)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 group-[.experience-active]:opacity-100 transition-opacity duration-1000"
+	></div>
+
+	<!-- Logo Node (The Anchor) -->
+	<div class="relative mb-8 shrink-0">
+		<!-- Nebula Glow Effect -->
+		<div
+			class="absolute inset-0 rounded-full bg-primary/10 blur-[60px] transition-all duration-1000 scale-150 group-hover:bg-primary/20 group-[.experience-active]:bg-primary/30 group-[.experience-active]:blur-[80px]"
+		></div>
+		<div
+			class="absolute inset-0 rounded-full bg-secondary/5 blur-[40px] transition-all duration-1000 -translate-x-4 translate-y-4 scale-125 group-hover:bg-secondary/15 group-[.experience-active]:bg-secondary/15"
+		></div>
+
+		<a
+			href={link}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="relative block overflow-hidden rounded-full border border-white/10 bg-black/20 p-2 backdrop-blur-sm transition-all duration-700 group-hover:scale-110 group-[.experience-active]:scale-110 shadow-[0_0_30px_rgba(var(--p),0.1)] group-hover:shadow-[0_0_50px_rgba(var(--p),0.3)] group-[.experience-active]:shadow-[0_0_60px_rgba(var(--p),0.4)] group-[.experience-active]:border-primary/30"
+		>
+			<CldImage
+				src={getCloudinaryPublicId(image)}
+				alt={company}
+				width={300}
+				height={300}
+				crop="fill"
+				class="h-32 w-32 rounded-full object-cover grayscale opacity-60 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-[.experience-active]:grayscale-0 group-[.experience-active]:opacity-100 md:h-40 md:w-40"
+			/>
+		</a>
+	</div>
+
+	<!-- Floating Content (Computational Graph Style) -->
+	<div class="relative w-full space-y-4">
+		<div class="space-y-3">
+			<h3
+				class="relative text-2xl md:text-3xl font-black tracking-tighter text-white transition-all duration-500 flex items-center justify-center gap-2"
+				style="text-shadow: 0 0 8px rgba(var(--p), 0.4), 0 4px 12px rgba(0, 0, 0, 0.9);"
+			>
+				<span
+					class="text-primary font-mono text-xl opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 group-[.experience-active]:opacity-100 group-[.experience-active]:translate-x-0"
+					>[</span
+				>
+				<span
+					class="group-hover:text-primary group-[.experience-active]:text-primary transition-colors duration-500 uppercase"
+				>
+					{role}
+				</span>
+				<span
+					class="text-primary font-mono text-xl opacity-0 translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 group-[.experience-active]:opacity-100 group-[.experience-active]:translate-x-0"
+					>]</span
+				>
+			</h3>
+
+			<div class="flex flex-col items-center gap-1">
+				<p
+					class="text-sm font-black text-secondary/70 uppercase tracking-[0.4em]"
+					style="text-shadow: 0 0 8px rgba(var(--s), 0.3), 0 4px 12px rgba(0, 0, 0, 0.9);"
+				>
+					{company}
+				</p>
+				<div
+					class="h-[1px] w-8 bg-white/10 group-hover:w-16 group-hover:bg-primary/50 group-[.experience-active]:w-20 group-[.experience-active]:bg-primary transition-all duration-700"
+				></div>
+			</div>
+		</div>
+
+		<div class="px-6 relative">
+			<!-- Subtle corner accents for a technical feel -->
+			<div
+				class="absolute top-0 left-4 w-2 h-2 border-l border-t border-white/0 group-hover:border-white/20 group-[.experience-active]:border-white/30 transition-colors"
+			></div>
+			<div
+				class="absolute bottom-0 right-4 w-2 h-2 border-r border-b border-white/0 group-hover:border-white/20 group-[.experience-active]:border-white/30 transition-colors"
+			></div>
+
+			<p
+				class="text-xs md:text-sm text-secondary/80 leading-relaxed font-semibold tracking-wide italic group-[.experience-active]:text-white/90 transition-colors"
+				style="letter-spacing: 0.05em;"
+			>
+				"{description}"
+			</p>
+		</div>
+	</div>
 </div>

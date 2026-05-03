@@ -1,280 +1,35 @@
 ---
-import Techstackcards from "./techstackcards.astro";
+import HoneycombGrid from "./HoneycombGrid";
 
-import reactIcon from "../assets/icons/react.svg";
-import bitcoinIcon from "../assets/icons/bitcoin.svg";
-import braveIcon from "../assets/icons/brave.svg";
-import bunIcon from "../assets/icons/bun.svg";
-import cIcon from "../assets/icons/c.svg";
-import chromeIcon from "../assets/icons/chrome.svg";
-import cloudflareIcon from "../assets/icons/cloudflare.svg";
-import cloudflareWorkersIcon from "../assets/icons/cloudflare-workers.svg";
-import cloudinaryIcon from "../assets/icons/cloudinary.svg";
-import condaIcon from "../assets/icons/conda.svg";
-import cplusplusIcon from "../assets/icons/c-plusplus.svg";
-import css3Icon from "../assets/icons/css-3.svg";
-import curlIcon from "../assets/icons/curl.svg";
-import dailydevIcon from "../assets/icons/dailydev.svg";
-import daisyUIIcon from "../assets/icons/daisyui.svg";
-import dbtIcon from "../assets/icons/dbt.svg";
-import denoIcon from "../assets/icons/deno.svg";
-import digitalOceanIcon from "../assets/icons/digital-ocean.svg";
-import djangoIcon from "../assets/icons/django.svg";
-import dockerIcon from "../assets/icons/docker.svg";
-import duckduckgoIcon from "../assets/icons/duckduckgo.svg";
-import ethereumIcon from "../assets/icons/ethereum.svg";
-import expressIcon from "../assets/icons/express.svg";
-import fastapiIcon from "../assets/icons/fastapi.svg";
-import ffmpegIcon from "../assets/icons/ffmpeg.svg";
-import firefoxIcon from "../assets/icons/firefox.svg";
-import flaskIcon from "../assets/icons/flask.svg";
-import flyIcon from "../assets/icons/fly.svg";
-import framerIcon from "../assets/icons/framer.svg";
-import githubIcon from "../assets/icons/github.svg";
-import githubActionsIcon from "../assets/icons/github-actions.svg";
-import githubCopilotIcon from "../assets/icons/github-copilot.svg";
-import gitIcon from "../assets/icons/git.svg";
-import googleCloudIcon from "../assets/icons/google-cloud.svg";
-import googleDevelopersIcon from "../assets/icons/google-developers.svg";
-import googleGeminiIcon from "../assets/icons/google-gemini.svg";
-import googleIcon from "../assets/icons/google.svg";
-import gradioIcon from "../assets/icons/gradio.svg";
-import grpcIcon from "../assets/icons/grpc.svg";
-import honoIcon from "../assets/icons/hono.svg";
-import html5Icon from "../assets/icons/html-5.svg";
-import huggingFaceIcon from "../assets/icons/hugging-face.svg";
-import javascriptIcon from "../assets/icons/javascript.svg";
-import jsonIcon from "../assets/icons/json.svg";
-import jupyterIcon from "../assets/icons/jupyter.svg";
-import jwtIcon from "../assets/icons/jwt.svg";
-import mailgunIcon from "../assets/icons/mailgun.svg";
-import markdownIcon from "../assets/icons/markdown.svg";
-import materialUIIcon from "../assets/icons/material-ui.svg";
-import matplotlibIcon from "../assets/icons/matplotlib.svg";
-import mdxIcon from "../assets/icons/mdx.svg";
-import metamaskIcon from "../assets/icons/metamask.svg";
-import microsoftAzureIcon from "../assets/icons/microsoft-azure.svg";
-import microsoftWindowsIcon from "../assets/icons/microsoft-windows.svg";
-import millionIcon from "../assets/icons/million.svg";
-import mistralAIIcon from "../assets/icons/mistral-ai.svg";
-import mongodbIcon from "../assets/icons/mongodb.svg";
-import mysqlIcon from "../assets/icons/mysql.svg";
-import netlifyIcon from "../assets/icons/netlify.svg";
-import nextjsIcon from "../assets/icons/nextjs.svg";
-import nginxIcon from "../assets/icons/nginx.svg";
-import nodejsIcon from "../assets/icons/nodejs.svg";
-import npmIcon from "../assets/icons/npm.svg";
-import numpyIcon from "../assets/icons/numpy.svg";
-import openaiIcon from "../assets/icons/openai.svg";
-import openapiIcon from "../assets/icons/openapi.svg";
-import opencvIcon from "../assets/icons/opencv.svg";
-import opensourceIcon from "../assets/icons/opensource.svg";
-import pandasIcon from "../assets/icons/pandas.svg";
-import partytownIcon from "../assets/icons/partytown.svg";
-import pnpmIcon from "../assets/icons/pnpm.svg";
-import postgresqlIcon from "../assets/icons/postgresql.svg";
-import postmanIcon from "../assets/icons/postman.svg";
-import prismaIcon from "../assets/icons/prisma.svg";
-import pwaIcon from "../assets/icons/pwa.svg";
-import pypiIcon from "../assets/icons/pypi.svg";
-import pythonIcon from "../assets/icons/python.svg";
-import pytorchIcon from "../assets/icons/pytorch.svg";
-import reactQueryIcon from "../assets/icons/react-query.svg";
-import reactRouterIcon from "../assets/icons/react-router.svg";
-import redisIcon from "../assets/icons/redis.svg";
-import replitIcon from "../assets/icons/replit.svg";
-import rustIcon from "../assets/icons/rust.svg";
-import seabornIcon from "../assets/icons/seaborn.svg";
-import sentryIcon from "../assets/icons/sentry.svg";
-import snowflakeIcon from "../assets/icons/snowflake.svg";
-import snykIcon from "../assets/icons/snyk.svg";
-import solidityIcon from "../assets/icons/solidity.svg";
-import solidjsIcon from "../assets/icons/solidjs.svg";
-import sqliteIcon from "../assets/icons/sqlite.svg";
-import stackoverflowIcon from "../assets/icons/stackoverflow.svg";
-import streamlitIcon from "../assets/icons/streamlit.svg";
-import supabaseIcon from "../assets/icons/supabase.svg";
-import swaggerIcon from "../assets/icons/swagger.svg";
-import tailwindcssIcon from "../assets/icons/tailwindcss.svg";
-import tauriIcon from "../assets/icons/tauri.svg";
-import tensorflowIcon from "../assets/icons/tensorflow.svg";
-import terminalIcon from "../assets/icons/terminal.svg";
-import tomlIcon from "../assets/icons/toml.svg";
-import torBrowserIcon from "../assets/icons/tor-browser.svg";
-import trpcIcon from "../assets/icons/trpc.svg";
-import typescriptIcon from "../assets/icons/typescript.svg";
-import vercelIcon from "../assets/icons/vercel.svg";
-import vimIcon from "../assets/icons/vim.svg";
-import visualStudioCodeIcon from "../assets/icons/visual-studio-code.svg";
-import vitejsIcon from "../assets/icons/vitejs.svg";
-import vivaldiIcon from "../assets/icons/vivaldi.svg";
-import webassemblyIcon from "../assets/icons/webassembly.svg";
-import yarnIcon from "../assets/icons/yarn.svg";
-import zodIcon from "../assets/icons/zod.svg";
-import zshIcon from "../assets/icons/zsh.svg";
-import anthropicIcon from "../assets/icons/anthropic.svg";
-import arcIcon from "../assets/icons/arc.svg";
-import astroIcon from "../assets/icons/astro.svg";
-import auth0Icon from "../assets/icons/auth0.svg";
-import awsIcon from "../assets/icons/aws.svg";
-import axiosIcon from "../assets/icons/axios.svg";
-import bashIcon from "../assets/icons/bash.svg";
-import actixWebIcon from "../assets/icons/actix-web.svg";
-import scikitLearnIcon from "../assets/icons/scikitlearn.svg";
-import llamaIndexIcon from "../assets/icons/llama-index.svg";
-import langchainIcon from "../assets/icons/langchain.svg";
-import wandbIcon from "../assets/icons/wandb.svg";
-
-const languages = {
-    C: cIcon,
-    "C++": cplusplusIcon,
-    Rust: rustIcon,
-    Python: pythonIcon,
-    HTML: html5Icon,
-    CSS: css3Icon,
-    TypeScript: typescriptIcon,
-    JavaScript: javascriptIcon,
-    ZSH: zshIcon,
-    Bash: bashIcon,
-};
-
-const frontends = {
-    Astro: astroIcon,
-    React: reactIcon,
-    "Next.js": nextjsIcon,
-    "Million.js": millionIcon,
-    "Solid.js": solidjsIcon,
-    "Tailwind CSS": tailwindcssIcon,
-    "Material UI": materialUIIcon,
-    "Daisy UI": daisyUIIcon,
-    "Vite.js": vitejsIcon,
-    "React Router": reactRouterIcon,
-    "React Query": reactQueryIcon,
-    Auth0: auth0Icon,
-    pnpm: pnpmIcon,
-    npm: npmIcon,
-    yarn: yarnIcon,
-    Deno: denoIcon,
-    Framer: framerIcon,
-    Gradio: gradioIcon,
-    Streamlit: streamlitIcon,
-    Partytown: partytownIcon,
-    PWA: pwaIcon,
-    Curl: curlIcon,
-};
-
-const backends = {
-    "Node.js": nodejsIcon,
-    "Bun.js": bunIcon,
-    "Hono.js": honoIcon,
-    Express: expressIcon,
-    FastAPI: fastapiIcon,
-    Flask: flaskIcon,
-    Django: djangoIcon,
-    "Actix Web": actixWebIcon,
-    Tauri: tauriIcon,
-    Supabase: supabaseIcon,
-    Zod: zodIcon,
-    Prisma: prismaIcon,
-    PostgreSQL: postgresqlIcon,
-    SQLite: sqliteIcon,
-    MySQL: mysqlIcon,
-    MongoDB: mongodbIcon,
-    Redis: redisIcon,
-    Vercel: vercelIcon,
-    Netlify: netlifyIcon,
-    Cloudflare: cloudflareIcon,
-    "Cloudflare Workers": cloudflareWorkersIcon,
-    AWS: awsIcon,
-    Azure: microsoftAzureIcon,
-    GCP: googleCloudIcon,
-    "Digital Ocean": digitalOceanIcon,
-    Fly: flyIcon,
-    gRPC: grpcIcon,
-    tRPC: trpcIcon,
-    Axios: axiosIcon,
-    PostMan: postmanIcon,
-    Swagger: swaggerIcon,
-    OpenAPI: openapiIcon,
-    JWT: jwtIcon,
-    Docker: dockerIcon,
-    Nginx: nginxIcon,
-    Mailgun: mailgunIcon,
-    Cloudinary: cloudinaryIcon,
-};
-
-const tools = {
-    Git: gitIcon,
-    GitHub: githubIcon,
-    "GitHub Copilot": githubCopilotIcon,
-    "GitHub Actions": githubActionsIcon,
-    vscode: visualStudioCodeIcon,
-    vim: vimIcon,
-    Terminal: terminalIcon,
-    Vivaldi: vivaldiIcon,
-    Brave: braveIcon,
-    "Tor Browser": torBrowserIcon,
-    "Google Chrome": chromeIcon,
-    Firefox: firefoxIcon,
-    "Arc Browser": arcIcon,
-    "Open Source": opensourceIcon,
-    Windows: microsoftWindowsIcon,
-    Google: googleIcon,
-    DuckDuckGo: duckduckgoIcon,
-    "Google Developers": googleDevelopersIcon,
-    "Daily Dev": dailydevIcon,
-    "Stack Overflow": stackoverflowIcon,
-    Snyk: snykIcon,
-    Sentry: sentryIcon,
-    Replit: replitIcon,
-    FFmpeg: ffmpegIcon,
-};
-
-const aiml = {
-    NumPy: numpyIcon,
-    Pandas: pandasIcon,
-    "Scikit-learn": scikitLearnIcon,
-    Matplotlib: matplotlibIcon,
-    Seaborn: seabornIcon,
-    PyTorch: pytorchIcon,
-    TensorFlow: tensorflowIcon,
-    Jupyter: jupyterIcon,
-    Conda: condaIcon,
-    PyPi: pypiIcon,
-    OpenCV: opencvIcon,
-    LangChain: langchainIcon,
-    "Llama Index": llamaIndexIcon,
-    "Weights & Biases": wandbIcon,
-    OpenAI: openaiIcon,
-    "Hugging Face": huggingFaceIcon,
-    Anthropic: anthropicIcon,
-    "Google Gemini": googleGeminiIcon,
-    "Mistral AI": mistralAIIcon,
-    Snoflake: snowflakeIcon,
-    DBT: dbtIcon,
-};
-
-const web3 = {
-    Bitcoin: bitcoinIcon,
-    Ethereum: ethereumIcon,
-    Solidity: solidityIcon,
-    WebAssembly: webassemblyIcon,
-    MetaMask: metamaskIcon,
-};
-
-
+import Pretext from "./Pretext.astro";
 ---
 
-<div id="skills" class="flex flex-col items-center my-10">
-    <h1 class="text-4xl font-bold text-primary md:text-6xl" data-aos="fade-up">👨🏿‍💻 Skills ⚙️</h1>
-    <div>
+<div id="skills" class="flex flex-col items-center my-20 px-4">
+	<div data-aos="fade-up" class="my-20">
+		<Pretext text="💻 SYSTEM CAPABILITIES" size={24} />
+	</div>
 
-        <Techstackcards title="🕉️ Languages 🔠" icons={languages} />
-        <Techstackcards title="🧠 AI/ML 🤖" icons={aiml} />
-        <Techstackcards title="💻 Frontends 📱" icons={frontends} />
-        <Techstackcards title="💾 Backends 💻" icons={backends} />
-        <Techstackcards title="🔥 Tools 🔨" icons={tools} />
-
-        <!-- <Techstackcards title="Web3 ⛓️" icons={web3} /> -->
-    </div>
+	<div class="w-full space-y-20">
+		<HoneycombGrid
+			client:load
+			title="🕉️ Languages & Logic"
+			category="languages"
+		/>
+		<HoneycombGrid
+			client:load
+			title="🧠 Neural Networks & AI"
+			category="aiml"
+		/>
+		<HoneycombGrid
+			client:load
+			title="💻 Neural Interface (Frontend)"
+			category="frontends"
+		/>
+		<HoneycombGrid
+			client:load
+			title="💾 Core Systems (Backend)"
+			category="backends"
+		/>
+		<HoneycombGrid client:load title="🔥 Universal Tools" category="tools" />
+	</div>
 </div>

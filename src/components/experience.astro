@@ -1,20 +1,218 @@
 ---
-import * as data from "../content/data/data.mdx";
 import ExperienceCard from "../components/experiencecard.astro";
+import * as data from "../content/data/data.mdx";
+
+import Pretext from "./Pretext.astro";
+
 const { experience } = data.frontmatter;
+
+// Sort experience: most recent first
+const sortedExperience = experience;
 ---
 
-<div id="experience" class="m-2 md:m-5 md:pl-10">
-    <ul class="steps steps-vertical">
-        <li data-content="⭐" class="step ">
-            <h1 class="text-4xl font-bold text-center text-primary md:text-6xl" data-aos="slide-right">🏢 Experience 💼</h1>
-        </li>
-        {
-            experience.map((exp, i) => (
-                <li key={i} data-content="⚫" class="step step-primary" data-aos="slide-right">
-                    <ExperienceCard {...exp}  />
-                </li>
-            ))
-        }
-    </ul>
+<div id="experience" class="relative pt-16 md:pt-32 pb-10">
+	<div class="max-w-7xl mx-auto px-4 mb-5">
+		<Pretext data-aos="fade-up" text="⚙️ EXPERIENCE" size={24} />
+	</div>
+
+	<!-- Scroll Container -->
+	<div
+		id="experience-horizontal-wrapper"
+		class="relative h-[600vh]"
+		style="--card-width: 450px; --card-width-mobile: 320px;"
+	>
+		<div
+			class="sticky top-0 h-screen w-full flex flex-col justify-start overflow-hidden pt-[30vh]"
+		>
+			<!-- Energy Beam (Upgraded Top Line) -->
+			<div
+				class="absolute top-[30vh] left-0 w-full h-[2px] z-0 overflow-hidden"
+			>
+				<!-- Base Beam -->
+				<div
+					class="absolute inset-0 bg-linear-to-r from-transparent via-[#8a2be2] via-[#00ffff] to-transparent opacity-40"
+				></div>
+
+				<!-- Data Stream (Animated Dashed Line) -->
+				<div class="absolute inset-0 data-stream"></div>
+
+				<!-- Precision Ticks (Ruler) -->
+				<div class="absolute inset-0 ruler-ticks opacity-20"></div>
+			</div>
+
+			<!-- Timeline Progress Flare -->
+			<div
+				id="timeline-progress"
+				class="absolute top-[30vh] left-0 h-[2px] bg-linear-to-r from-primary/0 via-primary to-primary shadow-[0_0_20px_rgba(var(--p),0.8)] origin-left scale-x-0 z-10"
+			></div>
+
+			<!-- Track with docking cards -->
+			<div
+				id="experience-track"
+				class="flex items-start w-max gap-8 md:gap-24 will-change-transform ease-out z-20 px-[calc(50vw-var(--card-width-mobile)/2)] md:px-[calc(50vw-var(--card-width)/2)]"
+			>
+				<style>
+				.data-stream {
+					background-image: linear-gradient(
+						90deg,
+						#00ffff 2px,
+						transparent 2px
+					);
+					background-size: 20px 100%;
+					animation: stream-flow 2s linear infinite;
+					opacity: 0.3;
+				}
+
+				@keyframes stream-flow {
+					from {
+						background-position: 0 0;
+					}
+					to {
+						background-position: 40px 0;
+					}
+				}
+
+				.ruler-ticks {
+					background-image: linear-gradient(90deg, white 1px, transparent 1px);
+					background-size: 50px 100%;
+					height: 6px;
+					top: -2px;
+				}
+				</style>
+
+				{sortedExperience.map(
+						(exp: { from: string; to: string }, i: number) => (
+							<div class="experience-node flex-none w-(--card-width-mobile) md:w-(--card-width) relative group/item pt-10">
+								{/* Axis Lock Dates (At the top axis) */}
+								<div class="absolute top-[-45px] left-1/2 whitespace-nowrap opacity-20 transition-all duration-500 date-axis z-30 px-4 py-1.5 rounded-full border border-primary/20 backdrop-blur-md bg-white/5">
+									<span
+										class="text-[10px] md:text-sm font-mono font-black text-primary tracking-[0.2em]"
+										style="text-shadow: 0 0 10px rgba(var(--p), 0.5), 0 0 20px rgba(var(--p), 0.2);"
+									>
+										{exp.from} — {exp.to}
+									</span>
+								</div>
+
+								{/* Orbital Connector */}
+								<div class="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+									<div class="relative -translate-y-1/2">
+										<div class="node-dot w-4 h-4 rounded-full bg-base-100 border border-primary/40 transition-all duration-300" />
+										<div class="node-glow absolute inset-0 w-4 h-4 rounded-full bg-primary/20 blur-md scale-150 opacity-0 transition-opacity duration-300" />
+									</div>
+
+									{/* Connector */}
+									<div class="connector-line w-px h-15 bg-primary/20 transition-all duration-300" />
+								</div>
+
+								<div class="card-wrapper transition-all duration-700 opacity-20 scale-90">
+									<ExperienceCard {...exp} index={i} />
+								</div>
+							</div>
+						),
+					)}
+			</div>
+
+			<!-- Background Decorative Text -->
+			<div
+				class="absolute top-[20%] left-10 text-[8px] font-mono text-white/5 uppercase tracking-[0.6em] hidden lg:block"
+			>
+				TIMELINE_AXIS_INITIALIZED // SYSTEM_READY
+			</div>
+			<div
+				class="absolute top-[20%] right-10 text-[8px] font-mono text-white/5 uppercase tracking-[0.6em] hidden lg:block"
+			>
+				DATA_POINTS: {experience.length}
+			</div>
+		</div>
+	</div>
 </div>
+
+<script>
+const initExperienceScroll = () => {
+	const wrapper = document.getElementById("experience-horizontal-wrapper");
+	const track = document.getElementById("experience-track");
+	const progress = document.getElementById("timeline-progress");
+	const nodes = document.querySelectorAll(".experience-node");
+
+	if (!wrapper || !track || !progress) return;
+
+	const update = () => {
+		const rect = wrapper.getBoundingClientRect();
+		const viewportHeight = window.innerHeight;
+		const viewportWidth = window.innerWidth;
+		const center = viewportWidth / 2;
+
+		if (rect.top > viewportHeight || rect.bottom < 0) return;
+
+		const totalScrollable = rect.height - viewportHeight;
+		const scrollDistance = -rect.top;
+
+		let p = scrollDistance / totalScrollable;
+		p = Math.max(0, Math.min(1, p));
+
+		const trackWidth = track.scrollWidth;
+		const maxMove = trackWidth - viewportWidth;
+
+		track.style.transform = `translateX(-${p * maxMove}px)`;
+		progress.style.transform = `scaleX(${p})`;
+
+		nodes.forEach((node) => {
+			const nodeRect = node.getBoundingClientRect();
+			const nodeCenter = nodeRect.left + nodeRect.width / 2;
+			const dist = Math.abs(center - nodeCenter);
+			const radius = viewportWidth * 0.4;
+
+			let intensity = 1 - dist / radius;
+			intensity = Math.max(0, Math.min(1, intensity));
+
+			const card = node.querySelector(".card-wrapper") as HTMLElement;
+			const connector = node.querySelector(".connector-line") as HTMLElement;
+			const dot = node.querySelector(".node-dot") as HTMLElement;
+			const glow = node.querySelector(".node-glow") as HTMLElement;
+			const dateAxis = node.querySelector(".date-axis") as HTMLElement;
+
+			if (card) {
+				card.style.opacity = (0.2 + intensity * 0.8).toString();
+				card.style.transform = `scale(${0.9 + intensity * 0.1}) translateY(${intensity * 12}px)`;
+
+				const cardInner = card.querySelector(".experience-card-root");
+				if (cardInner) {
+					if (intensity > 0.8) {
+						cardInner.classList.add("experience-active");
+					} else {
+						cardInner.classList.remove("experience-active");
+					}
+				}
+			}
+
+			if (connector) {
+				connector.style.backgroundColor = `rgba(var(--p), ${0.1 + intensity * 0.9})`;
+				connector.style.height = `${40 + intensity * 20}px`;
+			}
+
+			if (dateAxis) {
+				dateAxis.style.opacity = (0.2 + intensity * 0.8).toString();
+				dateAxis.style.transform = `translateX(-50%) translateY(${intensity * -8}px)`;
+			}
+
+			if (dot) {
+				dot.style.transform = `scale(${1 + intensity * 0.5})`;
+				dot.style.borderColor = `rgba(var(--p), ${0.2 + intensity * 0.8})`;
+				dot.style.backgroundColor =
+					intensity > 0.8 ? "rgb(var(--p))" : "transparent";
+				dot.style.boxShadow = `0 0 ${intensity * 20}px rgba(var(--p), 0.6)`;
+			}
+			if (glow) {
+				glow.style.opacity = (intensity * 0.7).toString();
+			}
+		});
+	};
+
+	window.addEventListener("scroll", update, { passive: true });
+	window.addEventListener("resize", update);
+	update();
+};
+
+document.addEventListener("DOMContentLoaded", initExperienceScroll);
+document.addEventListener("astro:after-swap", initExperienceScroll);
+</script>

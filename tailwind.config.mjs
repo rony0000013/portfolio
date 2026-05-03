@@ -1,5 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-const { addDynamicIconSelectors } = require("@iconify/tailwind");
+import { addDynamicIconSelectors } from "@iconify/tailwind";
+import typography from "@tailwindcss/typography";
+import daisyui from "daisyui";
+import animate from "tailwindcss-animate";
 
 export default {
 	content: [
@@ -16,13 +18,7 @@ export default {
 		},
 	},
 	important: false,
-	plugins: [
-		require("@tailwindcss/typography"),
-		require("tailwindcss-animate"),
-		addDynamicIconSelectors(),
-		require("daisyui"),
-		require("preline/plugin"),
-	],
+	plugins: [typography, animate, addDynamicIconSelectors(), daisyui],
 	daisyui: {
 		themes: [
 			"light",

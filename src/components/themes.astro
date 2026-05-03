@@ -1,4 +1,6 @@
 ---
+import themeLottie from "../assets/theme.lottie";
+
 const themes = {
 	light: "☀️ Light",
 	dark: "🌙 Dark",
@@ -33,32 +35,203 @@ const themes = {
 	nord: "❄️ Nord",
 	sunset: "🌇 Sunset",
 };
-
-const { image } = Astro.props;
 ---
-<div class="flex align-middle text-center">
-<!-- <dotlottie-player autoplay loop playMode="normal" src={image} class="p-0 m-0 size-10"
-></dotlottie-player> -->
-<select class="select  bg-transparent text-primary  border-none text-lg" data-choose-theme>
-	<option selected disabled class="bg-black">
-		{/* <span class="icon-[line-md--star-pulsating-twotone-loop] btn btn-primary size-8 " /> */}
-		✨ Themes
-		<!-- <span class="icon-[la--chevron-down] size-4 text-white"></span>	 -->
-	</option>
 
-	{
-		Object.entries(themes).map(([theme, name]) => (
-			<option value={theme} class="bg-black">
-				<div
-					// data-set-theme={theme}
-					// data-act-class="ACTIVECLASS"
-					
-					aria-label={name}
+<div
+	class="theme-menu-container relative flex items-center justify-center h-full text-base-content"
+	data-theme-container
+>
+	<button
+		type="button"
+		class="theme-trigger group relative flex items-center justify-center p-1 transition-all duration-500 hover:scale-110 focus:outline-none z-50"
+		aria-label="Toggle Theme Menu"
+	>
+		<div
+			class="size-10 flex items-center justify-center overflow-hidden pointer-events-none"
+		>
+			<dotlottie-player
+				autoplay
+				loop
+				src={themeLottie}
+				class="size-14 min-w-14"
+			></dotlottie-player>
+		</div>
+		<div
+			class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300 shadow-[0_0_10px_var(--color-primary)]"
+		></div>
+	</button>
+
+	<div
+		class="theme-flyout fixed top-28 left-1/2 -translate-x-1/2 w-[90vw] md:w-[750px] opacity-0 pointer-events-none transition-all duration-500 z-[100] translate-y-2"
+	>
+		<div
+			class="fixed inset-0 bg-black/40 backdrop-blur-md -z-10 opacity-0 transition-opacity duration-500 theme-backdrop"
+		></div>
+		<div
+			class="hud-selector-pill p-4 sm:p-6 rounded-3xl sm:rounded-4xl border border-base-content/20 bg-base-300 shadow-[0_30px_100px_rgba(0,0,0,0.6)] w-full max-h-[70vh] flex flex-col gap-4"
+		>
+			<div
+				class="flex items-center justify-between border-b border-base-content/10 pb-2 shrink-0"
+			>
+				<span
+					class="font-orbitron text-[8px] sm:text-[9px] tracking-[0.3em] text-primary uppercase"
+					>Theme_Engine</span
 				>
-					{name}
-				</div>
-			</option>
-		))
-	}
-</select>
+				<span
+					class="font-space-mono text-[7px] sm:text-[8px] opacity-40 uppercase"
+					>v2.9_ACTIVE</span
+				>
+			</div>
+			<div
+				class="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 overflow-y-auto px-1 custom-scrollbar min-h-[300px]"
+			>
+				{Object.entries(themes).map(([key, name]) => {
+						const parts = name.split(" ");
+						return (
+							<button
+								type="button"
+								data-theme-id={key}
+								class="theme-pill-btn group/pill relative flex items-center gap-2 p-2 rounded-lg border border-base-content/5 bg-base-content/3 hover:bg-primary/10 hover:border-primary/40 transition-all duration-300 text-left overflow-hidden"
+							>
+								<span class="text-xs group-hover:scale-120 transition-transform duration-300">
+									{parts[0]}
+								</span>
+								<span class="font-orbitron text-[7px] sm:text-[8px] tracking-wider opacity-60 group-hover:opacity-100 uppercase truncate text-base-content">
+									{parts.slice(1).join(" ")}
+								</span>
+								<div class="active-dot absolute right-2 top-1/2 -translate-y-1/2 size-1.5 rounded-full bg-primary opacity-0 transition-opacity blur-[1px]" />
+							</button>
+						);
+					})}
+			</div>
+		</div>
+	</div>
 </div>
+
+<script is:inline>
+(() => {
+	const init = () => {
+		const html = document.documentElement;
+		const flyout = document.querySelector(".theme-flyout");
+
+		// THE PORTAL FIX: Move the flyout to the body to escape Navbar transforms
+		if (flyout && flyout.parentElement !== document.body) {
+			document.body.appendChild(flyout);
+		}
+
+		const updateUI = () => {
+			const theme =
+				html.getAttribute("data-theme") ||
+				localStorage.getItem("theme") ||
+				"dark";
+			document.querySelectorAll("[data-theme-id]").forEach((btn) => {
+				const dot = btn.querySelector(".active-dot");
+				if (btn.getAttribute("data-theme-id") === theme) {
+					btn.classList.add("active-theme-pill");
+					dot?.classList.add("opacity-100");
+				} else {
+					btn.classList.remove("active-theme-pill");
+					dot?.classList.remove("opacity-100");
+				}
+			});
+		};
+
+		const handleGlobalClick = (e) => {
+			const trigger = e.target.closest(".theme-trigger");
+			const pill = e.target.closest("[data-theme-id]");
+			const backdrop = e.target.closest(".theme-backdrop");
+			const currentFlyout = document.querySelector(".theme-flyout");
+
+			if (trigger) {
+				e.preventDefault();
+				e.stopPropagation();
+				const isOpen = currentFlyout?.classList.contains("opacity-100");
+
+				// Close all
+				document.querySelectorAll(".theme-flyout").forEach((f) => {
+					f.classList.add("opacity-0", "translate-y-2", "pointer-events-none");
+					f.classList.remove(
+						"opacity-100",
+						"translate-y-0",
+						"pointer-events-auto",
+					);
+					f.querySelector(".theme-backdrop")?.classList.add("opacity-0");
+				});
+
+				if (!isOpen && currentFlyout) {
+					currentFlyout.classList.remove(
+						"opacity-0",
+						"translate-y-2",
+						"pointer-events-none",
+					);
+					currentFlyout.classList.add(
+						"opacity-100",
+						"translate-y-0",
+						"pointer-events-auto",
+					);
+					const b = currentFlyout.querySelector(".theme-backdrop");
+					if (b) {
+						b.classList.add("opacity-100");
+						b.classList.remove("opacity-0");
+					}
+				}
+				return;
+			}
+
+			if (pill) {
+				const themeId = pill.dataset.themeId;
+				html.setAttribute("data-theme", themeId);
+				localStorage.setItem("theme", themeId);
+				updateUI();
+				setTimeout(() => {
+					currentFlyout?.classList.add(
+						"opacity-0",
+						"translate-y-2",
+						"pointer-events-none",
+					);
+					currentFlyout
+						?.querySelector(".theme-backdrop")
+						?.classList.add("opacity-0");
+				}, 300);
+				return;
+			}
+
+			if (
+				backdrop ||
+				(!e.target.closest(".theme-menu-container") &&
+					!e.target.closest(".theme-flyout"))
+			) {
+				currentFlyout?.classList.add(
+					"opacity-0",
+					"translate-y-2",
+					"pointer-events-none",
+				);
+				currentFlyout
+					?.querySelector(".theme-backdrop")
+					?.classList.add("opacity-0");
+			}
+		};
+
+		document.removeEventListener("click", window._themeHandler);
+		document.addEventListener("click", handleGlobalClick);
+		window._themeHandler = handleGlobalClick;
+
+		updateUI();
+	};
+
+	// Run on every load/transition
+	document.addEventListener("astro:page-load", init);
+	init();
+})();
+</script>
+
+<style is:global>
+.hud-selector-pill {
+	box-shadow: inset 0 0 20px rgba(var(--color-primary-rgb), 0.05);
+	backdrop-filter: blur(60px) saturate(180%);
+}
+.active-theme-pill {
+	border-color: rgba(var(--color-primary-rgb), 0.6);
+	background-color: rgba(var(--color-primary-rgb), 0.1);
+}
+</style>

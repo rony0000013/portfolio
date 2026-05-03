@@ -1,7 +1,8 @@
 # build output
-
+dist/
 # generated types
 .astro/
+.agents
 
 # dependencies
 node_modules/

@@ -1,62 +1,273 @@
 ---
-import { Img } from "astro-imagetools/components";
-import Layout from "../layouts/Layout.astro";
-import Footer from "../components/footer.astro";
-import Navbar from "../components/navbar.astro";
-import * as certs from "../content/data/certificates.mdx";
-import Net from "../components/net.astro";
-
+import { CldImage } from "astro-cloudinary";
+import { Icon } from "astro-icon/components";
 import certificateLottie from "../assets/certificate.lottie";
+import Pretext from "../components/Pretext.astro";
+import * as certs from "../content/data/certificates.mdx";
+import Layout from "../layouts/Layout.astro";
+import { getCloudinaryPublicId } from "../utils/cloudinary";
 
-const { certificates } = certs.frontmatter;
+const { certificates, brand_colours } = certs.frontmatter;
+
+interface Certificate {
+	title: string;
+	image: string;
+	link: string;
+	issuer: string;
+	date: string;
+	brand: string;
+}
+
+interface BrandColour {
+	title: string;
+	color: string;
+}
+
+// Helper to assign brand-specific colors using the mapping from MDX
+const getBrandColor = (brandKey: string) => {
+	const brands = brand_colours as BrandColour[];
+	const match = brands.find(
+		(b) => b.title.toLowerCase() === brandKey?.toLowerCase(),
+	);
+	return match ? match.color : "#ffffff";
+};
+
+// Sort certificates by date (most recent first)
+const sortedCertificates = [...(certificates as Certificate[])].sort((a, b) => {
+	const parseDate = (d: string) => {
+		// Handle range "2-4 February 2026" -> "4 February 2026"
+		const clean = d.includes("-") ? d.split("-")[1].trim() : d;
+		return new Date(clean).getTime() || 0;
+	};
+	return parseDate(b.date) - parseDate(a.date);
+});
+
+// Height-Aware Masonry Distribution
+// We estimate height based on content to ensure columns end at similar levels
+const columns: { certs: Certificate[]; height: number; speed: number }[] = [
+	{ certs: [], height: 0, speed: -0.04 }, // Left
+	{ certs: [], height: 0, speed: -0.08 }, // Center (Fastest)
+	{ certs: [], height: 0, speed: 0.02 }, // Right (Trailing)
+];
+
+sortedCertificates.forEach((cert) => {
+	// Estimate height: base card + title length factor
+	const estimatedHeight = 450 + cert.title.length * 0.8;
+
+	// Find the shortest column
+	const shortestColumn = columns.reduce((prev, curr) =>
+		prev.height <= curr.height ? prev : curr,
+	);
+
+	shortestColumn.certs.push(cert);
+	shortestColumn.height += estimatedHeight;
+});
 ---
 
-<Layout title="📜Cerificates">
-    <main class="antialiased overflow-hidden">
-        <Navbar />
-        <div class="md:h-[15vh]"></div>
-        <div class="flex items-center justify-center my-16 text-3xl font-bold text-center md:text-5xl text-primary">
-            <dotlottie-player
-                autoplay
-                loop
-                playMode="normal"
-                src={certificateLottie}
-                class="mr-5 md:mr-10 md:size-16 size-10"
-            >
-            </dotlottie-player>CERTIFICATES</div>
-        <div class="grid grid-cols-2 gap-4 m-3 md:m-10 md:grid-cols-3 lg:grid-cols-4">
-            {
-                certificates.map((cert) => (
-                    <div class="object-cover duration-500 origin-bottom transform card group rounded-xl md:rotate-6 hover:rotate-0 hover:-translate-y-12 hover:scale-150 hover:20 backdrop-blur-lg" >
-                        <div data-aos="zoom-in">
-                            <a href={cert.link} target="_blank" rel="noopener noreferrer"  class="w-full h-46 rounded-bl-3xl rounded-tr-3xl sm:h-56 lg:h-64" >
-                            <Img
-                                src={cert.image}
-                                alt={cert.title}
-                                objectFit="contain"
-                               
-                            />
-                        </a>
-                    </div>
-                        <div class="mt-2 sm:flex sm:items-center sm:justify-center sm:gap-4">
-                            <strong class="text-sm font-medium text-info sm:text-md">
-                                {cert.title}
-                            </strong>
+<Layout title="📜 Certificates">
+	<main
+		class="antialiased overflow-hidden text-white relative min-h-screen pb-40 md:pb-100"
+	>
+		<div class="md:h-[10vh]"></div>
 
-                            <span class="hidden sm:block sm:h-px sm:w-10 sm:bg-primary" />
+		<div
+			class="flex items-center justify-center my-12 text-3xl font-bold text-center md:text-5xl text-primary relative z-10"
+		>
+			<Pretext text="📃 CERTIFICATES" size={24} />
+		</div>
 
-                            <p class=" text-sm  mt-0.5  sm:mt-0 text-success sm:text-md">
-                                {cert.issuer}
-                            </p>
+		<div class="relative z-10 px-4 md:px-12 max-w-[1400px] mx-auto">
+			<div
+				class="cert-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 items-start"
+			>
+				{columns.map((column, colIdx) => (
+                        <div
+                            class="parallax-wrapper will-change-transform flex flex-col gap-6 md:gap-10"
+                            data-speed={column.speed}
+                        >
+                            {column.certs.map((cert, index) => {
+                                const brandColor = getBrandColor(cert.brand);
+                                // Global index for consistent rotation
+                                const globalIndex = index * 3 + colIdx;
+                                const rotations = ["-4deg", "3deg", "-2deg", "4deg", "-3deg", "2deg"];
+                                const cardRot = rotations[globalIndex % rotations.length];
+
+                                return (
+                                    <div
+                                        class="cert-card group/card relative cursor-pointer transition-all duration-500 ease-out z-10 h-full flex flex-col outline-none focus-within:ring-2 focus-within:ring-white/20 rounded-[24px]"
+                                        style={`--card-rot: ${cardRot};`}
+                                        tabindex="0"
+                                    >
+                                        {/* Holographic Border Effect */}
+                                        <div
+                                            class="absolute -inset-px rounded-[24px] opacity-0 group-hover/card:opacity-100 group-active/card:opacity-100 group-focus-within/card:opacity-100 blur-md transition-opacity duration-500 pointer-events-none"
+                                            style={`background: linear-gradient(45deg, transparent, ${brandColor}, transparent)`}
+                                        />
+
+                                        {/* Main Card with Glassmorphism */}
+                                        <div class="relative overflow-hidden rounded-[22px] bg-white/3 border border-white/10 backdrop-blur-md p-3 flex flex-col grow shadow-2xl z-10">
+                                            {/* Image Container */}
+
+                                            <CldImage
+                                                src={getCloudinaryPublicId(
+                                                    cert.image,
+                                                )}
+                                                alt={cert.title}
+                                                width={800}
+                                                height={600}
+                                                crop="fill"
+                                                class="w-full h-full object-contain transition-transform duration-700 group-hover/card:scale-105 group-active/card:scale-105 rounded-[11px]"
+                                            />
+
+                                            {/* Scanner Line Animation on Hover */}
+                                            <div class="absolute inset-0 bg-linear-to-b from-transparent via-white/10 to-transparent h-1/2 w-full -translate-y-full group-hover/card:animate-scan group-active/card:animate-scan group-focus-within/card:animate-scan pointer-events-none" />
+
+                                            {/* Brand Badge */}
+                                            <div
+                                                class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-2xl border"
+                                                style={`background-color: ${brandColor}33; color: ${brandColor}; border-color: ${brandColor}66;`}
+                                            >
+                                                {cert.issuer}
+                                            </div>
+
+                                            {/* Content */}
+                                            <div class="p-4 flex flex-col grow justify-between">
+                                                <div>
+                                                    <h3 class="text-lg md:text-xl font-bold text-white/90 group-hover/card:text-white transition-colors tracking-wide line-clamp-2">
+                                                        {cert.title}
+                                                    </h3>
+
+                                                    <div class="flex flex-wrap items-center mt-3 text-white/40 text-xs md:text-sm gap-4">
+                                                        <span class="flex items-center gap-1.5 font-mono">
+                                                            <Icon name="heroicons:calendar-days" class="size-3.5" />
+                                                            {cert.date}
+                                                        </span>
+                                                        <span class="flex items-center gap-1.5 text-success/70 font-mono">
+                                                            <Icon name="heroicons:check-badge" class="size-3.5" />
+                                                            Verified
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <a
+                                                    href={cert.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="mt-6 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 transition-all text-sm font-medium"
+                                                >
+                                                    View Credential
+                                                    <Icon name="heroicons:arrow-top-right-on-square" class="size-3.5" />
+                                                </a>
+                                            </div>
+
+                                            {/* Subtle light reflection sweeping across */}
+                                            <div class="absolute top-0 -left-full w-1/2 h-full bg-linear-to-r from-transparent via-white/5 to-transparent skew-x-[-25deg] group-hover/card:left-[150%] group-active/card:left-[150%] group-focus-within/card:left-[150%] transition-all duration-1000 ease-in-out" />
+                                        </div>
+                                    </div>
+                                 );
+                             })}
                         </div>
-                        <p class="text-sm sm:invisible group-hover:visible text-primary sm:text-center sm:text-md">
-                            {cert.date}
-                        </p>
-                    </div>
-                ))
-            }
-        </div>
-    </main>
-    <Net />
-    <Footer />
+                    ))}
+			</div>
+		</div>
+	</main>
 </Layout>
+
+<script>
+// Parallax Column Scrolling Logic
+const initParallax = () => {
+	const wrappers = document.querySelectorAll(".parallax-wrapper");
+	let ticking = false;
+
+	const updateParallax = () => {
+		const scrollY = window.scrollY;
+		const isDesktop = window.innerWidth >= 768; // Disable parallax on mobile to prevent layout gaps
+
+		wrappers.forEach((wrapper) => {
+			if (isDesktop) {
+				const speed = parseFloat(wrapper.getAttribute("data-speed") || "0");
+				// Use translate3d for GPU acceleration
+				const yPos = scrollY * speed;
+				(wrapper as HTMLElement).style.transform =
+					`translate3d(0, ${yPos}px, 0)`;
+			} else {
+				(wrapper as HTMLElement).style.transform = `translate3d(0, 0, 0)`;
+			}
+		});
+		ticking = false;
+	};
+
+	// Passive listener for highly performant scrolling
+	window.addEventListener(
+		"scroll",
+		() => {
+			if (!ticking) {
+				window.requestAnimationFrame(updateParallax);
+				ticking = true;
+			}
+		},
+		{ passive: true },
+	);
+
+	// Run once on load to ensure proper initial placement
+	updateParallax();
+
+	// Re-calculate on resize in case user moves from desktop to mobile
+	window.addEventListener("resize", () => {
+		if (!ticking) {
+			window.requestAnimationFrame(updateParallax);
+			ticking = true;
+		}
+	});
+};
+
+// Astro view transitions support
+document.addEventListener("astro:page-load", initParallax);
+// Standard load fallback
+if (document.readyState === "complete") {
+	initParallax();
+} else {
+	document.addEventListener("DOMContentLoaded", initParallax);
+}
+</script>
+
+<style>
+/* CSS Base state: Rotated via the inline style variable */
+.cert-card {
+	transform: rotate(var(--card-rot)) scale(1);
+}
+
+/* Hover & Active state: Straighten out and scale up slightly, pop to front */
+.cert-card:hover,
+.cert-card:active,
+.cert-card:focus-within {
+	transform: rotate(0deg) scale(1.05);
+	z-index: 50;
+}
+
+/* * Pure CSS approach to the focus effect!
+     * If the grid contains a hovered or active card, find the cards that are NOT hovered/active, 
+     * and apply dimming and blurring to them.
+     */
+.cert-grid:has(.cert-card:hover) .cert-card:not(:hover),
+.cert-grid:has(.cert-card:active) .cert-card:not(:active),
+.cert-grid:has(.cert-card:focus-within) .cert-card:not(:focus-within) {
+	opacity: 0.3;
+	transform: rotate(var(--card-rot)) scale(0.96);
+	filter: blur(3px);
+}
+
+/* Scanner Animation */
+@keyframes scan {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(200%);
+	}
+}
+
+.animate-scan {
+	animation: scan 2s linear infinite;
+}
+</style>

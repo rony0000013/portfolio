@@ -1,0 +1,470 @@
+---
+import * as data from "../content/data/data.mdx";
+import Pretext from "./Pretext.astro";
+
+interface Publication {
+	title: string;
+	conference: string;
+	date: string;
+	description: string;
+	technologies: string[];
+	doi: string;
+	link: string;
+}
+
+interface Award {
+	title: string;
+	description: string;
+	date?: string;
+	link?: string;
+}
+
+const { publications, awards } = data.frontmatter as {
+	publications: Publication[];
+	awards: Award[];
+};
+---
+
+<div id="achievements" class="relative py-24 md:py-32 overflow-hidden">
+	<!-- Cyberpunk Background Elements -->
+	<div
+		class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-linear-to-r from-transparent via-primary/50 to-transparent opacity-30"
+	></div>
+
+	<div class="max-w-7xl mx-auto px-4">
+		<div class="flex flex-col items-center mb-20">
+			<Pretext text="🏆 ACHIEVEMENTS & RESEARCH" size={24} />
+		</div>
+
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+			<!-- Publications Column -->
+			<div class="space-y-8">
+				<h3
+					class="font-orbitron text-xl font-bold text-primary flex items-center gap-3 mb-8"
+				>
+					<span class="size-2 bg-primary rounded-full animate-pulse"></span>
+					PUBLICATIONS
+				</h3>
+
+				<div class="grid grid-cols-1 gap-12 pt-10">
+					{publications.map((pub: Publication, i: number) => (
+              <div
+                class="publication-shard-wrapper relative"
+                data-aos="fade-up"
+                data-aos-delay={i * 200}
+                data-aos-offset="0"
+              >
+                <div
+                  class="cyber-shard group relative p-8 backdrop-blur-xl border border-primary/30 transition-all duration-700 overflow-hidden"
+                  style={`animation: float ${6 + i}s ease-in-out infinite; animation-delay: ${i * 0.5}s;`}
+                >
+                  {/* Interior HUD Accents */}
+                  <div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 -rotate-45 translate-x-12 -translate-y-12 border-b border-primary/20" />
+                  <div class="absolute bottom-4 right-4 font-mono text-[8px] text-primary/20 tracking-[0.5em] uppercase pointer-events-none">
+                    ASSET_ID::SCIPY_{2024 + i}
+                  </div>
+
+                  {/* Header Info */}
+                  <div class="flex justify-between items-start mb-6">
+                    <div class="space-y-1">
+                      <div class="text-[10px] font-mono text-primary animate-pulse tracking-widest flex items-center gap-2">
+                        <span class="size-1.5 bg-primary rounded-full shadow-[0_0_10px_rgba(var(--color-primary-rgb),0.8)]" />
+                        RESEARCH_LOG
+                      </div>
+                      <div class="relative">
+                        <span
+                          class="block text-xl md:text-2xl font-orbitron font-black invisible uppercase tracking-tight leading-tight"
+                          aria-hidden="true"
+                        >
+                          {pub.title}
+                        </span>
+                        <h4
+                          class="absolute inset-0 text-xl md:text-2xl font-orbitron font-black text-white group-hover:text-primary transition-all duration-500 tracking-tight leading-tight uppercase decoding-title"
+                          data-text={pub.title}
+                          style="text-shadow: 0 0 20px rgba(0,0,0,0.5);"
+                        >
+                          {pub.title}
+                        </h4>
+                      </div>
+                    </div>
+                    <div class="text-sm font-mono font-bold text-white/70 group-hover:text-primary transition-colors border-l border-primary/20 pl-4 py-1">
+                      {pub.date}
+                    </div>
+                  </div>
+
+                  {/* Conference & Metadata */}
+                  <div class="flex items-center gap-4 mb-6 border-b border-white/5 pb-4">
+                    <p class="text-xs font-mono text-primary/80 uppercase tracking-[0.2em]">
+                      {pub.conference}
+                    </p>
+                    <div class="size-1 bg-white/20 rounded-full" />
+                    <span class="text-xs font-mono text-white/60 font-medium">
+                      DOI: {pub.doi}
+                    </span>
+                  </div>
+
+                  {/* Decoding Description */}
+                  <div class="relative mb-8">
+                    <p
+                      class="text-sm leading-relaxed font-space-mono invisible pointer-events-none"
+                      aria-hidden="true"
+                    >
+                      {pub.description}
+                    </p>
+                    <p
+                      class="absolute inset-0 text-sm text-white/70 leading-relaxed font-space-mono decoding-text"
+                      data-text={pub.description}
+                    >
+                      {pub.description}
+                    </p>
+                  </div>
+
+                  {/* Action Footer */}
+                  <div class="flex flex-wrap items-center justify-between gap-6">
+                    <div class="flex flex-wrap gap-2">
+                      {pub.technologies.map((tech: string) => (
+                        <span class="text-[10px] font-mono px-3 py-1 bg-white/10 border border-white/20 text-white/80 uppercase tracking-tight hover:border-primary/50 hover:text-primary transition-all cursor-default">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {pub.link && (
+                      <a
+                        href={pub.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="group/btn relative px-6 py-2 overflow-hidden transition-all duration-300"
+                      >
+                        <div class="absolute inset-0 bg-primary/10 group-hover/btn:bg-primary/20 skew-x-[-20deg] transition-all" />
+                        <div class="absolute inset-0 border border-primary/30 group-hover/btn:border-primary skew-x-[-20deg] transition-all" />
+                        <span class="relative font-orbitron text-[10px] font-bold text-primary tracking-widest flex items-center gap-2">
+                          INITIALIZE_LINK <span class="text-lg">→</span>
+                        </span>
+                      </a>
+                    )}
+                  </div>
+
+                  {/* Corner HUD Brackets */}
+                  <div class="absolute top-0 left-0 size-4 border-t-2 border-l-2 border-primary/60" />
+                  <div class="absolute bottom-0 right-0 size-4 border-b-2 border-r-2 border-primary/60" />
+
+                  {/* Hover Scan Overlay */}
+                  <div class="absolute inset-0 bg-linear-to-b from-primary/0 via-primary/5 to-primary/0 -translate-y-full group-hover:animate-scan-fast pointer-events-none" />
+                </div>
+              </div>
+            ))}
+				</div>
+			</div>
+
+			<!-- Awards & Certifications Column -->
+			<div class="space-y-8">
+				<h3
+					class="font-orbitron text-xl font-bold text-secondary flex items-center gap-3 mb-8"
+				>
+					<span class="size-2 bg-secondary rounded-full animate-pulse"></span>
+					RECOGNITION
+				</h3>
+
+				<div class="grid grid-cols-1 gap-6 pt-10">
+					{awards.map((award: Award, i: number) => (
+              <div
+                class="award-slate-wrapper relative group"
+                data-aos="fade-left"
+                data-aos-delay={i * 150}
+                data-aos-offset="0"
+              >
+                <div class="cyber-slate relative p-6 backdrop-blur-xl border-r border-secondary/30 transition-all duration-500 overflow-hidden">
+                  {/* Vertical Power Bar */}
+                  <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary/20 group-hover:bg-secondary group-hover:shadow-[0_0_15px_rgba(var(--color-secondary-rgb),0.8)] transition-all duration-500" />
+
+                  <div class="flex items-start gap-6">
+                    {/* Icon Node */}
+                    <div class="relative size-12 shrink-0">
+                      <div class="absolute inset-0 bg-secondary/10 border border-secondary/30 rotate-45 group-hover:rotate-90 transition-transform duration-700" />
+                      <div class="absolute inset-0 flex items-center justify-center text-secondary">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <title>Award Success Icon</title>
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <div class="flex-1 min-w-0">
+                      <div class="flex justify-between items-start mb-2">
+                        <div class="space-y-0.5">
+                          <div class="text-[8px] font-mono text-secondary/50 tracking-[0.3em] uppercase">
+                            STATUS::VALIDATED
+                          </div>
+                          <div class="relative">
+                            <span
+                              class="block text-lg font-orbitron font-bold invisible uppercase"
+                              aria-hidden="true"
+                            >
+                              {award.title}
+                            </span>
+                            <h4
+                              class="absolute inset-0 font-orbitron font-bold text-white group-hover:text-secondary transition-colors uppercase decoding-title"
+                              data-text={award.title}
+                            >
+                              {award.title}
+                            </h4>
+                          </div>
+                        </div>
+                        {award.date && (
+                          <span class="text-xs font-mono font-bold text-white/60 tracking-wider">
+                            [{award.date}]
+                          </span>
+                        )}
+                      </div>
+
+                      <div class="relative mb-4">
+                        <p
+                          class="text-sm leading-relaxed font-space-mono invisible pointer-events-none"
+                          aria-hidden="true"
+                        >
+                          {award.description}
+                        </p>
+                        <p
+                          class="absolute inset-0 text-sm text-white/50 leading-relaxed font-space-mono decoding-text"
+                          data-text={award.description}
+                        >
+                          {award.description}
+                        </p>
+                      </div>
+
+                      {award.link && (
+                        <a
+                          href={award.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center gap-3 group/link"
+                        >
+                          <div class="h-px w-8 bg-secondary/30 group-hover/link:w-12 group-hover/link:bg-secondary transition-all" />
+                          <span class="text-[9px] font-mono font-black text-secondary tracking-widest uppercase">
+                            VERIFY_CREDENTIAL
+                          </span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Corner Decals */}
+                  <div class="absolute top-0 right-0 size-3 border-t border-r border-secondary/40" />
+                  <div class="absolute bottom-0 left-4 size-1 bg-secondary/40" />
+
+                  {/* Background ID String */}
+                  <div class="absolute -bottom-2 -right-4 text-[40px] font-black text-secondary/3 select-none pointer-events-none font-orbitron italic">
+                    {award.title.split(" ")[0]}
+                  </div>
+                </div>
+              </div>
+            ))}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Decorative background text -->
+	<div
+		class="absolute -bottom-10 -right-20 text-[120px] font-black text-white/2 select-none pointer-events-none uppercase tracking-[0.5em] font-orbitron"
+	>
+		DECRYPTED
+	</div>
+</div>
+
+<style>
+.cyber-shard {
+	clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+	background: rgba(var(--color-primary-rgb), 0.03);
+}
+
+.cyber-shard:hover {
+	animation-play-state: paused;
+	background: rgba(var(--color-primary-rgb), 0.08);
+	border-color: rgba(var(--color-primary-rgb), 0.8);
+	box-shadow: 0 0 40px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.cyber-slate {
+	clip-path: polygon(
+		0 0,
+		95% 0,
+		100% 15px,
+		100% 100%,
+		5% 100%,
+		0 calc(100% - 15px)
+	);
+	background: rgba(var(--color-secondary-rgb), 0.03);
+}
+
+.cyber-slate:hover {
+	background: rgba(var(--color-secondary-rgb), 0.08);
+	border-color: rgba(var(--color-secondary-rgb), 0.8);
+	box-shadow: 0 0 40px rgba(var(--color-secondary-rgb), 0.15);
+}
+
+.clip-path-hexagon {
+	clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.scanline-alt {
+	background: linear-gradient(
+		to bottom,
+		transparent 50%,
+		rgba(255, 255, 255, 0.05) 50%
+	);
+	background-size: 100% 4px;
+	animation: scanline-move 10s linear infinite;
+}
+
+@keyframes scanline-move {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 0 100%;
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0) rotate(0deg);
+	}
+	50% {
+		transform: translateY(-15px) rotate(0.5deg);
+	}
+}
+
+@keyframes scan-fast {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(100%);
+	}
+}
+
+.animate-scan-fast {
+	animation: scan-fast 1.5s linear infinite;
+}
+
+/* Glitch Effect */
+.glitch-alt {
+	position: relative;
+}
+
+.glitch-alt::before,
+.glitch-alt::after {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.8;
+}
+
+.group:hover .glitch-alt::before {
+	animation: glitch-anim 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+	color: #f0f;
+	z-index: -1;
+}
+
+.group:hover .glitch-alt::after {
+	animation: glitch-anim 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both
+		infinite;
+	color: #0ff;
+	z-index: -2;
+}
+
+@keyframes glitch-anim {
+	0% {
+		transform: translate(0);
+	}
+	20% {
+		transform: translate(-2px, 2px);
+	}
+	40% {
+		transform: translate(-2px, -2px);
+	}
+	60% {
+		transform: translate(2px, 2px);
+	}
+	80% {
+		transform: translate(2px, -2px);
+	}
+	100% {
+		transform: translate(0);
+	}
+}
+</style>
+
+<script>
+const characters =
+	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+";
+
+const decodeElement = (el: HTMLElement) => {
+	const originalText = el.dataset.text || "";
+	let iteration = 0;
+	let interval: ReturnType<typeof setInterval> | undefined;
+
+	interval = setInterval(() => {
+		el.innerText = originalText
+			.split("")
+			.map((_, index) => {
+				if (index < iteration) {
+					return originalText[index];
+				}
+				return characters[Math.floor(Math.random() * characters.length)];
+			})
+			.join("");
+
+		if (iteration >= originalText.length) {
+			clearInterval(interval);
+		}
+
+		iteration += 1; // FASTER: 1 char per frame
+	}, 20); // FASTER: 20ms interval
+};
+
+const initDecoding = () => {
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				const card = entry.target as HTMLElement;
+				const titleEl = card.querySelector(".decoding-title") as HTMLElement;
+				const textEl = card.querySelector(".decoding-text") as HTMLElement;
+
+				if (entry.isIntersecting) {
+					if (titleEl) decodeElement(titleEl);
+					if (textEl) setTimeout(() => decodeElement(textEl), 150);
+				} else {
+					// Prepare for re-entry without collapsing height
+					if (titleEl) titleEl.innerText = "";
+					if (textEl) textEl.innerText = "";
+				}
+			});
+		},
+		{ threshold: 0.1 },
+	);
+
+	document.querySelectorAll(".cyber-shard, .cyber-slate").forEach((card) => {
+		observer.observe(card);
+	});
+};
+
+document.addEventListener("DOMContentLoaded", initDecoding);
+document.addEventListener("astro:after-swap", initDecoding);
+</script>

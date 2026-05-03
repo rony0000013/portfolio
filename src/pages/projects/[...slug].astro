@@ -1,93 +1,409 @@
 ---
+import { getCollection, render } from "astro:content";
+import { CldImage } from "astro-cloudinary";
+import { Icon } from "astro-icon/components";
 import { marked } from "marked";
-import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
-import ProjectsLayout from "../../layouts/ProjectsLayout.astro";
+import arrowLottie from "../../assets/arrow.lottie";
+import githubBlackLottie from "../../assets/githubBlack.lottie";
+import Pretext from "../../components/Pretext.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getCloudinaryPublicId } from "../../utils/cloudinary";
 
 export async function getStaticPaths() {
-    const projectsEntries = await getCollection("projects");
-    return projectsEntries.map((entry) => ({
-        params: { slug: entry.slug },
-        props: { entry },
-    }));
+	const projectsEntries = await getCollection("projects");
+	return projectsEntries.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
 }
 
 const { entry } = Astro.props;
 const { data } = entry;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 let content = null;
-if (data.links?.githubReadme) {  
-    const response = await fetch(data.links.githubReadme);
-    const markdown = await response.text();
-    content = marked.parse(markdown);
+if (data.links?.githubReadme) {
+	const response = await fetch(data.links.githubReadme);
+	const markdown = await response.text();
+	content = marked.parse(markdown);
 }
 ---
 
-<ProjectsLayout title={entry.data.title} description={entry.data.description}>
-    <div class="m-5 md:m-10 card">
-        <div class="hero py-10 rounded-box bg-black text-white mb-12 shadow-2xl">
-            <div class="hero-content flex-col lg:flex-row">
-                <Image
-                    src={data.image}
-                    alt={data.title}
-                    inferSize
-                    class="justify-start max-w-sm w-full rounded-lg shadow-2xl"
-                />
-                <div>
-                    <h1 class="text-xl md:text-5xl font-bold md:ml-5">{data.title}</h1>
-                    <div class="py-4 md:ml-5">
-                        {data.description} 
-                        <br />
-                        {<span class="text-sm text-info">Date: {data.date}</span>}
-                        <div class="flex flex-wrap gap-2 pt-2">
-                            {
-                                data.tech.map((tech) => (
-                                    <span class="badge badge-success">{tech}</span>
-                                ))
-                            }
-                        </div>
-                    </div>
+<Layout title={entry.data.title} description={entry.data.description}>
+	<main
+		class="relative min-h-screen pt-[14vh] md:pt-[18vh] pb-20 px-4 md:px-10 overflow-hidden antialiased"
+	>
+		<!-- Animated Background Glow Orbs -->
+		<div
+			class="fixed top-1/4 -left-20 size-[300px] md:size-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[150px] pointer-events-none animate-pulse"
+		></div>
+		<div
+			class="fixed bottom-1/4 -right-20 size-[300px] md:size-[500px] bg-primary/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none animate-pulse"
+			style="animation-delay: 2s"
+		></div>
 
-                    <ul class="flex menu menu-horizontal gap-5">
-                        {data.links.demo && 
-                        <li class="bg-base-200 rounded-box ">
-                            <a aria-label="demo link" href={data.links.demo} target="_blank">
-                                Demo Link
-                                <dotlottie-player
-                                    autoplay
-                                    loop
-                                    playMode="normal"
-                                    src="/src/assets/arrow.lottie"
-                                    class="size-8 rounded-full -rotate-45 bg-white "
-                                >
-                                </dotlottie-player>
-                            </a>
-                        </li>}
-                        <li class="bg-base-200 rounded-box">
-                            <a aria-label="github" href={data.links.github} target="_blank">
-                                Github Link
-                                <dotlottie-player
-                                    autoplay
-                                    loop
-                                    playMode="normal"
-                                    src="/src/assets/githubBlack.lottie"
-                                    class="size-8 rounded-box bg-white"
-                                >
-                                </dotlottie-player>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div
-            class="prose dark:prose-invert
-                        prose-h1:font-bold prose-h1:text-primary
-                        prose-h2:text-secondary prose-h3:text-secondary prose-h4:text-secondary prose-h5:text-secondary prose-h6:text-secondary
-                        prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
-                        prose-headings:underline md:mx-auto"
-        >
-            {content ? <article set:html={content} /> : <Content />}
-        </div>
-    </div>
-</ProjectsLayout>
+		<!-- Scanline & HUD Overlay -->
+		<div
+			class="fixed inset-0 z-50 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-size-[100%_2px,3px_100%] opacity-20"
+		></div>
+
+		<div class="relative z-10 max-w-7xl mx-auto">
+			<!-- Premium Holographic Projector System -->
+			<div class="flex flex-col items-center relative mb-20 md:mb-32">
+				<Pretext text={data.title.toUpperCase()} size={40} />
+
+				<!-- Top: Floating Hologram Projection -->
+				<div class="relative w-full max-w-4xl group perspective-2000 z-20">
+					<div
+						class="relative rounded-2xl overflow-hidden border border-white/10 bg-black/60 shadow-[0_0_50px_rgba(var(--color-primary-rgb),0.3)] transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]
+                        transform-[rotateX(20deg)_rotateY(0deg)_translateZ(50px)] group-hover:transform-[rotateX(5deg)_rotateY(0deg)_translateZ(100px)_scale(1.02)]"
+						data-tilt
+						data-tilt-max="5"
+						data-tilt-speed="1000"
+						data-tilt-glare="true"
+						data-tilt-max-glare="0.2"
+					>
+						<CldImage
+							src={getCloudinaryPublicId(data.image)}
+							alt={data.title}
+							width={1600}
+							height={1200}
+							crop="fill"
+							transition:name={`project-image-${entry.id}`}
+							class="w-full h-auto aspect-video object-cover grayscale-20 group-hover:grayscale-0 transition-opacity duration-1000"
+						/>
+
+						<!-- Holographic Overlay Effects -->
+						<div class="absolute inset-0 z-10 pointer-events-none">
+							<!-- Moving Scanlines -->
+							<div
+								class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(var(--color-primary-rgb),0.1)_50%)] bg-size-[100%_4px] opacity-30 animate-[scan_8s_linear_infinite]"
+							></div>
+							<!-- Edge Glow -->
+							<div
+								class="absolute inset-0 border-4 border-primary/20 blur-sm"
+							></div>
+						</div>
+
+						<!-- Scanning Line -->
+						<div
+							class="absolute top-0 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-primary to-transparent opacity-80 z-20 animate-[scan_4s_linear_infinite]"
+						></div>
+					</div>
+
+					<!-- Image Bottom Glow -->
+					<div
+						class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[90%] h-px bg-primary/60 blur-[2px] z-30"
+					></div>
+				</div>
+
+				<!-- Middle: The Light Rays (Targeted HUD Projection) -->
+				<div
+					class="relative w-full max-w-4xl h-32 md:h-48 z-10 pointer-events-none"
+				>
+					<!-- Targeted Atmospheric Glow -->
+					<div
+						class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300%] bg-linear-to-t from-primary/15 via-transparent to-transparent blur-[60px] opacity-30"
+					></div>
+
+					<!-- Precise Projection Fan SVG -->
+					<Icon
+						name="projection-fan"
+						class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full opacity-50 mix-blend-screen"
+					/>
+
+					<!-- Emitter Hub Glimmer -->
+					<div
+						class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-full bg-linear-to-t from-primary/50 to-transparent blur-2xl opacity-60"
+					></div>
+				</div>
+
+				<!-- Bottom: Project Details Console -->
+				<div class="w-full max-w-4xl relative z-20 px-4 md:px-0">
+					<!-- Focal Emitter Port (Where the beam connects) -->
+					<div
+						class="absolute -top-1 left-1/2 -translate-x-1/2 w-48 h-1 bg-primary blur-[2px] opacity-100 shadow-[0_0_20px_var(--color-primary)] z-30"
+					></div>
+					<div
+						class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-white opacity-100 shadow-[0_0_10px_white] z-40"
+					></div>
+
+					<!-- Main Dashboard Enclosure -->
+					<div
+						class="relative bg-[#08080a]/90 backdrop-blur-3xl border border-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,1)] mt-2"
+					>
+						<!-- Cyberpunk Structural Borders -->
+						<div
+							class="absolute top-0 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-primary/60 to-transparent"
+						></div>
+						<div
+							class="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-white/20 to-transparent"
+						></div>
+
+						<!-- Hardware Corner Brackets -->
+						<div
+							class="absolute -top-px -left-px w-8 h-8 border-t-2 border-l-2 border-primary/80 z-20"
+						></div>
+						<div
+							class="absolute -top-px -right-px w-8 h-8 border-t-2 border-r-2 border-primary/80 z-20"
+						></div>
+						<div
+							class="absolute -bottom-px -left-px w-8 h-8 border-b-2 border-l-2 border-white/30 z-20"
+						></div>
+						<div
+							class="absolute -bottom-px -right-px w-8 h-8 border-b-2 border-r-2 border-white/30 z-20"
+						></div>
+
+						<!-- Inner Display Area -->
+						<div
+							class="p-6 md:p-10 flex flex-col gap-8 relative overflow-hidden"
+						>
+							<!-- Grid Background Overlay -->
+							<div
+								class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[24px_24px] pointer-events-none opacity-40"
+							></div>
+
+							<!-- Console Header -->
+							<div
+								class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-white/10 pb-6 relative z-10"
+							>
+								<div class="flex items-center gap-4">
+									<div
+										class="flex items-center justify-center size-12 bg-primary/10 border border-primary/30 relative rounded-sm"
+									>
+										<div
+											class="absolute inset-0 border border-primary/20 scale-[0.6]"
+										></div>
+										<div
+											class="size-2.5 bg-primary animate-pulse shadow-[0_0_12px_var(--color-primary)]"
+										></div>
+									</div>
+									<div>
+										<h3
+											class="font-orbitron text-[16px] md:text-[20px] tracking-[0.2em] text-white uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+										>
+											{data.title}
+										</h3>
+										<span
+											class="font-mono text-[10px] md:text-[11px] text-primary/70 tracking-widest uppercase mt-1 block"
+											>ID: {entry.id} // PROJECT</span
+										>
+									</div>
+								</div>
+
+								<div class="flex flex-col items-end gap-1.5">
+									<div class="flex gap-1.5 opacity-50">
+										<div class="w-1.5 h-3.5 bg-white"></div>
+										<div class="w-3 h-3.5 bg-white"></div>
+										<div class="w-1 h-3.5 bg-white"></div>
+										<div class="w-1.5 h-3.5 bg-white"></div>
+										<div class="w-4 h-3.5 bg-white"></div>
+										<div class="w-1.5 h-3.5 bg-primary"></div>
+									</div>
+									<div
+										class="font-mono text-[10px] md:text-[11px] text-white/50 tracking-wider"
+									>
+										DATE: {data.date || "PRESENT"}
+									</div>
+								</div>
+							</div>
+
+							<!-- Split Data Architecture -->
+							<div
+								class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 relative z-10"
+							>
+								<!-- Left: Description Panel -->
+								<div class="lg:col-span-7 flex flex-col gap-5">
+									<div class="flex items-center gap-3">
+										<div
+											class="w-full h-px bg-linear-to-r from-primary/50 to-transparent"
+										></div>
+										<span
+											class="font-orbitron text-[10px] tracking-[0.3em] text-primary/80 whitespace-nowrap"
+											>PROJECT_OVERVIEW</span
+										>
+									</div>
+									<p
+										class="font-space-mono text-[14px] md:text-[15px] leading-relaxed text-white/80 text-justify relative pl-5 border-l-2 border-primary/30"
+									>
+										{data.description}
+									</p>
+								</div>
+
+								<!-- Right: Tech Stack Panel -->
+								<div
+									class="lg:col-span-5 bg-black/40 border border-white/5 p-6 relative group rounded-sm"
+								>
+									<div
+										class="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary/50"
+									></div>
+									<div
+										class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary/50"
+									></div>
+
+									<!-- Inner Panel Scanline -->
+									<div
+										class="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.4)_50%)] bg-size-[100%_4px] opacity-30"
+									></div>
+
+									<span
+										class="block relative z-10 font-orbitron text-[10px] text-white/60 tracking-[0.3em] mb-5 border-b border-white/10 pb-3"
+										>TECH_STACK</span
+									>
+
+									<ul
+										class="relative z-10 font-mono text-[11px] md:text-[12px] text-white/70 flex flex-col gap-3"
+									>
+										{data.tech.map((tech) => (
+												<li class="flex justify-between items-center border-b border-white/5 pb-2">
+													<span class="flex items-center gap-2.5">
+														<span class="text-primary/60">
+															{">"}
+														</span>
+														{tech}
+													</span>
+													<span class="text-green-400/90 font-bold tracking-widest shadow-[0_0_10px_rgba(74,222,128,0.2)]">
+														[OK]
+													</span>
+												</li>
+											))}
+									</ul>
+								</div>
+							</div>
+
+							<!-- Action Execution Row -->
+							<div
+								class="flex flex-col sm:flex-row gap-5 mt-4 relative z-10 pt-8 border-t border-white/10"
+							>
+								{data.links.demo && (
+										<a
+											href={data.links.demo}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex-1 relative overflow-hidden group/btn bg-primary/10 border border-primary/40 hover:border-primary rounded-sm transition-all duration-300"
+										>
+											{/* Glare/Sweep effect */}
+											<div class="absolute -inset-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out bg-linear-to-r from-transparent via-primary/20 to-transparent skew-x-12" />
+
+											<div class="flex items-center justify-between px-6 py-5 relative z-10">
+												<span class="font-orbitron text-[12px] tracking-[0.3em] text-primary font-bold">
+													LIVE_PREVIEW
+												</span>
+												<dotlottie-player
+													autoplay
+													loop
+													src={arrowLottie}
+													class="size-7 md:size-8 -rotate-45 drop-shadow-[0_0_5px_var(--color-primary)] transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
+												/>
+											</div>
+										</a>
+									)}
+
+								<a
+									href={data.links.github}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="flex-1 relative overflow-hidden group/btn bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/10 rounded-sm transition-all duration-300"
+								>
+									<div
+										class="flex items-center justify-between px-6 py-5 relative z-10"
+									>
+										<span
+											class="font-orbitron text-[12px] tracking-[0.3em] text-white/80 group-hover/btn:text-white transition-colors"
+											>SOURCE_CODE</span
+										>
+										<div
+											class="size-7 md:size-8 opacity-70 group-hover/btn:opacity-100 transition-opacity"
+										>
+											<dotlottie-player
+												autoplay
+												loop
+												src={githubBlackLottie}
+												class="w-full h-full invert brightness-0 group-hover/btn:brightness-200 transition-all"
+											></dotlottie-player>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Project Documentation Section -->
+				<div class="mt-24 relative px-4 md:px-0">
+					<!-- Laser Divider -->
+					<div
+						class="absolute left-1/2 -top-12 -translate-x-1/2 w-[2px] h-24 bg-linear-to-b from-transparent via-primary/60 to-transparent opacity-40"
+					></div>
+
+					<div class="max-w-4xl mx-auto">
+						<div class="mb-14 flex flex-col items-center">
+							<span
+								class="font-orbitron text-[12px] tracking-[0.4em] text-primary/60 uppercase mb-4"
+								>PROJECT_DETAILS</span
+							>
+							<div class="w-24 h-px bg-primary/30"></div>
+						</div>
+
+						<div
+							class="prose dark:prose-invert max-w-none
+                        prose-headings:font-orbitron prose-headings:tracking-widest prose-headings:uppercase prose-headings:text-primary/90
+                        prose-h1:text-3xl prose-h2:text-xl prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-4
+                        prose-p:font-space-mono prose-p:text-[15px] prose-p:leading-relaxed prose-p:opacity-80
+                        prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                        prose-ul:list-none prose-ul:pl-0
+                        prose-li:relative prose-li:pl-8 prose-li:mb-4
+                        prose-li:before:content-['>'] prose-li:before:absolute prose-li:before:left-0 prose-li:before:text-primary prose-li:before:opacity-70
+                        prose-img:rounded-2xl prose-img:border prose-img:border-white/10
+                        prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-0.5 prose-code:rounded"
+						>
+							{content ? (
+									<article set:html={content} />
+								) : (
+									<Content />
+								)}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<style>
+		@keyframes scan {
+			0% {
+				transform: translateY(0);
+			}
+			100% {
+				transform: translateY(100vh);
+			}
+		}
+
+		.pretext-container {
+			margin: 0;
+		}
+
+		.custom-scrollbar::-webkit-scrollbar-thumb {
+			background: var(--color-primary);
+			border-radius: 10px;
+		}
+
+		/* Cinematic View Transition Smoothing for Projects */
+		::view-transition-group(*) {
+			animation-duration: 300ms;
+			animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		::view-transition-old(*),
+		::view-transition-new(*) {
+			animation-duration: 300ms;
+			mix-blend-mode: normal;
+		}
+		</style>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"
+			integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+	</main>
+</Layout>

@@ -1,97 +1,381 @@
 ---
-import Image from "astro/components/Image.astro";
-import { Img } from "astro-imagetools/components";
+import { Image } from "astro:assets";
+import { CldImage } from "astro-cloudinary";
 import github from "../assets/icons/github.svg";
+import kaggle from "../assets/icons/kaggle.svg";
+import leetcode from "../assets/icons/leetcode.svg";
 import linkedin from "../assets/icons/linkedin.svg";
 import twitter from "../assets/icons/twitter.svg";
-import leetcode from "../assets/icons/leetcode.svg";
-import kaggle from "../assets/icons/kaggle.svg";    
 import rs from "../assets/rs.png";
-
 import * as data from "../content/data/data.mdx";
+import { getCloudinaryPublicId } from "../utils/cloudinary";
+import Pretext from "./Pretext.astro";
+
 const { name, description, image, resume, links } = data.frontmatter;
 ---
 
 <div
-    id="about"
-    class="flex flex-wrap items-center justify-center align-middle md:flex-nowrap backdrop-blur-md"
+	id="about"
+	class="relative flex flex-wrap items-center justify-center align-middle md:flex-nowrap gap-12 py-8 px-8 md:px-16 bg-stone-900/30 backdrop-blur-md rounded-[3rem] md:rounded-[4rem] shadow-[0_20px_100px_rgba(0,0,0,0.5)] overflow-hidden"
 >
-    <div class="flex m-10 md:w-16 md:flex-col grow-0">
-        <a href={links.github} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
-            <Image
-                src={github}
-                alt={links.github}
-                onload="this.style.opacity=1"
-                class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
-                
-            />
-        </a>
-        <a href={links.leetcode} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
-            <Image
-                src={leetcode}
-                alt={links.leetcode}
-                onload="this.style.opacity=1"
-                class="w-10 h-10 p-1 m-1.5 easeload bg-black mask mask-squircle "
-            />  
-        </a>
+	<!-- Section-wide Scanline -->
+	<div
+		class="absolute inset-0 bg-linear-to-b from-transparent via-white/5 to-transparent h-20 animate-scanline pointer-events-none opacity-20"
+	></div>
 
-        <a href={links.linkedin} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
-            <Image
-                src={linkedin}
-                alt={links.linkedin}
-                onload="this.style.opacity=1"
-                class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
-            />
-        </a>
-        <a href={links.twitter} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
-            <Image
-                src={twitter}
-                alt={links.twitter}
-                onload="this.style.opacity=1"
-                class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
-            />
-        </a>
-        <a href={links.kaggle} target="_blank" rel="noopener noreferrer" data-aos="slide-right">
-            <Image
-                src={kaggle}
-                alt={links.kaggle}
-                onload="this.style.opacity=1"
-                class="w-10 h-10 p-1 m-1.5 easeload bg-white mask mask-squircle"
-            />
-        </a>
+	<!-- Left: Social Shards  -->
+	<div
+		class="flex flex-row md:flex-col gap-4 order-2 md:order-1 items-center justify-center"
+	>
+		<a
+			href={links.github}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group/social"
+			data-aos="fade-right"
+			data-aos-delay="100"
+		>
+			<div
+				class="p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-primary/50 hover:bg-primary/10 transition-all duration-500 group-hover/social:scale-125 group-hover/social:rotate-12 group-hover/social:shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.3)]"
+			>
+				<Image
+					src={github}
+					alt="GitHub"
+					class="w-6 h-6 invert group-hover/social:-rotate-12 transition-transform duration-500"
+				/>
+			</div>
+		</a>
+		<a
+			href={links.linkedin}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group/social"
+			data-aos="fade-right"
+			data-aos-delay="200"
+		>
+			<div
+				class="p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-primary/50 hover:bg-primary/10 transition-all duration-500 group-hover/social:scale-125 group-hover/social:rotate-12 group-hover/social:shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.3)]"
+			>
+				<Image
+					src={linkedin}
+					alt="LinkedIn"
+					class="w-6 h-6 invert group-hover/social:-rotate-12 transition-transform duration-500"
+				/>
+			</div>
+		</a>
+		<a
+			href={links.twitter}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group/social"
+			data-aos="fade-right"
+			data-aos-delay="300"
+		>
+			<div
+				class="p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-primary/50 hover:bg-primary/10 transition-all duration-500 group-hover/social:scale-125 group-hover/social:rotate-12 group-hover/social:shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.3)]"
+			>
+				<Image
+					src={twitter}
+					alt="Twitter"
+					class="w-6 h-6 invert group-hover/social:-rotate-12 transition-transform duration-500"
+				/>
+			</div>
+		</a>
+		<a
+			href={links.leetcode}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group/social"
+			data-aos="fade-right"
+			data-aos-delay="400"
+		>
+			<div
+				class="p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-primary/50 hover:bg-primary/10 transition-all duration-500 group-hover/social:scale-125 group-hover/social:rotate-12 group-hover/social:shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.3)]"
+			>
+				<Image
+					src={leetcode}
+					alt="LeetCode"
+					class="w-6 h-6 group-hover/social:-rotate-12 transition-transform duration-500"
+				/>
+			</div>
+		</a>
+	</div>
 
-    </div>
-    <div
-        class="justify-center w-48 h-48 align-middle md:w-80 md:h-80 mask mask-squircle" data-aos="zoom-in"
-    >
-        <!-- <Image src={image} alt={name} inferSize class="rounded-full" /> -->
-        <Img src={image} alt={name} objectFit="cover" />
-    </div>
+	<!-- Center: Holographic Profile -->
+	<div
+		class="relative order-1 md:order-2 group/profile profile-group"
+		data-aos="zoom-in"
+	>
+		<!-- Orbital Rings -->
+		<div
+			class="absolute -inset-4 border border-primary/20 rounded-full animate-[spin_20s_linear_infinite] opacity-40"
+		></div>
+		<div
+			class="absolute -inset-8 border border-white/5 rounded-full animate-[spin_30s_linear_infinite_reverse] opacity-20"
+		></div>
 
-    <div class="p-8 md:p-12 lg:px-10 lg:py-24 ">
-        <div class="max-w-xl mx-auto text-center ltr:sm:text-left rtl:sm:text-right">
-            <Image src={rs} alt="Rounak Sen" inferSize class="size-10 md:size-14 justify-center mx-auto" />
-            <h2 class="text-2xl font-bold text-white md:text-3xl">
-                {name}
-            </h2>
+		<!-- Main Image Container -->
+		<div
+			class="relative w-56 h-56 md:size-80 p-2 bg-linear-to-br from-primary/20 to-transparent rounded-full border border-white/10 backdrop-blur-xl shadow-[0_0_50px_rgba(var(--color-primary-rgb),0.2)] overflow-hidden"
+		>
+			<div
+				class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"
+			></div>
+			<CldImage
+				src={getCloudinaryPublicId(image)}
+				alt={name}
+				width={800}
+				height={800}
+				crop="fill"
+				gravity="face"
+				class="w-full h-full object-cover rounded-full saturate-[0.8] group-hover/profile:saturate-100 group-hover/profile:scale-110 transition-all duration-700 ease-out"
+			/>
 
-            <p class="block text-white md:mt-4">
-                {description}
-            </p>
+			<!-- Scanline Effect -->
+			<div
+				class="absolute inset-0 bg-linear-to-b from-transparent via-primary/5 to-primary/10 opacity-30 pointer-events-none"
+			></div>
+		</div>
 
-            <div class="mt-4 md:mt-8" data-aos="zoom-in">
-                <a href={resume} class="btn btn-primary"> RESUME 📃</a>
-            </div>
-        </div>
-    </div>
+		<!-- Floating Accents -->
+		<div
+			class="accent-top absolute -top-2 left-[calc(100%-2.5rem)] size-12 border-t-2 border-r-2 border-primary/40 rounded-tr-3xl origin-top transition-all duration-300"
+		></div>
+		<div
+			class="accent-bottom absolute -bottom-2 left-[-0.5rem] size-12 border-b-2 border-l-2 border-primary/40 rounded-bl-3xl origin-bottom transition-all duration-300"
+		></div>
+	</div>
+
+	<!-- Right: Info Console  -->
+	<div class="p-4 md:p-8 order-3 flex flex-col items-center text-center">
+		<div class="max-w-xl flex flex-col items-center">
+			<Image
+				src={rs}
+				alt="Signature"
+				inferSize
+				class="size-12 md:size-16 mb-4 opacity-70 hover:opacity-100 transition-opacity mx-auto"
+			/>
+
+			<div data-aos="fade-up" class="mb-6">
+				<Pretext text={name.toUpperCase()} size={24} />
+			</div>
+
+			<p
+				data-aos="fade-up"
+				data-aos-delay="100"
+				class="font-space-mono text-sm md:text-base leading-relaxed text-white/70 max-w-lg mb-10 text-justify"
+			>
+				{description}
+			</p>
+
+			<!-- HUD Action Button -->
+			<div
+				class="relative inline-block group/btn"
+				data-aos="fade-up"
+				data-aos-delay="200"
+			>
+				<a
+					href={resume}
+					class="relative flex items-center justify-center px-10 py-4 bg-primary/10 border border-primary/30 hover:border-primary/60 transition-all duration-300 rounded-sm overflow-hidden"
+					style="clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<!-- Scanning Polish -->
+					<div
+						class="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-white/20 to-transparent"
+					></div>
+
+					<span
+						class="relative font-orbitron text-xs font-bold tracking-[0.4em] text-primary group-hover/btn:text-white transition-colors"
+					>
+						DOWNLOAD_RESUME
+					</span>
+				</a>
+
+				<!-- Corner Brackets for Button -->
+				<div
+					class="absolute -top-1 -left-1 size-5 border-t border-l border-primary/60"
+				></div>
+				<div
+					class="absolute -bottom-1 -right-1 size-5 border-b border-r border-primary/60"
+				></div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <style>
-    .easeload {
-        opacity: 0;
-        -webkit-transition: all 2s ease;
-        -moz-transition: all 2s ease;
-        -ms-transition: all 2s ease;
-        -o-transition: all 2s ease;
-    }
+@keyframes scanline {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(500%);
+	}
+}
+
+.animate-scanline {
+	animation: scanline 8s linear infinite;
+}
+
+.easeload {
+	opacity: 0;
+	-webkit-transition: all 2s ease;
+	-moz-transition: all 2s ease;
+	-ms-transition: all 2s ease;
+	-o-transition: all 2s ease;
+}
+
+@keyframes scan-top {
+	0% {
+		left: calc(100% - 2.5rem);
+		width: 3rem;
+		height: 3rem;
+		border-right-width: 2px;
+		border-left-width: 0;
+		border-radius: 1.5rem 0 0 0;
+	}
+	40%,
+	60% {
+		left: -0.5rem;
+		width: calc(100% + 1rem);
+		height: 2px;
+		border-radius: 0;
+		border-right-width: 0;
+		border-left-width: 0;
+		box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.6);
+	}
+	100% {
+		left: -0.5rem;
+		width: 3rem;
+		height: 3rem;
+		border-right-width: 0;
+		border-left-width: 2px;
+		border-radius: 1.5rem 0 0 0;
+	}
+}
+
+@keyframes scan-bottom {
+	0% {
+		left: -0.5rem;
+		width: 3rem;
+		height: 3rem;
+		border-left-width: 2px;
+		border-right-width: 0;
+		border-radius: 0 0 0 1.5rem;
+	}
+	40%,
+	60% {
+		left: -0.5rem;
+		width: calc(100% + 1rem);
+		height: 2px;
+		border-radius: 0;
+		border-left-width: 0;
+		border-right-width: 0;
+		box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.6);
+	}
+	100% {
+		left: calc(100% - 2.5rem);
+		width: 3rem;
+		height: 3rem;
+		border-left-width: 0;
+		border-right-width: 2px;
+		border-radius: 0 0 1.5rem 0;
+	}
+}
+
+@keyframes scan-top-reverse {
+	0% {
+		left: -0.5rem;
+		width: 3rem;
+		height: 3rem;
+		border-right-width: 0;
+		border-left-width: 2px;
+		border-radius: 1.5rem 0 0 0;
+	}
+	40%,
+	60% {
+		left: -0.5rem;
+		width: calc(100% + 1rem);
+		height: 2px;
+		border-radius: 0;
+		border-right-width: 0;
+		border-left-width: 0;
+		box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.6);
+	}
+	100% {
+		left: calc(100% - 2.5rem);
+		width: 3rem;
+		height: 3rem;
+		border-right-width: 2px;
+		border-left-width: 0;
+		border-radius: 0 1.5rem 0 0;
+	}
+}
+
+@keyframes scan-bottom-reverse {
+	0% {
+		left: calc(100% - 2.5rem);
+		width: 3rem;
+		height: 3rem;
+		border-left-width: 0;
+		border-right-width: 2px;
+		border-radius: 0 0 1.5rem 0;
+	}
+	40%,
+	60% {
+		left: -0.5rem;
+		width: calc(100% + 1rem);
+		height: 2px;
+		border-radius: 0;
+		border-left-width: 0;
+		border-right-width: 0;
+		box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.6);
+	}
+	100% {
+		left: -0.5rem;
+		width: 3rem;
+		height: 3rem;
+		border-left-width: 2px;
+		border-right-width: 0;
+		border-radius: 0 0 0 1.5rem;
+	}
+}
+
+.profile-group:hover .accent-top {
+	animation: scan-top 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.profile-group:hover .accent-bottom {
+	animation: scan-bottom 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.profile-group.has-hovered:not(:hover) .accent-top {
+	animation: scan-top-reverse 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.profile-group.has-hovered:not(:hover) .accent-bottom {
+	animation: scan-bottom-reverse 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
 </style>
+
+<script is:inline>
+function initProfileHover() {
+	const containers = document.querySelectorAll(".profile-group");
+	containers.forEach((container) => {
+		container.addEventListener(
+			"mouseover",
+			() => {
+				container.classList.add("has-hovered");
+			},
+			{ once: true },
+		);
+	});
+}
+
+// Run on initial load
+initProfileHover();
+// Run after Astro page swaps (for view transitions)
+document.addEventListener("astro:after-swap", initProfileHover);
+</script>

@@ -1,175 +1,507 @@
 ---
+import certificateLottie from "../assets/certificate.lottie";
+import gameLottie from "../assets/game.lottie";
+import githubLottie from "../assets/github.lottie";
+import homeLottie from "../assets/home.lottie";
+import menuLottie from "../assets/menu.lottie";
+import themeLottie from "../assets/theme.lottie";
 import Themes from "./themes.astro";
-import home from "../assets/home.lottie";
-import menu from "../assets/menu.lottie";
-import up from "../assets/up.lottie";
-import github from "../assets/github.lottie";
-import certificate from "../assets/certificate.lottie";
-import theme from "../assets/theme.lottie";
 
-// import { Image } from "astro:assets";
-// import { Img } from "astro-imagetools/components";
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
 
-
+// Asset URL Extraction
+const getSrc = (asset: string | { src: string }) =>
+	typeof asset === "string" ? asset : asset.src;
+const certificateSrc = getSrc(certificateLottie);
+const githubSrc = getSrc(githubLottie);
+const homeSrc = getSrc(homeLottie);
+const menuSrc = getSrc(menuLottie);
+const themeSrc = getSrc(themeLottie);
+const gameSrc = getSrc(gameLottie);
 ---
 
-<>
-	<!-- Mobile Navbar -->
-	<div class="md:hidden text-white">
-		<div class="fixed bottom-0 z-10 justify-center h-[10vh] backdrop-blur-lg navbar card">
-			<ul class="menu menu-horizontal rounded-box">
-				<li>
-					<a href="/" class="p-0">
-						<!-- <canvas id="dotlottie-canvas-home" class="size-10"></canvas> -->
-						<dotlottie-player
-							autoplay
-							loop
-							playMode="normal"
-							src={home}
-							class="size-10"
-						>
-						</dotlottie-player>
-					</a>
-				</li>
-				<div class="divider divider-horizontal"></div>
-
-				<li
-					data-hs-overlay="#docs-sidebar"
-					aria-controls="docs-sidebar"
-					aria-label="Toggle navigation"
-				>
-					<!-- <span class="sr-only">Toggle Navigation</span> -->
-					<!-- <span class="icon-[svg-spinners--blocks-scale] size-8 text-white"></span> -->
-					<!-- <Image src={menuIcon} alt="home" class="p-0 size-14" /> -->
-					<dotlottie-player
-						class="w-[4rem]"
-						autoplay
-						loop
-						playMode="normal"
-						src={menu}
-					>
-					</dotlottie-player>
-				</li>
-				<div class="divider divider-horizontal"></div>
-				<li
-					id="scrollToTopButton"
-					class="p-2 text-white rounded-btn"
-					onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-				>
-					<!-- <span class="icon-[line-md--chevron-up] size-8 text-white rotate-90"></span> -->
-					<dotlottie-player
-						autoplay
-						loop
-						playMode="normal"
-						src={up}
-						class="w-[3rem]"
-					>
-					</dotlottie-player>
-				</li>
-			</ul>
-		</div>
-		<div
-			id="docs-sidebar"
-			class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 translate-x-full transition-all duration-300 transform hidden fixed top-0 end-0 bottom-0 z-[60] w-64 backdrop-blur-lg border rounded-box border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:start-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+<div class="contents" transition:name="navbar">
+	<!-- Mobile Navbar (Bottom Pill Toggle) -->
+	<div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+		<button
+			type="button"
+			data-hs-overlay="#docs-sidebar"
+			aria-controls="docs-sidebar"
+			class="hud-pill-toggle flex items-center gap-3 px-8 py-3.5 rounded-full border border-base-content/20 shadow-[0_10px_40px_rgba(0,0,0,0.3)] backdrop-blur-2xl bg-base-300/60 text-base-content font-orbitron text-[10px] tracking-[0.4em] hover:scale-105 active:scale-95 transition-all"
 		>
-			<nav
-				class="flex flex-col flex-wrap w-full p-6 hs-accordion-group"
-				data-hs-accordion-always-open
-			>
-				<ul class="grid grid-flow-row space-y-1.5 gap-3">
-					<li class="flex justify-center text-center rounded-btn border-y-2 border-primary">
-						<a href="/" class="flex items-center ">
-							<dotlottie-player
-								autoplay
-								loop
-								playMode="normal"
-								src={home}
-								class="size-10"
-							>
-							</dotlottie-player>
-							Home
-						</a>
-					</li>
-
-					<li class="flex justify-center text-center rounded-btn border-y-2 border-primary">
-						<a href="/projects" class="flex items-center ">
-							<dotlottie-player
-								autoplay
-								loop
-								playMode="normal"
-								src={github}
-								class="size-10"
-							>
-							</dotlottie-player>
-							Projects
-						</a>
-					</li>
-					<li class="flex justify-center text-center rounded-btn border-y-2 border-primary">
-						<a href="/certificates" class="flex items-center ">
-							<dotlottie-player
-								autoplay
-								loop
-								playMode="normal"
-								src={certificate}
-								class="size-10"
-							>
-							</dotlottie-player>
-							Certificates
-						</a>
-					</li>
-					<li class="flex justify-center text-center rounded-btn border-y-2 border-primary">
-						<Themes image={theme} />
-					</li>
-				</ul>
-			</nav>
-		</div>
+			<div class="size-6 flex items-center justify-center pointer-events-none">
+				<dotlottie-player
+					autoplay
+					loop
+					src={menuSrc}
+					class="size-10"
+				></dotlottie-player>
+			</div>
+			MENU
+		</button>
 	</div>
 
-	<!-- Desktop Navbar -->
-	<div class="fixed top-0 z-10 hidden text-white md:navbar backdrop-blur-lg">
-		<div class="gap-5 mx-auto">
-			<ul class="gap-5 menu menu-horizontal">
-				<li>
-					<a href="/" class="border-y-2 border-primary">
+	<!-- Mobile Bottom Offcanvas (Protocol Sheet) -->
+	<div
+		id="docs-sidebar"
+		class="hs-overlay hs-overlay-open:translate-y-0 translate-y-full fixed bottom-0 inset-x-0 transition-all duration-500 transform h-[50vh] w-full z-60 hidden backdrop-blur-3xl bg-base-300/60 border-t border-white/10 rounded-t-[3rem] shadow-[0_-20px_80px_rgba(0,0,0,0.4)]"
+		tabindex="-1"
+	>
+		<div class="flex flex-col h-full relative overflow-visible">
+			<!-- Handle -->
+			<div
+				class="w-16 h-1 bg-base-content/10 rounded-full mx-auto my-4 opacity-50 shrink-0"
+			></div>
+
+			<!-- Cyber Glow background -->
+			<div
+				class="absolute -top-20 left-1/2 -translate-x-1/2 size-64 bg-primary/10 blur-[100px] rounded-full pointer-events-none"
+			></div>
+
+			<!-- Navigation Content -->
+			<div class="flex-1 overflow-y-auto px-8 space-y-4 custom-scrollbar">
+				<nav
+					class="grid grid-cols-2 gap-3 font-orbitron tracking-[0.3em] text-[10px]"
+				>
+					<a
+						href="/"
+						class={`group flex flex-col items-center justify-center p-4 rounded-3xl border transition-all duration-500 ${currentPath === "/" ? "bg-primary/15 border-primary/40 shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.2)]" : "bg-white/3 border-white/5 hover:bg-primary/10 hover:border-primary/30"}`}
+					>
 						<dotlottie-player
 							autoplay
 							loop
-							playMode="normal"
-							src={home}
-							class="p-0 m-0 size-10"
+							src={homeSrc}
+							class="size-10 mb-2"
+						></dotlottie-player>
+						<span
+							class={`transition-all ${currentPath === "/" ? "opacity-100 text-primary" : "opacity-60 group-hover:opacity-100 group-hover:text-primary"}`}
+							>HOME</span
 						>
-						</dotlottie-player> Home</a
+					</a>
+					<a
+						href="/projects"
+						class={`group flex flex-col items-center justify-center p-4 rounded-3xl border transition-all duration-500 ${currentPath === "/projects" ? "bg-primary/15 border-primary/40 shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.2)]" : "bg-white/3 border-white/5 hover:bg-primary/10 hover:border-primary/30"}`}
 					>
-				</li>
-				<li>
-					<a href="/projects" class="border-y-2 border-primary">
 						<dotlottie-player
 							autoplay
 							loop
-							playMode="normal"
-							src={github}
-							class="p-0 m-0 size-10"
+							src={githubSrc}
+							class="size-10 mb-2"
+						></dotlottie-player>
+						<span
+							class={`transition-all ${currentPath === "/projects" ? "opacity-100 text-primary" : "opacity-60 group-hover:opacity-100 group-hover:text-primary"}`}
+							>PROJECTS</span
 						>
-						</dotlottie-player> Projects</a
+					</a>
+					<a
+						href="/games"
+						class={`group flex flex-col items-center justify-center p-4 rounded-3xl border transition-all duration-500 ${currentPath === "/games" ? "bg-primary/15 border-primary/40 shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.2)]" : "bg-white/3 border-white/5 hover:bg-primary/10 hover:border-primary/30"}`}
 					>
-				</li>
-				<li>
-					<a href="/certificates" class="border-y-2 border-primary">
+						<div class="relative size-10 flex items-center justify-center mb-2">
+							<dotlottie-player
+								autoplay
+								loop
+								src={gameSrc}
+								class="absolute size-18 max-w-none"
+							></dotlottie-player>
+						</div>
+						<span
+							class={`transition-all ${currentPath === "/games" ? "opacity-100 text-primary" : "opacity-60 group-hover:opacity-100 group-hover:text-primary"}`}
+							>GAMES</span
+						>
+					</a>
+					<a
+						href="/certificates"
+						class={`group flex flex-col items-center justify-center p-4 rounded-3xl border transition-all duration-500 ${currentPath === "/certificates" ? "bg-primary/15 border-primary/40 shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.2)]" : "bg-white/3 border-white/5 hover:bg-primary/10 hover:border-primary/30"}`}
+					>
 						<dotlottie-player
 							autoplay
 							loop
-							playMode="normal"
-							src={certificate}
-							class="p-0 m-0 size-10"
+							src={certificateSrc}
+							class="size-10 mb-2"
+						></dotlottie-player>
+						<span
+							class={`transition-all ${currentPath === "/certificates" ? "opacity-100 text-primary" : "opacity-60 group-hover:opacity-100 group-hover:text-primary"}`}
+							>CERTIFICATES</span
 						>
-						</dotlottie-player>
-						Certificates</a
+					</a>
+				</nav>
+
+				<!-- Theme Toggle -->
+				<div class="pb-6">
+					<button
+						type="button"
+						data-hs-overlay="#theme-bottom-sheet"
+						class="w-full flex items-center justify-between px-8 py-4 rounded-3xl border border-primary/20 bg-primary/5 text-primary font-orbitron text-[10px] tracking-[0.4em] hover:bg-primary/10 transition-all font-bold active:scale-95"
 					>
-				</li>
-			</ul>
-			<div class="h-[3.5rem] rounded-btn border-y-2 border-primary">
-				<Themes image={theme} />
+						<div class="flex items-center gap-4">
+							<div class="size-6 overflow-hidden">
+								<dotlottie-player
+									autoplay
+									loop
+									src={themeSrc}
+									class="size-10 -ml-2"
+								></dotlottie-player>
+							</div>
+							THEMES
+						</div>
+						<span class="icon-[line-md--chevron-small-right] size-6"></span>
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</>
+
+	<!-- Dedicated Mobile Theme Bottom Sheet (Glassmorphism) -->
+	<div
+		id="theme-bottom-sheet"
+		class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-y-0 translate-y-full transition-all duration-500 transform hidden fixed bottom-0 inset-s-0 inset-e-0 z-70 w-full h-fit max-h-[90vh] backdrop-blur-[50px] bg-base-300/50 border-t border-white/20 rounded-t-[3rem] overflow-y-auto"
+	>
+		<div class="flex flex-col h-full p-8 pb-16">
+			<div
+				class="w-16 h-1 bg-base-content/10 rounded-full mx-auto mb-8 opacity-50"
+			></div>
+
+			<div class="flex justify-between items-center mb-8 px-2">
+				<div class="flex flex-col">
+					<span class="font-orbitron text-[10px] tracking-[0.4em] text-primary"
+						>SELECT_PROTOCOL</span
+					>
+					<span
+						class="font-space-mono text-[7px] opacity-40 uppercase tracking-widest"
+						>Active_Core_Shift_Ready</span
+					>
+				</div>
+				<button
+					type="button"
+					data-hs-overlay="#theme-bottom-sheet"
+					class="text-base-content/40 hover:text-primary transition-all p-2"
+				>
+					<span class="icon-[line-md--close] size-7"></span>
+				</button>
+			</div>
+
+			<div class="grid grid-cols-2 gap-3 px-2">
+				{Object.entries({
+						light: "☀️ Light",
+						dark: "🌙 Dark",
+						cupcake: "🧁 Cupcake",
+						bumblebee: "🐝 Bumblebee",
+						emerald: "✳️ Emerald",
+						corporate: "🏢 Corporate",
+						synthwave: "🌆 Synthwave",
+						retro: "🕰️ Retro",
+						cyberpunk: "🌆 Cyberpunk",
+						valentine: "💗 Valentine",
+						halloween: "🎃 Halloween",
+						garden: "🌷 Garden",
+						forest: "🌲 Forest",
+						aqua: "🐟 Aqua",
+						lofi: "📼 Lofi",
+						pastel: "🌸 Pastel",
+						fantasy: "🔮 Fantasy",
+						wireframe: "📝 Wireframe",
+						black: "🖤 Black",
+						luxury: "💎 Luxury",
+						dracula: "🧛 Dracula",
+						cmyk: "🎨 Cmyk",
+						autumn: "🍂 Autumn",
+						business: "🏦 Business",
+						acid: "💊 Acid",
+						lemonade: "🍋 Lemonade",
+						night: "🌃 Night",
+						coffee: "☕ Coffee",
+						winter: "⛄ Winter",
+						dim: "🕶️ Dim",
+						nord: "❄️ Nord",
+						sunset: "🌇 Sunset",
+					}).map(([key, name]) => {
+						const parts = name.split(" ");
+						return (
+							<button
+								type="button"
+								data-theme-id={key}
+								class="theme-grid-pill group/pill relative flex items-center gap-3 p-4 rounded-2xl border border-white/5 bg-white/4 active:bg-primary/20 transition-all text-left overflow-hidden shadow-lg"
+							>
+								<span class="text-lg group-active:scale-125 transition-transform">
+									{parts[0]}
+								</span>
+								<span class="font-orbitron text-[8px] tracking-wider opacity-60 uppercase truncate group-active:opacity-100">
+									{parts.slice(1).join(" ")}
+								</span>
+								<div class="active-dot absolute right-3 top-1/2 -translate-y-1/2 size-2 rounded-full bg-primary opacity-0 transition-opacity blur-[1px]" />
+								{/* Shine effect */}
+								<div class="absolute inset-0 bg-linear-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover/pill:translate-x-full transition-transform duration-1000" />
+							</button>
+						);
+					})}
+			</div>
+		</div>
+	</div>
+
+	<!-- Desktop Navbar (Unified HUD Pill) -->
+	<div
+		class="fixed top-8 left-1/2 -translate-x-1/2 z-50 hidden md:block w-fit max-w-[95vw]"
+	>
+		<nav
+			class="hud-pill flex items-center px-6 py-1.5 rounded-full border border-base-content/20 shadow-[0_0_40px_rgba(0,0,0,0.1)] backdrop-blur-3xl bg-base-300/50 text-base-content transition-all duration-700 hover:border-primary/40 hover:shadow-[0_0_50px_rgba(var(--color-primary-rgb),0.15)] whitespace-nowrap overflow-visible"
+		>
+			<ul
+				class="flex items-center gap-2 font-orbitron text-[10px] uppercase tracking-[0.3em] opacity-80"
+			>
+				<li>
+					<a
+						href="/"
+						class="group/link relative flex items-center px-5 py-3 transition-all duration-300"
+					>
+						<span
+							class={`absolute left-0 transition-all duration-300 font-bold text-primary text-sm ${currentPath === "/" ? "opacity-100 translate-x-1" : "opacity-0 -translate-x-2 group-hover/link:translate-x-1 group-hover/link:opacity-100"}`}
+							>[</span
+						>
+						<span
+							class={`flex items-center gap-2 relative z-10 transition-all duration-300 ${currentPath === "/" ? "text-primary [text-shadow:0_0_10px_var(--color-primary)]" : "group-hover/link:text-primary group-hover/link:[text-shadow:0_0_10px_var(--color-primary)]"}`}
+						>
+							<dotlottie-player
+								autoplay
+								loop
+								src={homeSrc}
+								class="size-8"
+							></dotlottie-player>
+							HOME
+						</span>
+						<span
+							class={`absolute right-0 transition-all duration-300 font-bold text-primary text-sm ${currentPath === "/" ? "opacity-100 -translate-x-1" : "opacity-0 translate-x-2 group-hover/link:-translate-x-1 group-hover/link:opacity-100"}`}
+							>]</span
+						>
+						<div
+							class={`absolute inset-x-2 inset-y-1 rounded-lg transition-all duration-300 -z-10 bg-primary/5 blur-sm ${currentPath === "/" ? "opacity-100 scale-x-100" : "opacity-0 scale-x-90 group-hover/link:opacity-100 group-hover/link:scale-x-100"}`}
+						></div>
+						<div
+							class={`absolute bottom-1 left-1/2 -translate-x-1/2 h-px bg-primary transition-all duration-500 ease-in-out [box-shadow:0_0_10px_var(--color-primary)] ${currentPath === "/" ? "w-[90%]" : "w-0 group-hover/link:w-[90%]"}`}
+						></div>
+					</a>
+				</li>
+				<li>
+					<a
+						href="/projects"
+						class="group/link relative flex items-center px-5 py-3 transition-all duration-300"
+					>
+						<span
+							class={`absolute left-0 transition-all duration-300 font-bold text-primary text-sm ${currentPath === "/projects" ? "opacity-100 translate-x-1" : "opacity-0 -translate-x-2 group-hover/link:translate-x-1 group-hover/link:opacity-100"}`}
+							>[</span
+						>
+						<span
+							class={`flex items-center gap-2 relative z-10 transition-all duration-300 ${currentPath === "/projects" ? "text-primary [text-shadow:0_0_10px_var(--color-primary)]" : "group-hover/link:text-primary group-hover/link:[text-shadow:0_0_10px_var(--color-primary)]"}`}
+						>
+							<dotlottie-player
+								autoplay
+								loop
+								src={githubSrc}
+								class="size-8"
+							></dotlottie-player>
+							PROJECTS
+						</span>
+						<span
+							class={`absolute right-0 transition-all duration-300 font-bold text-primary text-sm ${currentPath === "/projects" ? "opacity-100 -translate-x-1" : "opacity-0 translate-x-2 group-hover/link:-translate-x-1 group-hover/link:opacity-100"}`}
+							>]</span
+						>
+						<div
+							class={`absolute inset-x-2 inset-y-1 rounded-lg transition-all duration-300 -z-10 bg-primary/5 blur-sm ${currentPath === "/projects" ? "opacity-100 scale-x-100" : "opacity-0 scale-x-90 group-hover/link:opacity-100 group-hover/link:scale-x-100"}`}
+						></div>
+						<div
+							class={`absolute bottom-1 left-1/2 -translate-x-1/2 h-px bg-primary transition-all duration-500 ease-in-out [box-shadow:0_0_10px_var(--color-primary)] ${currentPath === "/projects" ? "w-[90%]" : "w-0 group-hover/link:w-[90%]"}`}
+						></div>
+					</a>
+				</li>
+				<li>
+					<a
+						href="/games"
+						class="group/link relative flex items-center px-5 py-3 transition-all duration-300"
+					>
+						<span
+							class={`absolute left-0 transition-all duration-300 font-bold text-primary text-sm ${currentPath === "/games" ? "opacity-100 translate-x-1" : "opacity-0 -translate-x-2 group-hover/link:translate-x-1 group-hover/link:opacity-100"}`}
+							>[</span
+						>
+						<span
+							class={`flex items-center gap-2 relative z-10 transition-all duration-300 ${currentPath === "/games" ? "text-primary [text-shadow:0_0_10px_var(--color-primary)]" : "group-hover/link:text-primary group-hover/link:[text-shadow:0_0_10px_var(--color-primary)]"}`}
+						>
+							<div
+								class="relative size-8 flex items-center justify-center shrink-0"
+							>
+								<dotlottie-player
+									autoplay
+									loop
+									src={gameSrc}
+									class="absolute size-14 max-w-none"
+								></dotlottie-player>
+							</div>
+							GAMES
+						</span>
+						<span
+							class={`absolute right-0 transition-all duration-300 font-bold text-primary text-sm ${currentPath === "/games" ? "opacity-100 -translate-x-1" : "opacity-0 translate-x-2 group-hover/link:-translate-x-1 group-hover/link:opacity-100"}`}
+							>]</span
+						>
+						<div
+							class={`absolute inset-x-2 inset-y-1 rounded-lg transition-all duration-300 -z-10 bg-primary/5 blur-sm ${currentPath === "/games" ? "opacity-100 scale-x-100" : "opacity-0 scale-x-90 group-hover/link:opacity-100 group-hover/link:scale-x-100"}`}
+						></div>
+						<div
+							class={`absolute bottom-1 left-1/2 -translate-x-1/2 h-px bg-primary transition-all duration-500 ease-in-out [box-shadow:0_0_10px_var(--color-primary)] ${currentPath === "/games" ? "w-[90%]" : "w-0 group-hover/link:w-[90%]"}`}
+						></div>
+					</a>
+				</li>
+				<li>
+					<a
+						href="/certificates"
+						class="group/link relative flex items-center px-5 py-3 transition-all duration-300"
+					>
+						<span
+							class={`absolute left-0 transition-all duration-300 font-bold text-primary text-sm ${currentPath === "/certificates" ? "opacity-100 translate-x-1" : "opacity-0 -translate-x-2 group-hover/link:translate-x-1 group-hover/link:opacity-100"}`}
+							>[</span
+						>
+						<span
+							class={`flex items-center gap-2 relative z-10 transition-all duration-300 ${currentPath === "/certificates" ? "text-primary [text-shadow:0_0_10_px_var(--color-primary)]" : "group-hover/link:text-primary group-hover/link:[text-shadow:0_0_10_px_var(--color-primary)]"}`}
+						>
+							<dotlottie-player
+								autoplay
+								loop
+								src={certificateSrc}
+								class="size-8"
+							></dotlottie-player>
+							CERTIFICATES
+						</span>
+						<span
+							class={`absolute right-0 transition-all duration-300 font-bold text-primary text-sm ${currentPath === "/certificates" ? "opacity-100 -translate-x-1" : "opacity-0 translate-x-2 group-hover/link:-translate-x-1 group-hover/link:opacity-100"}`}
+							>]</span
+						>
+						<div
+							class={`absolute inset-x-2 inset-y-1 rounded-lg transition-all duration-300 -z-10 bg-primary/5 blur-sm ${currentPath === "/certificates" ? "opacity-100 scale-x-100" : "opacity-0 scale-x-90 group-hover/link:opacity-100 group-hover/link:scale-x-100"}`}
+						></div>
+						<div
+							class={`absolute bottom-1 left-1/2 -translate-x-1/2 h-px bg-primary transition-all duration-500 ease-in-out [box-shadow:0_0_10px_var(--color-primary)] ${currentPath === "/certificates" ? "w-[90%]" : "w-0 group-hover/link:w-[90%]"}`}
+						></div>
+					</a>
+				</li>
+			</ul>
+
+			<div class="w-px h-6 bg-base-content/10 mx-4 shrink-0"></div>
+
+			<div
+				class="shrink-0 scale-90 opacity-80 hover:opacity-100 transition-opacity pr-4"
+			>
+				<Themes position="top-full" />
+			</div>
+		</nav>
+	</div>
+</div>
+
+<style>
+.hud-pill-toggle,
+.hud-pill-theme {
+	backdrop-filter: blur(20px);
+	box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.nav-card {
+	transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-card:active {
+	transform: scale(0.95);
+	background: rgba(var(--color-primary-rgb), 0.15);
+}
+
+.hud-selector-pill {
+	backdrop-filter: blur(50px) saturate(200%);
+}
+
+dotlottie-player {
+	display: block;
+}
+</style>
+
+<script>
+const updateActiveLinks = () => {
+	const pathname = window.location.pathname;
+	const currentPath = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
+
+	// Handle Desktop Links
+	const desktopLinks = document.querySelectorAll(".group\\/link");
+	desktopLinks.forEach((link) => {
+		const href = link.getAttribute("href");
+		const isActive = href === currentPath;
+
+		// Brackets
+		const brackets = link.querySelectorAll(
+			".absolute.left-0, .absolute.right-0",
+		);
+		brackets.forEach((b) => {
+			if (isActive) {
+				b.classList.remove("opacity-0", "-translate-x-2", "translate-x-2");
+				b.classList.add("opacity-100", "translate-x-1", "-translate-x-1");
+			} else {
+				b.classList.add("opacity-0", "-translate-x-2", "translate-x-2");
+				b.classList.remove("opacity-100", "translate-x-1", "-translate-x-1");
+			}
+		});
+
+		// Text and Glow
+		const content = link.querySelector(".relative.z-10");
+		const glow = link.querySelector(".bg-primary\\/5");
+		const underline = link.querySelector(".h-px.bg-primary");
+
+		if (isActive) {
+			content?.classList.add(
+				"text-primary",
+				"[text-shadow:0_0_10px_var(--color-primary)]",
+			);
+			glow?.classList.add("opacity-100", "scale-x-100");
+			glow?.classList.remove("opacity-0", "scale-x-90");
+			underline?.classList.add("w-[90%]");
+			underline?.classList.remove("w-0");
+		} else {
+			content?.classList.remove(
+				"text-primary",
+				"[text-shadow:0_0_10px_var(--color-primary)]",
+			);
+			glow?.classList.add("opacity-0", "scale-x-90");
+			glow?.classList.remove("opacity-100", "scale-x-100");
+			underline?.classList.add("w-0");
+			underline?.classList.remove("w-[90%]");
+		}
+	});
+
+	// Handle Mobile Links
+	const mobileLinks = document.querySelectorAll(".hs-overlay nav a");
+	mobileLinks.forEach((link) => {
+		const href = link.getAttribute("href");
+		const isActive = href === currentPath;
+
+		if (isActive) {
+			link.classList.add(
+				"bg-primary/15",
+				"border-primary/40",
+				"shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.2)]",
+			);
+			link.classList.remove("bg-white/3", "border-white/5");
+			link
+				.querySelector("span:last-child")
+				?.classList.add("opacity-100", "text-primary");
+			link.querySelector("span:last-child")?.classList.remove("opacity-60");
+		} else {
+			link.classList.remove(
+				"bg-primary/15",
+				"border-primary/40",
+				"shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.2)]",
+			);
+			link.classList.add("bg-white/3", "border-white/5");
+			link
+				.querySelector("span:last-child")
+				?.classList.remove("opacity-100", "text-primary");
+			link.querySelector("span:last-child")?.classList.add("opacity-60");
+		}
+	});
+};
+
+document.addEventListener("astro:page-load", updateActiveLinks);
+</script>

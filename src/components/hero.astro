@@ -1,24 +1,32 @@
 ---
+import handwaveLottie from "../assets/handwave.lottie";
 import Title from "./title.astro";
-import down from "../assets/down.lottie";
+
+const waveSrc =
+	typeof handwaveLottie === "string" ? handwaveLottie : handwaveLottie.src;
 ---
 
-<div class="h-screen hero backdrop-blur-none mt-[5vh]">
-	<div class="text-center hero-content text-neutral-content">
-		<div class="">
-			<h1 class="mb-5 text-5xl font-bold text-white">Hi👋🏿 I am,</h1>
-			<Title />
-			<div class="mt-[10vh] text-4xl animate-bounce flex items-center justify-center">
-				<!-- <span class="icon-[line-md--chevron-triple-down] text-white  transform duration-1000 -rotate-90"/> -->
+<div class="h-screen hero backdrop-blur-none" id="hero">
+	<div class="text-center hero-content text-neutral-content -mt-24 md:mt-0">
+		<div>
+			<h1
+				class="text-5xl font-bold text-white flex items-center justify-center gap-1"
+				style="color: white !important;"
+			>
+				Hi
+				<div
+					class="relative size-16 flex items-center justify-center -mt-2 -mx-1"
+				>
 					<dotlottie-player
 						autoplay
 						loop
-						playMode="normal"
-						src={down}
-						class="size-14"
-					>
-					</dotlottie-player>
-			</div>
+						src={waveSrc}
+						class="size-20 brightness-[0.4] contrast-[1.1] sepia-[0.2]"
+					></dotlottie-player>
+				</div>
+				I am,
+			</h1>
+			<Title />
 		</div>
 	</div>
 </div>

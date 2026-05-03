@@ -1,38 +1,33 @@
 ---
-import Navbar from "../../components/navbar.astro";
-import Layout from "../../layouts/Layout.astro";
-import Projects from "../../components/projects";
-import Net from "../../components/net.astro";
-import Footer from "../../components/footer.astro";
-
-import github from "../../assets/github.lottie";
-
 import { getCollection } from "astro:content";
-const projects = await getCollection("projects");
-// console.log(projects[0]);
+import github from "../../assets/github.lottie";
+import Pretext from "../../components/Pretext.astro";
+import Projects from "../../components/projects";
+import Layout from "../../layouts/Layout.astro";
 
+const projects = await getCollection("projects");
+const sortedProjects = projects.sort((a, b) => {
+	const dateA = new Date(a.data.date).getTime();
+	const dateB = new Date(b.data.date).getTime();
+	return dateB - dateA;
+});
 ---
 
 <Layout title="Projects">
-    <main class="antialiased overflow-hidden">
-    <Navbar />
-    <div class="md:h-[15vh]"></div>
-    <div class="flex items-center justify-center my-16 text-3xl font-bold text-center md:text-5xl text-primary"  >
-        <dotlottie-player
-                autoplay
-                loop
-                playMode="normal"
-                src={github}
-                class="mr-5 md:mr-10 md:size-16 size-10"
-            >
-            </dotlottie-player>
-        PROJECTS</div>
-    <Projects projects={projects}  />
-    <Net />
+	<main class="antialiased overflow-hidden">
+		<div class="md:h-[10vh]"></div>
+		<div
+			class="flex items-center justify-center mb-8 text-3xl font-bold text-center md:text-5xl text-primary"
+		>
+			<Pretext text="💻 PROJECTS" size={24} />
+		</div>
+		<Projects projects={sortedProjects} />
+	</main>
 
-    <Footer />
-    </main>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"
+		integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"
+	></script>
 </Layout>

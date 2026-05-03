@@ -1,9 +1,9 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "jsx": "preserve",
-    "strictNullChecks": true,
-    "allowJs": true,
-    "jsxImportSource": "solid-js"
-  }
+	"extends": "astro/tsconfigs/strict",
+	"compilerOptions": {
+		"jsx": "preserve",
+		"strictNullChecks": true,
+		"allowJs": true,
+		"jsxImportSource": "solid-js"
+	}
 }

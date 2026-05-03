@@ -1,82 +1,239 @@
 ---
-import title from '../assets/title_1.png'
-// console.log()
 ---
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+<div
+	id="ascii-container"
+	class="relative w-full h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden bg-transparent"
+>
+	<!-- Desktop & Mobile: High-Performance Canvas ASCII -->
+	<canvas id="ascii-canvas" class="block w-full h-full"></canvas>
 
-<div id="particle-slider" class="w-full h-[40vh] overflow-hidden">
-    <div class="slides">
-        <div
-            id="first-slide"
-            class="slide" 
-            data-src={title.src}
-        >
-        </div>
-    </div>
-    <canvas class="draw" aria-label="particle name"></canvas>
+	<!-- Hidden sampling field -->
+	<canvas id="sampling-canvas" class="hidden"></canvas>
 </div>
 
-
 <script>
-    var init = function () {
-        var isMobile =
-            navigator.userAgent && navigator.userAgent.toLowerCase().indexOf("mobile") >= 0;
-        var isSmall = window.innerWidth < 1000;
+class FastASCII {
+	private container: HTMLElement;
+	private canvas: HTMLCanvasElement;
+	private sampleCanvas: HTMLCanvasElement;
+	private ctx: CanvasRenderingContext2D;
+	private sampleCtx: CanvasRenderingContext2D;
+	private textLine1: string;
+	private textLine2: string;
+	private chars: string[];
+	private time: number;
+	private mouseX: number;
+	private mouseY: number;
+	private resX: number;
+	private resY: number;
 
-        var ps = new ParticleSlider({
-            ptlGap: isMobile || isSmall ? 3 : 0,
-            ptlSize: isMobile || isSmall ? 3 : 1,
-            width: 1e9,
-            height: 1e9,
-        });
+	constructor() {
+		const container = document.getElementById("ascii-container");
+		const canvas = document.getElementById("ascii-canvas") as HTMLCanvasElement;
+		const sampleCanvas = document.getElementById(
+			"sampling-canvas",
+		) as HTMLCanvasElement;
 
-        var gui = new dat.GUI();
-        gui.add(ps, "ptlGap")
-            .min(0)
-            .max(5)
-            .step(1)
-            .onChange(function () {
-                ps.init(true);
-            });
-        gui.add(ps, "ptlSize")
-            .min(1)
-            .max(5)
-            .step(1)
-            .onChange(function () {
-                ps.init(true);
-            });
-        gui.add(ps, "restless");
-        gui.addColor(ps, "color").onChange(function (value) {
-            ps.monochrome = true;
-            ps.setColor(value);
-            ps.init(true);
-        });
+		if (!container || !canvas || !sampleCanvas) {
+			throw new Error("FastASCII: Required elements not found");
+		}
 
-        window.addEventListener
-            ? window.addEventListener(
-                  "click",
-                  function () {
-                      ps.init(true);
-                  },
-                  false,
-              )
-            : (window.onclick = function () {
-                  ps.init(true);
-              });
-    };
+		this.container = container;
+		this.canvas = canvas;
+		this.sampleCanvas = sampleCanvas;
 
-    var initParticleSlider = (function () {
-        var psScript = document.createElement("script");
-        psScript.addEventListener
-            ? psScript.addEventListener("load", init, false)
-            : (psScript.onload = init);
-        psScript.src = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/23500/ps-0.9.js";
-        psScript.setAttribute("type", "text/javascript");
-        document.body.appendChild(psScript);
-    })(
-        window.addEventListener
-            ? window.addEventListener("load", initParticleSlider, false)
-            : (window.onload = initParticleSlider),
-    );
+		const ctx = this.canvas.getContext("2d", { alpha: true });
+		const sampleCtx = this.sampleCanvas.getContext("2d", {
+			willReadFrequently: true,
+		});
+
+		if (!ctx || !sampleCtx) {
+			throw new Error("FastASCII: Could not get 2D context");
+		}
+
+		this.ctx = ctx;
+		this.sampleCtx = sampleCtx;
+
+		this.textLine1 = "ROUNAK";
+		this.textLine2 = "SEN";
+		this.chars = ["#", "o", ".", " "].reverse();
+
+		this.time = 0;
+		this.mouseX = -1000;
+		this.mouseY = -1000;
+
+		this.resX = 4;
+		this.resY = 8;
+
+		this.init();
+	}
+
+	async init() {
+		this.resize();
+		window.addEventListener("resize", () => {
+			this.resize();
+		});
+
+		window.addEventListener("mousemove", (e) => {
+			const rect = this.canvas.getBoundingClientRect();
+			const dpr = window.devicePixelRatio || 1;
+			this.mouseX = (e.clientX - rect.left) * dpr;
+			this.mouseY = (e.clientY - rect.top) * dpr;
+		});
+
+		window.addEventListener("touchmove", (e) => {
+			if (e.touches.length > 0) {
+				const rect = this.canvas.getBoundingClientRect();
+				const dpr = window.devicePixelRatio || 1;
+				this.mouseX = (e.touches[0].clientX - rect.left) * dpr;
+				this.mouseY = (e.touches[0].clientY - rect.top) * dpr;
+			}
+		});
+
+		await document.fonts.ready;
+		this.animate();
+	}
+
+	resize() {
+		const dpr = window.devicePixelRatio || 1;
+		const rect = this.container.getBoundingClientRect();
+
+		this.canvas.width = rect.width * dpr;
+		this.canvas.height = rect.height * dpr;
+
+		this.sampleCanvas.width = 1200;
+		this.sampleCanvas.height = 900;
+	}
+
+	drawSample() {
+		const ctx = this.sampleCtx;
+		const w = this.sampleCanvas.width;
+		const h = this.sampleCanvas.height;
+		const isMobile = window.innerWidth < 768;
+
+		ctx.fillStyle = "black";
+		ctx.fillRect(0, 0, w, h);
+
+		ctx.fillStyle = "white";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+
+		// Stylish Font: Using Grandstander which was imported in Layout
+		const stylishFont = "Grandstander, Georgia, serif";
+
+		if (isMobile) {
+			ctx.font = `900 180px ${stylishFont}`;
+			ctx.letterSpacing = "15px";
+			ctx.fillText(this.textLine1, w / 2, h / 2 - 140);
+			ctx.fillText(this.textLine2, w / 2, h / 2 + 140);
+		} else {
+			ctx.font = `900 140px ${stylishFont}`;
+			ctx.letterSpacing = "12px";
+			ctx.fillText(`${this.textLine1} ${this.textLine2}`, w / 2, h / 2);
+		}
+
+		ctx.globalAlpha = 0.8;
+		const orbitR = isMobile ? 350 : 420;
+		const ballsCount = isMobile ? 12 : 14;
+
+		for (let i = 0; i < ballsCount; i++) {
+			const ang = this.time * 0.012 + i * ((Math.PI * 2) / ballsCount);
+			const r = orbitR + Math.sin(this.time * 0.03 + i) * 60;
+			ctx.beginPath();
+			ctx.arc(
+				w / 2 + Math.cos(ang) * r,
+				h / 2 + Math.sin(ang) * (isMobile ? r * 0.9 : r * 0.5),
+				isMobile ? 35 : 25,
+				0,
+				Math.PI * 2,
+			);
+			ctx.fill();
+		}
+		ctx.globalAlpha = 1.0;
+	}
+
+	render() {
+		this.drawSample();
+		const sampleW = this.sampleCanvas.width;
+		const sampleH = this.sampleCanvas.height;
+		const data = this.sampleCtx.getImageData(0, 0, sampleW, sampleH).data;
+
+		const ctx = this.ctx;
+		const cw = this.canvas.width;
+		const ch = this.canvas.height;
+
+		ctx.clearRect(0, 0, cw, ch);
+
+		const isMobile = window.innerWidth < 768;
+		const scale = isMobile ? (cw * 0.95) / sampleW : (cw * 0.85) / sampleW;
+		const startX = (cw - sampleW * scale) / 2;
+		const startY = (ch - sampleH * scale) / 2;
+
+		const charFontSize = Math.floor(11 * scale);
+		ctx.font = `${charFontSize}px monospace`;
+		ctx.textAlign = "center";
+
+		for (let y = 0; y < sampleH; y += this.resY) {
+			for (let x = 0; x < sampleW; x += this.resX) {
+				const idx = (Math.floor(y) * sampleW + Math.floor(x)) * 4;
+				const b = (data[idx] + data[idx + 1] + data[idx + 2]) / 3 / 255;
+
+				if (b > 0.08) {
+					const charIdx = Math.floor(b * (this.chars.length - 1));
+					const char = this.chars[charIdx];
+
+					const rx = startX + x * scale;
+					const ry = startY + y * scale;
+
+					// 1. Flow Animation: Persistent gentle wave
+					const flowSpeed = 0.04;
+					const flowX = Math.sin(this.time * flowSpeed + y * 0.01) * 6;
+					const flowY = Math.cos(this.time * flowSpeed + x * 0.01) * 4;
+
+					let drawX = rx + flowX;
+					let drawY = ry + flowY;
+
+					const dist = Math.hypot(rx - this.mouseX, ry - this.mouseY);
+					let opacity = 0.3 + b * 0.7;
+					let color = "#ffffff";
+
+					if (dist < 120) {
+						const f = (120 - dist) / 120;
+						drawX += (rx - this.mouseX) * f * 0.5;
+						drawY += (ry - this.mouseY) * f * 0.5;
+
+						const hue = Math.floor(x * 0.5 + y * 0.2 + this.time * 2) % 360;
+						color = `hsl(${hue}, 100%, 75%)`;
+						opacity = 1;
+
+						ctx.shadowBlur = 5;
+						ctx.shadowColor = color;
+					}
+
+					ctx.globalAlpha = opacity;
+					ctx.fillStyle = color;
+					ctx.fillText(char, drawX, drawY);
+					ctx.shadowBlur = 0; // Reset shadow
+				}
+			}
+		}
+	}
+
+	animate() {
+		this.time++;
+		this.render();
+		requestAnimationFrame(() => this.animate());
+	}
+}
+
+const init = () => {
+	const canvas = document.getElementById("ascii-canvas");
+	if (canvas && !canvas.hasAttribute("data-ascii-active")) {
+		canvas.setAttribute("data-ascii-active", "true");
+		new FastASCII();
+	}
+};
+
+document.addEventListener("astro:page-load", init);
 </script>
