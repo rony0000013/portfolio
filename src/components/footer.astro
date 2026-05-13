@@ -9,6 +9,7 @@ import plane from "../assets/plane.lottie";
 import rs from "../assets/rs.png";
 
 import * as data from "../content/data/data.mdx";
+import VisitorCounter from "./VisitorCounter";
 
 const { links } = data.frontmatter;
 
@@ -50,18 +51,21 @@ const planeSrc = getAssetSrc(plane);
 				></div>
 			</div>
 
-			<div class="flex items-center gap-3">
-				<div class="relative">
-					<div class="size-2 bg-primary rounded-full animate-pulse"></div>
-					<div
-						class="absolute inset-0 size-2 bg-primary rounded-full animate-ping opacity-40"
-					></div>
+			<div class="flex flex-col items-center md:items-start gap-1">
+				<div class="flex items-center gap-3">
+					<div class="relative">
+						<div class="size-2 bg-primary rounded-full animate-pulse"></div>
+						<div
+							class="absolute inset-0 size-2 bg-primary rounded-full animate-ping opacity-40"
+						></div>
+					</div>
+					<span
+						class="font-orbitron text-[10px] tracking-[0.3em] text-white/50 uppercase"
+					>
+						Status: <span class="text-primary font-bold">Online</span>
+					</span>
 				</div>
-				<span
-					class="font-orbitron text-[10px] tracking-[0.3em] text-white/50 uppercase"
-				>
-					Status: <span class="text-primary font-bold">Online</span>
-				</span>
+				<VisitorCounter client:load />
 			</div>
 		</div>
 

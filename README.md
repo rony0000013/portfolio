@@ -1,63 +1,73 @@
 # My Portfolio
 
-This portfolio is built using Astro, a front-end framework for building fast, optimized websites and applications. It leverages a variety of dependencies to create a dynamic and interactive user experience.
+A high-performance, premium portfolio built with the latest web technologies, featuring a futuristic cyberpunk aesthetic, holographic HUD elements, and seamless interactive animations.
 
-## Dependencies 🧱
+## ✨ Key Features
 
-Here are the main dependencies used in this project:
+- **🚀 Astro 6 Foundations**: Ultra-fast performance with zero-JS by default, leveraging the latest server-side rendering capabilities.
+- **⚛️ SolidJS Reactivity**: Blazing fast client-side interactivity without the overhead of a virtual DOM.
+- **🎨 Tailwind CSS 4 + DaisyUI 5**: Next-gen styling with a sophisticated dark-mode first design system and component-driven architecture.
+- **🔮 Holographic HUD**: Interactive UI elements including the "Education Event Horizon", Honeycomb grids, and holographic profile scans.
+- **✨ Dynamic Effects**: 
+    - **Particles**: Immersive background environments powered by `@tsparticles`.
+    - **Animations**: Silky smooth motion via `AOS`, `Lottie`, and `Framer-esque` transitions.
+    - **Interactivity**: 3D tilt effects with `Vanilla-Tilt` and custom animated cursors.
+- **🎵 Real-time Integration**: Live Spotify status tracking and dynamic tech stack visualizations.
 
-- `astro`: The main Astro framework.
-- `tailwindcss`: A utility-first CSS framework.
-- `solid-js`: A declarative JavaScript library for building user interfaces.
-- `tsparticles`: A lightweight library for creating particles.
-- `aos`: Animate on scroll library.
-- `marked`: A markdown parser and compiler.
-- `typescript`: A typed superset of JavaScript.
-- `vanilla-tilt`: A smooth 3D tilt JavaScript library.
-- `@astrojs/*`: A collection of Astro plugins and utilities.
+## 🛠️ Tech Stack
 
-## DevDependencies 🧱
+### Core
+- **Framework**: [Astro 6](https://astro.build/)
+- **UI Library**: [SolidJS](https://www.solidjs.com/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) & [DaisyUI 5](https://daisyui.com/)
+- **Components**: [Preline UI](https://preline.co/)
 
-Here are the main devDependencies used in this project:
+### Ecosystem & Tools
+- **Icons**: [Iconify](https://iconify.design/) (Heroicons, Line MD, SVGs)
+- **Animations**: `aos`, `dotlottie`, `tailwindcss-animate`
+- **Particles**: `@tsparticles/all`
+- **Content**: `MDX` & `Marked`
+- **Media**: `Astro Cloudinary` & `Astro Imagetools`
+- **Optimization**: `@playform/compress`
 
-- `@iconify-json/*`: A collection of Iconify JSON icons.
-- `@tailwindcss/typography`: A plugin that provides a set of typography utilities for Tailwind CSS.
-- `animated-cursor`: A library for creating animated cursors.
-- `daisyui`: A plugin for Tailwind CSS that adds new utilities and components.
-- `tailwindcss-animate`: A plugin that adds animate.css classes as utilities in Tailwind CSS.
+## 🚀 Getting Started
 
-## Getting Started ▶️
+This project uses **Bun** as the primary package manager for maximum speed.
 
-To get started with this project, clone the repository and install the dependencies:
+### Installation
 
 ```bash
+# Clone the repository
 git clone <repository-url>
+
+# Navigate to project
 cd portfolio
-pnpm i
+
+# Install dependencies
+bun install
 ```
 
-To start the development server:
+### Development
 
 ```bash
-pnpm run dev
+bun dev
 ```
 
-This will start the server on `http://localhost:4321`.
+The development server will launch at `http://localhost:4321`.
 
-## Building for Production ⚒️
-
-To create a production build:
+### Production Build
 
 ```bash
-pnpm run build
+bun run build
 ```
 
-This will create a `dist` directory with the production-ready website.
+The optimized static build will be generated in the `dist/` directory.
 
-## Contributing 🤝
+## 🤝 Contributing
 
-Contributions are welcome. Please open an issue or submit a pull request.
+Feel free to explore, open issues, or submit pull requests to enhance the cyberpunk experience.
 
-## License 🔑
+## 🔑 License
 
-This project is open source and available under the [GLWTS License](LICENSE).
+This project is open-source and licensed under the [GLWTS License](LICENSE).
+
