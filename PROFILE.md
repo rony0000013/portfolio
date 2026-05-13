@@ -67,7 +67,7 @@
   <img src="src/assets/icons/matplotlib.svg" width="38" height="38" style="background-color: #2D333B; border-radius: 10px; padding: 5px;" alt="Matplotlib" />
   <img src="src/assets/icons/seaborn.svg" width="38" height="38" style="background-color: #2D333B; border-radius: 10px; padding: 5px;" alt="Seaborn" />
   <img src="src/assets/icons/plotly.svg" width="38" height="38" style="background-color: #2D333B; border-radius: 10px; padding: 5px;" alt="Plotly" />
-  <img src="src/assets/icons/networkX.svg" width="38" height="38" style="background-color: #2D333B; border-radius: 10px; padding: 5px;" alt="NetworkX" />
+  <img src="src/assets/icons/networkx.svg" width="38" height="38" style="background-color: #2D333B; border-radius: 10px; padding: 5px;" alt="Networkx" />
   <img src="src/assets/icons/jupyter.svg" width="38" height="38" style="background-color: #2D333B; border-radius: 10px; padding: 5px;" alt="Jupyter" />
   <img src="src/assets/icons/uv.svg" width="38" height="38" style="background-color: #2D333B; border-radius: 10px; padding: 5px;" alt="UV" />
   <img src="src/assets/icons/SpaCy.svg" width="38" height="38" style="background-color: #2D333B; border-radius: 10px; padding: 5px;" alt="SpaCy" />
